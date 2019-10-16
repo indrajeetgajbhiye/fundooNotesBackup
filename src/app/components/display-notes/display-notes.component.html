@@ -1,0 +1,5 @@
+<div [ngClass]="{'gridView':view,'listView':!view}" [fxLayout]="view?'row wrap':'column'">
+    <div *ngFor="let card of notes|search:(search?null:searchValue)">
+        <app-card class="example-card" [card]="card" (removeEvent)="removeEvent($event,card)"></app-card>
+    </div>
+</div>

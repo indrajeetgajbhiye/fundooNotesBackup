@@ -1,0 +1,27 @@
+<div>
+    <div mat-dialog-title>Edit Labels </div>
+    <div fxLaoutGap="space-between" fxlayoutAlign="row" mat-dialog-content>
+        <div class="clear done">
+            <mat-icon fxFlex=10 (click)="clear()" class="visible" mat-icon-button>clear</mat-icon>
+        </div>
+        <input class="textArea" fxFlex=80 [(ngModel)]="labelName" placeholder="Create new Label">
+        <div>
+            <mat-icon fxFlex=10 fxLayoutAlign="space-between end" (click)="addLabel()" class="visible" mat-icon-button>done</mat-icon>
+        </div>
+    </div>
+    <mat-divider class="divider"></mat-divider>
+    <div class="divider" fxLayout="row" fxLayoutAlign="space-between center" *ngFor="let label of ArrayOfLabel">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-icon (click)="deleteLabel(label.id)" class="visible" fxFlex=10 mat-icon-button>
+                delete</mat-icon>
+        </div>
+        <input class="textArea" fxFlex="80" [(ngModel)]="label.label" class="visible" id=label.id>
+        <div fxFlex="10">
+            <mat-icon (click)=edit(label)>edit</mat-icon>
+        </div>
+    </div>
+    <mat-divider class="divider"></mat-divider>
+    <div>
+        <div mat-button class="visible" fxLayoutAlign="end end" (click)="close()">Done</div>
+    </div>
+</div>

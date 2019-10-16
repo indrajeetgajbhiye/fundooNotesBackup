@@ -1,0 +1,32 @@
+<div class="main">
+    <mat-card class="card" fxLayout="column" fxLayoutAlign="center center" fxFlex="100" fxLayoutGap="1px">
+        <mat-card class="loginCard" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1px">
+            <div class="logo" fxLayoutAlign="center center">
+                <img mat-card-image fxFlex='50' src="https://upload.wikimedia.org/wikipedia/commons/d/df/Google_Keep_icon.svg">
+            </div>
+            <mat-label id="loginPage">Log In</mat-label>
+            <mat-card-content>
+                <div class="container" fxLayout="column" fxLayoutAlign="center stretch" fxLayout.xs="column" fxLayoutGap="5px">
+                    <mat-form-field appearance="outline" fxFlex="50">
+                        <mat-label>Email</mat-label>
+                        <input matInput name="email" [formControl]="email" required>
+                        <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex="50">
+                        <mat-label>Password</mat-label>
+                        <input matInput name="password" [formControl]="password" [type]="hide ? 'password' : 'text'" required>
+                        <mat-icon class="visible" matSuffix (click)="hide = !hide">{{hide ?'visibility' : 'visibility_off'}}</mat-icon>
+                        <mat-error *ngIf="password.invalid">{{getPasswordErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <div id="logInButton"><button mat-raised-button color="primary" (click)="secureLogin(email.value, password.value)">Log In</button>
+                    <button mat-raised-button color="primary" (click)="register()"> Sign Up</button></div>
+            </mat-card-actions>
+            <mat-card-actions>
+                <div id="forgotLink"><a routerLink="." (click)="forgot()">Forgot Password</a></div>
+            </mat-card-actions>
+        </mat-card>
+    </mat-card>
+</div>

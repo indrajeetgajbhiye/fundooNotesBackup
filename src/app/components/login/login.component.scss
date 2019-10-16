@@ -1,0 +1,31 @@
+@import '../../../styles.scss';
+#loginPage {
+    font-size: 25px;
+}
+
+.logo {
+    padding: 5px;
+}
+
+.visible {
+    cursor: pointer;
+}
+
+.main {
+    background: rgb(209, 209, 209);
+    height: 100%;
+}
+
+.card {
+    height: 100vh;
+    min-height: 640px;
+    min-width: 360px;
+}
+
+.loginCard {
+    border-radius: 12px;
+}
+
+// .mat-card:not([class*=mat-elevation-z]) {
+//     box-shadow: 1px 1px 1px -1px rgb(185, 184, 184), 1 1px 1px 0 rgb(170, 170, 170), 1 1px 3px 0 rgb(161, 160, 160);
+// }

@@ -1,0 +1,54 @@
+.sample {
+    background: transparent;
+}
+
+.textArea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    user-select: none;
+    // min-height: auto;
+    resize: none;
+}
+
+.display-note {
+    border-radius: 14px;
+}
+
+.display-note:hover {
+    box-shadow: 2px 2px 2px 2px #888888;
+}
+
+.mat-icon {
+    color: rgb(103, 107, 110);
+}
+
+.mat-icon:hover {
+    color: black;
+}
+
+.display-note {
+    .iconClass {
+        opacity: 0;
+    }
+    .barpin {
+        opacity: 0;
+    }
+    &:hover {
+        .iconClass {
+            opacity: 1;
+        }
+        .barpin {
+            opacity: 1;
+        }
+    }
+}
+
+.description textarea {
+    overflow: hidden;
+}
+
+.descriptionOpen textarea {
+    overflow: scroll;
+}

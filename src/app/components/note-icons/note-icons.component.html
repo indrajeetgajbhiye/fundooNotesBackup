@@ -1,0 +1,76 @@
+<div fxLayout="row" fxLayoutAlign="space-around center">
+    <div fxFlex='13'><button id="Remind" matTooltip="Remind me" mat-icon-button [matMenuTriggerFor]="remindMenu">
+      <mat-icon class="material-icons">notification_important</mat-icon>
+    </button></div>
+    <mat-menu #remindMenu="matMenu" class="Remaindermatmenu">
+        <app-reminder-icon [card]=card></app-reminder-icon>
+    </mat-menu>
+    <div fxFlex='13'><button mat-icon-button matTooltip="Collaborator" (click)="addCollaborator()">
+      <mat-icon class="material-icons">person_add</mat-icon>
+    </button></div>
+    <div fxFlex='13'><button mat-icon-button matTooltip="Select theme" [matMenuTriggerFor]="selectTheme">
+      <mat-icon class="material-icons">color_lens</mat-icon>
+    </button></div>
+    <mat-menu #selectTheme="matMenu" class="matmenu">
+        <ng-template matMenuContent>
+            <div fxLayout=row fxLayoutGap=10px style="margin-top:5px" *ngFor='let row of colorArray'>
+                <div *ngFor='let color of row'>
+                    <button [ngStyle]="{'background-color': color.color }" (click)='changeColor(color.color)' matTooltip="{{color.name}}" mat-mini-fab></button>
+                </div>
+            </div>
+        </ng-template>
+    </mat-menu>
+    <div fxFlex='13'><button mat-icon-button>
+      <mat-icon class="material-icons">image</mat-icon>
+    </button></div>
+    <div fxFlex='13'><button mat-icon-button (click)="changeArchiveNote()">
+      <mat-icon matTooltip="unarchive" *ngIf=card.isArchived class="material-icons">unarchive</mat-icon>
+      <mat-icon matTooltip="archive" *ngIf=!card.isArchived class="material-icons">archive</mat-icon>
+    </button></div>
+    <div fxFlex='13'>
+        <button mat-icon-button [matMenuTriggerFor]="More">
+      <mat-icon class="material-icons">more_vert</mat-icon>
+    </button>
+    </div>
+    <mat-menu #More="matMenu" class="matmenu" fxLayoutAlign="space-between start">
+        <div *ngIf=addLabel (click)="$event.stopPropagation()" fxLayout="column" fxLayoutAlign="space-between start" class="mainMenus">
+            <button mat-menu-item (click)="trashNote()">
+         <span>Delete</span>
+      </button>
+            <button mat-menu-item (click)="addLabelToggle()" (click)="$event.stopPropagation()">
+          <span>Add Label</span>
+      </button>
+            <button mat-menu-item (click)="$event.stopPropagation()">
+        <span>Add drawing</span>
+      </button>
+            <button mat-menu-item (click)="openQandA()">
+        <span>Ask Question</span>
+      </button>
+            <button mat-menu-item>
+        <span>Make a copy</span>
+      </button>
+            <button mat-menu-item>
+        <span>
+          Show checkboxes
+        </span>
+      </button>
+        </div>
+        <div *ngIf=!addLabel fxLayout="column" fxLayoutAlign="space-around start">
+            <div fxLayout="column" fxLayoutAlign="space-around start">
+                <span>Label note</span>
+                <div>
+                    <input class="textArea" fxFlex=80 [(ngModel)]="labelName" placeholder="Search for Label">
+                </div>
+                <div *ngFor="let label of labelList">
+                    <div *ngIf="label.id!=''">
+                        <mat-checkbox (click)="labelToNote(label)">
+                            {{label.label}}</mat-checkbox>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-menu>
+    <div *ngIf="show">
+        <button class="addnote" color="primary" mat-button (click)="updateNote()">close</button>
+    </div>
+</div>
