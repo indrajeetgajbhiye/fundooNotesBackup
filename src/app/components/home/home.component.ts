@@ -7,9 +7,9 @@ import { Label } from '../../Models/model.model';
 import { LabelDialogComponent } from '../label-dialog/label-dialog.component';
 import { NoteService } from '../../service/note/note.service';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Subject, from } from 'rxjs';
 import {ImageDialogComponent } from '../image-dialog/image-dialog.component'
-
+import { environment} from '../../../environments/environment'
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
@@ -32,8 +32,9 @@ export class HomeComponent implements OnInit, OnDestroy{
     imageFile = null;
     innerWidth: number;
     header='notes'
-
     ArrayOfLabel: Label;
+    public newImage = localStorage.getItem('imageUrl');
+    img = environment.profileUrl + this.newImage;
     constructor(public dialog1: MatDialog, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router, private dataService: DataService, public noteService: NoteService) {
         this.mobileQuery = media.matchMedia('(max-width: 600px)');
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -113,10 +114,29 @@ export class HomeComponent implements OnInit, OnDestroy{
         this.view = !this.view;
         this.dataService.changeView(this.view);
     }
-    onFileUpload(event) {
-        console.log("upload file")
-    }
-    openPicture(data) {
-        console.log("open pic")
-    }
+
+  onFileUpload(event) {
+    this.imageFile = event.path[0].files[0];
+    const uploadImage = new FormData();
+    uploadImage.append('file', this.imageFile, this.imageFile.name);
+    this.openPicture(event);
+  }
+  openPicture(data) {
+    const dialogRef = this.dialog1.open(ImageDialogComponent, {
+      width: 'auto',
+      height: 'auto',
+      data: data,
+      // disableClose: true
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == "imageChange") {
+        console.log("inside");
+      }
+      this.dataService.currentPhoto.subscribe(response => this.profile = response)
+      if (this.profile = true) {
+        this.imageProfile = localStorage.getItem('imageUrl');
+        this.img = environment.profileUrl + this.imageProfile;
+      }
+    })
+  }
 }

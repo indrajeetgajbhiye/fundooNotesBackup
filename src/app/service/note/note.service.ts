@@ -77,6 +77,9 @@ export class NoteService {
 
   getServiceOfUser(){
     return this.service.getConfig('/user/service')
+  }
+  uploadImage(data) {
+    return this.service.postImage('user/uploadProfileImage', data)
 }
 
 }

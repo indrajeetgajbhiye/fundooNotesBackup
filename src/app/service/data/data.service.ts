@@ -23,6 +23,10 @@ export class DataService {
 
   private view1 = new BehaviorSubject(true);
   public currentView1= this.view1.asObservable();
+
+  private changephoto = new BehaviorSubject(true);
+  currentPhoto = this.changephoto.asObservable();
+
   constructor() { }
   changeMessage(message: string) {
     this.messageSource.next(message)
@@ -35,5 +39,9 @@ export class DataService {
   }
   changeView1(message:any) {
     this.view1.next(message);
+  }
+  changeImage(message: boolean) {
+    console.log(message, "imagedata")
+    this.changephoto.next(message);
   }
 }

@@ -30,6 +30,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { BarRatingModule } from "ngx-bar-rating";
 import { SearchComponent } from './components/search/search.component';
+import { ImageDialogComponent } from './components/image-dialog/image-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -53,8 +55,9 @@ import { SearchComponent } from './components/search/search.component';
     LabelDialogComponent,
     LabelsComponent,
     CardComponent,
-    SearchComponent
-  ],
+    SearchComponent,
+    ImageDialogComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -64,6 +67,7 @@ import { SearchComponent } from './components/search/search.component';
     HttpClientModule,
     BarRatingModule,
     ImageCropperModule,
+    MatDialogModule,
     FroalaEditorModule.forRoot(), FroalaViewModule.forRoot()
   ],
   providers: [],

@@ -15,6 +15,7 @@ import { RemindersComponent } from './components/reminders/reminders.component'
 import { LabelsComponent } from './components/labels/labels.component'
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { SearchComponent } from './components/search/search.component';
+import { ImageDialogComponent } from './components/image-dialog/image-dialog.component';
 const routes: Routes = [
   {path: 'login',component: LoginComponent},
   {path: 'registration',component: RegisterComponent},
@@ -31,6 +32,7 @@ const routes: Routes = [
   },
   {path:'update-note',component:NoteDialogComponent},
   {path:'update-label',component:LabelDialogComponent},
+  {path:'upload-image',component:ImageDialogComponent},
   {path:"**", redirectTo:"home"}
 ];
 @NgModule({
