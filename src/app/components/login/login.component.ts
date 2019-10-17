@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem('email', data.email)
                 localStorage.setItem('firstName', data.firstName)
                 localStorage.setItem('lastName', data.lastName)
+                localStorage.setItem('imageUrl', data.imageUrl)
                 if(data.id){
                     this.router.navigate(['home'])
                 }

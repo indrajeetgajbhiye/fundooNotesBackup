@@ -7,8 +7,8 @@ import { Label } from '../../Models/model.model';
 import { LabelDialogComponent } from '../label-dialog/label-dialog.component';
 import { NoteService } from '../../service/note/note.service';
 import { takeUntil } from 'rxjs/operators';
-import { Subject, from } from 'rxjs';
-import {ImageDialogComponent } from '../image-dialog/image-dialog.component'
+import { Subject } from 'rxjs';
+import { ImageDialogComponent } from '../image-dialog/image-dialog.component'
 import { environment} from '../../../environments/environment'
 @Component({
     selector: 'app-home',
@@ -33,13 +33,17 @@ export class HomeComponent implements OnInit, OnDestroy{
     innerWidth: number;
     header='notes'
     ArrayOfLabel: Label;
-    public newImage = localStorage.getItem('imageUrl');
-    img = environment.profileUrl + this.newImage;
+    public newImage
+    img
     constructor(public dialog1: MatDialog, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router, private dataService: DataService, public noteService: NoteService) {
         this.mobileQuery = media.matchMedia('(max-width: 600px)');
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
         this.mobileQuery.addListener(this._mobileQueryListener);
         this.innerWidth = window.innerWidth;
+        this.newImage = localStorage.getItem('imageUrl');
+        console.log("inside home constructor");
+        
+        this.img=environment.profileUrl + "/" +this.newImage
         this.router.navigate(['home'])
     }
     @HostListener('window:resize', ['$event'])
@@ -50,6 +54,16 @@ export class HomeComponent implements OnInit, OnDestroy{
         this.getLabel();
         this.name = localStorage.getItem('firstName');
         this.email = localStorage.getItem('email');
+        this.newImage = localStorage.getItem('imageUrl');
+        this.img=environment.profileUrl + "/" +this.newImage
+        console.log("inside home ngOnInit");
+        this.dataService.currentPhoto.subscribe(message => { 
+            console.log("variable");
+            
+            this.image = message
+            this.newImage = localStorage.getItem('imageUrl');
+            this.img=environment.profileUrl + "/" +this.newImage
+        })
     }
     navigateArchive() {
         this.router.navigate(['archive']);
@@ -126,7 +140,7 @@ export class HomeComponent implements OnInit, OnDestroy{
       width: 'auto',
       height: 'auto',
       data: data,
-      // disableClose: true
+    //   disableClose: true
     })
     dialogRef.afterClosed().subscribe(result => {
       if (result == "imageChange") {
@@ -135,7 +149,7 @@ export class HomeComponent implements OnInit, OnDestroy{
       this.dataService.currentPhoto.subscribe(response => this.profile = response)
       if (this.profile = true) {
         this.imageProfile = localStorage.getItem('imageUrl');
-        this.img = environment.profileUrl + this.imageProfile;
+        this.img = environment.profileUrl + "/" +this.imageProfile;
       }
     })
   }

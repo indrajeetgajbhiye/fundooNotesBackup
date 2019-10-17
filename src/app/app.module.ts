@@ -32,6 +32,11 @@ import { BarRatingModule } from "ngx-bar-rating";
 import { SearchComponent } from './components/search/search.component';
 import { ImageDialogComponent } from './components/image-dialog/image-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+// import { MasonryGalleryModule } from 'ngx-masonry-gallery';
+import { ClickOutsideModule } from 'ng-click-outside';
+
+import { NgxMasonryModule } from 'ngx-masonry';
+import { MansonryComponent } from './components/mansonry/mansonry.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +45,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     RegisterComponent,
     ForgotPasswordComponent,
     HomeComponent,
+    MansonryComponent,
     NoteIconsComponent,
     AddNotesComponent,
     ResetPasswordComponent,
@@ -68,6 +74,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     BarRatingModule,
     ImageCropperModule,
     MatDialogModule,
+    // MasonryGalleryModule,
+    NgxMasonryModule,
+    ClickOutsideModule,
     FroalaEditorModule.forRoot(), FroalaViewModule.forRoot()
   ],
   providers: [],

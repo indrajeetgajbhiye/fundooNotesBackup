@@ -121,6 +121,7 @@ export class NoteIconsComponent implements OnInit {
         return;
       }
     }, this.service(label));
+    this.addLabel=!this.addLabel
   }
   service(label) {
     this.card.noteLabels.push(label);
@@ -137,5 +138,8 @@ export class NoteIconsComponent implements OnInit {
   }
   openQandA() {
     console.log("q and a ")
+  }
+  onClickedOutside($event){
+    this.addLabel = true
   }
 }

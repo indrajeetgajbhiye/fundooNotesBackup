@@ -7,22 +7,18 @@ import { HttpService } from '../http/http.service';
 export class NoteService {
 
   constructor(private service: HttpService) { }
-  noteServiceEncoded(url, data){
-    console.log("notes", data);
-
-    console.log("url", url)
+  noteServiceEncoded(url, data) {
     return this.service.postUrlEncoded(url, data)
   }
-  noteServiceGetData(url){
+  noteServiceGetData(url) {
     return this.service.httpGetData(url);
   }
-  noteServiceEncodedPost(url, data){
+  noteServiceEncodedPost(url, data) {
     return this.service.encodedPostForm(url, data)
   }
-  noteServiceJSON(url, data){
+  noteServiceJSON(url, data) {
     return this.service.postJSON(url, data)
   }
-
   archiveNote(data) {
     return this.service.postJSON('notes/archiveNotes', data)
   }
@@ -75,11 +71,13 @@ export class NoteService {
     return this.service.httpGetData('notes/getNotesDetail/' + cardId);
   }
 
-  getServiceOfUser(){
-    return this.service.getConfig('/user/service')
-  }
+  // getServiceOfUser() {
+  //   return this.service.getConfig('user/service')
+  // }
   uploadImage(data) {
+    console.log("in note service", data);
+    
     return this.service.postImage('user/uploadProfileImage', data)
-}
+  }
 
 }

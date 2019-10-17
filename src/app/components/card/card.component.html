@@ -1,18 +1,22 @@
-<mat-card class="display-note" [style.background]=card.color fxLayout="column" fxFlex=100>
+<mat-card class="display-note" [style.background]=card.color fxLayout="column">
     <div (click)="check()" fxLayout="column">
         <div fxFlex=50 class="Border" fxLayout="row" fxLayoutAlign="space-between center" class="takenote">
-            <div> <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3" class="textArea" [(ngModel)]="card.title"></textarea></div>
+            <div>
+                <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3" class="textArea" [(ngModel)]="card.title">
+                </textarea>
+            </div>
             <button *ngIf=!card.isDeleted fxFlex=10 mat-icon-button color="basic" (click)="changePin(card)" (click)="$event.stopPropagation()">
-        <div class="barpin" *ngIf=card.isPined>
-          <img src="../../../assets/images/pin_Off.svg" />
-        </div>
-        <div class="barpin" *ngIf=!card.isPined>
-          <img src="../../../assets/images/pin_On.svg" />
-        </div>
-      </button>
+                <div class="barpin" *ngIf=card.isPined>
+                    <img src="../../../assets/images/pin_Off.svg" />
+                </div>
+                <div class="barpin" *ngIf=!card.isPined>
+                    <img src="../../../assets/images/pin_On.svg" />
+                </div>
+            </button>
         </div>
         <div fxFlex=100 class="description">
-            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="15" class="textArea" [(ngModel)]="card.description"></textarea>
+            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="15" class="textArea" [(ngModel)]="card.description">
+            </textarea>
         </div>
         <div *ngIf='!display'>
             <div *ngFor='let list of card.noteCheckLists'>
@@ -29,7 +33,10 @@
             </div>
             <div *ngFor='let list of card.noteCheckLists'>
                 <div *ngIf="list.status=='close' && !list.isDeleted" fxLayout='center center'>
-                    <img src="../../../assets/images/right_box.svg" (click)='addCheckList(list)'><del>{{list.itemName}}</del>
+                    <img src="../../../assets/images/right_box.svg" (click)='addCheckList(list)'>
+                    <del>
+                            {{list.itemName}}
+                        </del>
                 </div>
             </div>
         </div>
@@ -52,7 +59,8 @@
     </div>
     <div fxLayoutGap='3%' fxLayout="row wrap" fxLayoutAlign="none center">
         <div *ngFor='let item of card.collaborators'>
-            <mat-icon class="material-icons" (click)="openCollaborator()" matTooltip={{item.email}}>account_circle</mat-icon>
+            <mat-icon class="material-icons" (click)="openCollaborator()" matTooltip={{item.email}}>account_circle
+            </mat-icon>
         </div>
     </div>
     <div fxFlex='100' fxLayout="row">

@@ -12,7 +12,7 @@ export class DataService {
     isDeleted: false,
     userId: ''
   }
-  private messageSource = new BehaviorSubject('');
+  private messageSource = new BehaviorSubject('searching');
   public currentMessage = this.messageSource.asObservable();
 
   private labelNotes = new BehaviorSubject<Label>(this.labelDefault);
@@ -41,7 +41,6 @@ export class DataService {
     this.view1.next(message);
   }
   changeImage(message: boolean) {
-    console.log(message, "imagedata")
     this.changephoto.next(message);
   }
 }

@@ -1,8 +1,7 @@
-  import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { NoteDialogComponent } from '../note-dialog/note-dialog.component';
 import { NoteService } from '../../service/note/note.service';
-// import { DataService } from "../../service/data/data.service";
 import { Router } from '@angular/router';
 
 @Component({

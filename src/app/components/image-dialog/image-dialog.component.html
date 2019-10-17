@@ -2,14 +2,14 @@
     <div mat-dialog-title>
         <span>Select Profile Photo</span>
     </div>
-    <div class="body">
+    <div class="body" fxLayout="column" fxLayoutAlign="space-around center">
         <button mat-button (click)="photoInput.click()">Select a photo from your computer</button>
 
         <input #photoInput type="file" style="display:none" (change)="fileChangeEvent($event)">
         <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 3" [resizeToWidth]="168" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (loadImageFailed)="loadImageFailed()"></image-cropper>
 
 
-        <img [src]="croppedImage" />
+        <img [src]="imageBefore" />
     </div>
     <div style="bottom:5;margin-top: 5%" fxLayout="row">
         <div style="padding:5px;">

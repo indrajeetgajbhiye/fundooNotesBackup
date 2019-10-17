@@ -12,8 +12,8 @@
     </div>
     <div *ngIf="!flag" fxLayout="row" fxLayoutAlign="space-around center" class="NotesAddNote">
         <mat-card [style.background]=message fxLayout="column" class="matcard" fxFlex="40" fxFlex.xs='90' [style.backgroundColor]=card.color>
-            <div class="Border" fxLayout="row" fxLayoutAlign="space-between center" class="takenote">
-                <textarea fxflex="80" class="textArea" matTextareaAutosize placeholder="Title " [formControl]="noteTitle" class="textArea"></textarea>
+            <div fxLayout="row" fxLayoutAlign="space-between center" class="takenote">
+                <textarea fxflex="80" class="textArea" matTextareaAutosize placeholder="Title " [formControl]="noteTitle"></textarea>
                 <button fxflex="80" mat-icon-button color="basic" (click)="changePin()">
                     <div class="barpin" *ngIf=card.isPined >
                         <img src="../../../assets/images/pin_Off.svg" />
@@ -24,7 +24,7 @@
             </button>
             </div>
             <div class="Border" fxLayout="column" class="takenote">
-                <textarea class="textArea" matTextareaAutosize placeholder="Take a note.. " [formControl]="noteContent" class="textArea"></textarea>
+                <textarea class="textArea" matTextareaAutosize placeholder="Take a note.. " [formControl]="noteContent"></textarea>
             </div>
             <div *ngIf='show==false'>
                 <div *ngFor='let list of checklistOpen'>

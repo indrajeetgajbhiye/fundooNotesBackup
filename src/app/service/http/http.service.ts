@@ -78,13 +78,12 @@ export class HttpService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': localStorage.getItem('userToken')
-
       })
     }
     console.log(localStorage.getItem('userToken'), "token")
     return this.http.post(url, body, httpOptions)
   }
-  getConfig(url) {
-    return this.http.get(environment.baseUrl + url);
-}
+  // getConfig(url) {
+  //   return this.http.get(environment.baseUrl + url);
+  // }
 } 

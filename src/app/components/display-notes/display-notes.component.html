@@ -1,5 +1,18 @@
-<div [ngClass]="{'gridView':view,'listView':!view}" [fxLayout]="view?'row wrap':'column'">
-    <div *ngFor="let card of notes|search:(search?null:searchValue)">
-        <app-card class="example-card" [card]="card" (removeEvent)="removeEvent($event,card)"></app-card>
+<!-- <div class="fixed" fxLayoutAlign="space-between start">
+
+    <div [ngClass]="{'gridView':view,'listView':!view}" [fxLayout]="view?'row wrap':'column'" fxLayoutGap="10px" [fxLayoutAlign]="view? 'start start': 'space-around center'">
+
+        <div *ngFor="let card of notes|search:(search?null:searchValue)">
+            <app-card class="example-card" [card]="card" (removeEvent)="removeEvent($event,card)"></app-card>
+        </div>
+
     </div>
-</div>
+</div> -->
+
+<ngx-masonry>
+    <div [ngClass]="{'gridView':view,'listView':!view}">
+        <div ngxMasonryItem *ngFor="let card of notes|search:(search?null:searchValue)">
+            <app-card class="example-card" [card]="card" (removeEvent)="removeEvent($event,card)"></app-card>
+        </div>
+    </div>
+</ngx-masonry>

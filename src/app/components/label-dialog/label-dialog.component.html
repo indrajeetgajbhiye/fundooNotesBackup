@@ -15,13 +15,13 @@
             <mat-icon (click)="deleteLabel(label.id)" class="visible" fxFlex=10 mat-icon-button>
                 delete</mat-icon>
         </div>
-        <input class="textArea" fxFlex="80" [(ngModel)]="label.label" class="visible" id=label.id>
+        <input class="textArea" fxFlex="80" [(ngModel)]="label.label" id=label.id>
         <div fxFlex="10">
-            <mat-icon (click)=edit(label)>edit</mat-icon>
+            <mat-icon (click)=edit(label) class="visible">edit</mat-icon>
         </div>
     </div>
     <mat-divider class="divider"></mat-divider>
     <div>
-        <div mat-button class="visible" fxLayoutAlign="end end" (click)="close()">Done</div>
+        <div mat-button class="visible" fxLayoutAlign="end end" (click)="close(); addLabel()">Done</div>
     </div>
 </div>

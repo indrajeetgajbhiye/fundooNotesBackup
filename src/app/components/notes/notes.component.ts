@@ -12,21 +12,17 @@ export class NotesComponent implements OnInit, OnChanges {
     cardData = [];
     constructor(private service: NoteService, private dataService : DataService) { }
     ngOnInit() {
-//         this.dataService.currentView1.subscribe({
-// console.log("nrgj",mee);
-
-//         });
         this.getAllCard();
     }
     getNewNote($event) {
         this.cardData.push($event);
         if ($event["isArchived"] == false) {
             if ($event["isPined"] == false) {
-                this.unPinNotes.reverse().push($event);
+                this.unPinNotes.push($event);
                 this.unPinNotes.reverse();
             }
             else
-                this.pinNotes.reverse().push($event);
+                this.pinNotes.push($event);
                 this.pinNotes.reverse();
         }
     }
