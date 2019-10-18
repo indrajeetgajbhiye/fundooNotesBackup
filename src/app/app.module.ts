@@ -37,6 +37,7 @@ import { ClickOutsideModule } from 'ng-click-outside';
 
 import { NgxMasonryModule } from 'ngx-masonry';
 import { MansonryComponent } from './components/mansonry/mansonry.component';
+import { CollaboratorDialogComponent } from './components/collaborator-dialog/collaborator-dialog.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { MansonryComponent } from './components/mansonry/mansonry.component';
     LabelsComponent,
     CardComponent,
     SearchComponent,
-    ImageDialogComponent
+    ImageDialogComponent,
+    CollaboratorDialogComponent
     ],
   imports: [
     BrowserModule,

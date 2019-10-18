@@ -8,14 +8,35 @@
 
     </div>
 </div> -->
-<div fxLayoutAlign="space-around center">
-    <div class="fixed" fxFlex='70'>
+<div *ngIf="view" fxLayoutAlign="space-around center">
+    <div fxFlex="15" fxFlex.sm="10" fxFlex.xs="5">
+
+    </div>
+    <div fxFlex='70' fxFlex.sm="80">
         <ngx-masonry>
-            <div [ngClass]="{'gridView':view,'listView':!view}">
+            <div fxLayoutGap="1%">
                 <div ngxMasonryItem *ngFor="let card of notes|search:(search?null:searchValue)">
                     <app-card class="example-card" [card]="card" (removeEvent)="removeEvent($event,card)"></app-card>
                 </div>
             </div>
         </ngx-masonry>
+    </div>
+    <div fxFlex="15" fxFlex.sm="10" fxFlex.xs="5">
+
+    </div>
+</div>
+<div *ngIf="!view" fxLayoutAlign="stretch center">
+    <div fxFlex="20" fxFlex.xs="10">
+
+    </div>
+    <div fxLayout='column' fxLayoutAlign="space-around stretch" fxFlex="60" fxFlex.xs="80">
+        <div>
+            <div *ngFor="let card of notes|search:(search?null:searchValue) ">
+                <app-card class="example-card" [view]='!view' [card]="card" (removeEvent)="removeEvent($event,card) "></app-card>
+            </div>
+        </div>
+    </div>
+    <div fxFlex="20" fxFlex.xs="10">
+
     </div>
 </div>

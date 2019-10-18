@@ -19,3 +19,9 @@
     padding: 4px;
     margin-left: 20%;
 }
+
+.listView {
+    flex-direction: column;
+    flex: auto;
+    flex-flow: column;
+}

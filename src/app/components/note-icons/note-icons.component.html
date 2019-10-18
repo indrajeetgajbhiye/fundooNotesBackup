@@ -16,17 +16,12 @@
       <mat-icon class="material-icons">color_lens</mat-icon>
     </button>
     </div>
-    <mat-menu #selectTheme="matMenu" class="matmenuContent">
-        <!-- <ng-template matMenuContent class="matmenuContent"> -->
-        <mat-card>
-            <div fxLayout=row fxLayoutGap=5px style="margin-top:3px; padding: 2px" *ngFor='let row of colorArray'>
-                <div *ngFor='let color of row'>
-                    <button [ngStyle]="{'background-color': color.color }" (click)='changeColor(color.color)' matTooltip="{{color.name}}" mat-mini-fab></button>
-                </div>
+    <mat-menu #selectTheme="matMenu" fxLayoutAlign="space-around center">
+        <div fxLayout=row *ngFor='let row of colorArray'>
+            <div *ngFor='let color of row'>
+                <button [ngStyle]="{'background-color': color.color }" (click)='changeColor(color.color)' matTooltip="{{color.name}}" mat-card-avatar></button>
             </div>
-        </mat-card>
-
-        <!-- </ng-template> -->
+        </div>
     </mat-menu>
     <div fxFlex='13'>
         <button mat-icon-button>

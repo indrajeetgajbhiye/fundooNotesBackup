@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./card.component.scss']
 })
 export class CardComponent implements OnInit {
-
+  @Input() view;
   @Input() fullIcon;
   @Input() card
   @Input() search: boolean = true;

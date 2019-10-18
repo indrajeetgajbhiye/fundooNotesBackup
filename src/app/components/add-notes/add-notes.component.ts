@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { NoteService } from '../../service/note/note.service';
 import { Model } from '../../Models/model.model';
@@ -12,6 +12,7 @@ export class AddNotesComponent implements OnInit {
     flag = true;
     flag2 = false;
     card: any;
+ 
     show = true;
     checklistOpen = [];
     @Output() newNoteEvent = new EventEmitter();
@@ -20,6 +21,7 @@ export class AddNotesComponent implements OnInit {
     color: string = '#FFFFFF';
     ngOnInit() {
         this.card = new Model();
+        // console.log(this.view)
     }
     changePin() {
         this.card.isPined = !this.card.isPined;

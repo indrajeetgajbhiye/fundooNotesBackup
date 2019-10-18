@@ -1,6 +1,8 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
+import { Location }from '@angular/common'
 import { NoteService } from '../../service/note/note.service'
 import { DataService } from 'src/app/service/data/data.service';
+import { Router } from '@angular/router';
 @Component({
     selector: 'app-notes',
     templateUrl: './notes.component.html',
@@ -10,7 +12,7 @@ export class NotesComponent implements OnInit, OnChanges {
     pinNotes = [];
     unPinNotes = [];
     cardData = [];
-    constructor(private service: NoteService, private dataService : DataService) { }
+    constructor(private service: NoteService, private dataService : DataService, public router: Router, private location: Location) { }
     ngOnInit() {
         this.getAllCard();
     }
@@ -18,13 +20,17 @@ export class NotesComponent implements OnInit, OnChanges {
         this.cardData.push($event);
         if ($event["isArchived"] == false) {
             if ($event["isPined"] == false) {
-                this.unPinNotes.push($event);
+                this.unPinNotes.reverse().push($event);
                 this.unPinNotes.reverse();
             }
             else
-                this.pinNotes.push($event);
+                this.pinNotes.reverse().push($event);
                 this.pinNotes.reverse();
         }
+    }
+    printCards(){
+        this.pinNotes;
+        this.unPinNotes;
     }
     ngOnChanges() {
         console.log("Onchanges");
@@ -33,7 +39,6 @@ export class NotesComponent implements OnInit, OnChanges {
         this.service.noteServiceGetData('notes/getNotesList').subscribe(data => {
             console.log(data)
             this.cardData = data["data"].data;
-            this.cardData;
             this.check();
             return
         })

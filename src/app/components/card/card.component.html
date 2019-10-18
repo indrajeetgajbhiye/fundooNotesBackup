@@ -1,8 +1,8 @@
 <mat-card class="display-note" [style.background]=card.color fxLayout="column">
     <div (click)="check()" fxLayout="column">
         <div fxFlex=50 class="Border" fxLayout="row" fxLayoutAlign="space-between center" class="takenote">
-            <div>
-                <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3" class="textArea" [(ngModel)]="card.title">
+            <div fxFlex='100' class="description">
+                <textarea fxFlex='100' cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3" class="textArea" [(ngModel)]="card.title">
                 </textarea>
             </div>
             <button *ngIf=!card.isDeleted fxFlex=10 mat-icon-button color="basic" (click)="changePin(card)" (click)="$event.stopPropagation()">
@@ -15,7 +15,7 @@
             </button>
         </div>
         <div fxFlex=100 class="description">
-            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="15" class="textArea" [(ngModel)]="card.description">
+            <textarea fxFlex='100' cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="15" class="textArea" [(ngModel)]="card.description">
             </textarea>
         </div>
         <div *ngIf='!display'>
