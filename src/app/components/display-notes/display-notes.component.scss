@@ -14,14 +14,16 @@
     resize: none;
 }
 
-.example-card {
-    width: 240px;
-    padding: 4px;
-    margin-left: 20%;
-}
-
 .listView {
     flex-direction: column;
     flex: auto;
     flex-flow: column;
+}
+
+::ng-deep .temp {
+    background-color: black;
+}
+
+.display {
+    margin-bottom: 10px;
 }

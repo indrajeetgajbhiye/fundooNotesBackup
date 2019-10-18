@@ -4,11 +4,15 @@
             <button mat-icon-button matTooltip="menu-bar" (click)="snav.toggle()">
 				<mat-icon>menu</mat-icon>
 			</button>
-            <div fxFlex="10" fxLayout.gt-xs="row" fxFlex.gt="500px">
-                <img id="img1" *ngIf="hide" src="../../../assets/images/logo.png" />
+            <div fxFlex="10" fxLayout.gt-xs="row" fxFlex.gt="500px" fxLayout="row">
+                <img id="img1" src="../../../assets/images/logo.png" />
+                <div *ngIf="innerWidth>600" fxLayoutAlign="center center">
+                    <h2>Fundoo</h2>
+                </div>
             </div>
+
         </div>
-        <div fxFlex="80" fxLayoutAlign="center center" *ngIf="innerWidth>600">
+        <div fxFlex="80" fxLayoutAlign="space-around center" *ngIf="innerWidth>600">
             <mat-form-field appearance="outline" [style.fontSize.px]="2" class="search">
                 <button mat-icon-button>
 					<mat-icon class="searchIcon">search</mat-icon>
@@ -16,7 +20,7 @@
                 <input fxFlex="90" (click)="navigateSearch()" [(ngModel)]="search" (keyup)="searchfor()" matInput placeholder="search" [style.fontSize.px]="18" class="searchText" autocomplete="off">
             </mat-form-field>
         </div>
-        <div fxFlex="80" fxLayoutAlign="center center" *ngIf="innerWidth<600">
+        <div fxFlex="100" fxFlex.xs="60" fxLayoutAlign="space-around center" *ngIf="innerWidth<600">
             <mat-icon *ngIf="hide" class="searchIcon" (click)="showSearch()">search</mat-icon>
             <mat-form-field *ngIf="!hide" appearance="outline" [style.fontSize.px]="2" class="search">
                 <button mat-icon-button>
@@ -32,7 +36,7 @@
             <button fxFlex="20" aria-label="Toggle sidenav" matTooltip="cart" mat-icon-button (click)="navigateCart()">
 				<mat-icon>shopping_cart</mat-icon>
 			</button>
-            <button mat-icon-button color="basic" id="grid" (click)="changeView()" matTooltip="grid">
+            <button *ngIf="innerWidth>600" mat-icon-button color="basic" id="grid" (click)="changeView()" matTooltip="grid">
 				<mat-icon *ngIf=view>view_stream</mat-icon>
 				<mat-icon *ngIf=!view>view_module</mat-icon>
 			</button>
@@ -62,38 +66,38 @@
         </mat-menu>
     </mat-toolbar>
     <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-        <mat-sidenav #snav [mode]="innerWidth>600 ? 'side' : 'over'" fixedTopGap="56">
-            <mat-nav-list>
-                <mat-list role="List">
-                    <mat-list-item role="listitem" id="note" (click)="navigateHome()" (click)=" header='notes'" class="navField" [ngClass]="{'highlight':header=='notes', 'normal':header!='notes'}">
-                        <img id="img1" src="../../../assets/images/bulb.svg" />Note
-                    </mat-list-item>
-                    <mat-list-item role="listitem" id="rem" class="navField" (click)="navigateReminder()" (click)="header='reminder'" [ngClass]="{'highlight':header=='reminder', 'normal':header!='reminder'}">
-                        <img id="img2" src="../../../assets/images/bell.svg" />Reminder
-                    </mat-list-item>
-                    <mat-divider></mat-divider>
-                    <p id="para">labels</p>
-                    <div *ngFor='let label of ArrayOfLabel'>
-                        <mat-nav-list>
-                            <mat-list-item class="navField" (click)="openLabelNotes(label.label)" (click)="header= label.label" [ngClass]="{'highlight':header==label.label, 'normal':header!=label.label}">
-                                <mat-icon>label_outline</mat-icon>
-                                {{label.label}}
-                            </mat-list-item>
-                        </mat-nav-list>
-                    </div>
-                    <mat-list-item role="listitem" id="lable" class="navField" (click)="openLabelDialog()" (click)="header='editLabel'" [ngClass]="{'highlight':header=='editLabel', 'normal':header!='editLabel'}">
-                        <mat-icon id="edit">edit</mat-icon>
-                        Edit label
-                    </mat-list-item>
-                    <mat-divider></mat-divider>
-                    <mat-list-item role="listitem" id="arch" class="navField" (click)="navigateArchive()" (click)="header='archive'" [ngClass]="{'highlight':header=='archive', 'normal':header!='archive'}">
-                        <img id="img4" src="../../../assets/images/archive.svg" /> Archive
-                    </mat-list-item>
-                    <mat-list-item role="listitem" id="bin" class="navField" (click)="navigateTrash()" (click)="header='trash'" [ngClass]="{'highlight':header=='trash', 'normal':header!='trash'}">
-                        <img id="img5" src="../../../assets/images/trash.svg" /> Trash
-                    </mat-list-item>
-                </mat-list>
-            </mat-nav-list>
+        <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'">
+            <!-- <mat-nav-list> -->
+            <mat-list role="List">
+                <mat-list-item role="listitem" id="note" (click)="navigateHome()" (click)=" header='notes'" class="navField" [ngClass]="{'highlight':header=='notes', 'normal':header!='notes'}">
+                    <img id="img1" src="../../../assets/images/bulb.svg" />Note
+                </mat-list-item>
+                <mat-list-item role="listitem" id="rem" class="navField" (click)="navigateReminder()" (click)="header='reminder'" [ngClass]="{'highlight':header=='reminder', 'normal':header!='reminder'}">
+                    <img id="img2" src="../../../assets/images/bell.svg" />Reminder
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <p id="para">labels</p>
+                <div *ngFor='let label of ArrayOfLabel'>
+                    <mat-nav-list>
+                        <mat-list-item class="navField" (click)="openLabelNotes(label.label)" (click)="header= label.label" [ngClass]="{'highlight':header==label.label, 'normal':header!=label.label}">
+                            <mat-icon>label_outline</mat-icon>
+                            {{label.label}}
+                        </mat-list-item>
+                    </mat-nav-list>
+                </div>
+                <mat-list-item role="listitem" id="lable" class="navField" (click)="openLabelDialog()" (click)="header='editLabel'" [ngClass]="{'highlight':header=='editLabel', 'normal':header!='editLabel'}">
+                    <mat-icon id="edit">edit</mat-icon>
+                    Edit label
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item role="listitem" id="arch" class="navField" (click)="navigateArchive()" (click)="header='archive'" [ngClass]="{'highlight':header=='archive', 'normal':header!='archive'}">
+                    <img id="img4" src="../../../assets/images/archive.svg" /> Archive
+                </mat-list-item>
+                <mat-list-item role="listitem" id="bin" class="navField" (click)="navigateTrash()" (click)="header='trash'" [ngClass]="{'highlight':header=='trash', 'normal':header!='trash'}">
+                    <img id="img5" src="../../../assets/images/trash.svg" /> Trash
+                </mat-list-item>
+            </mat-list>
+            <!-- </mat-nav-list> -->
         </mat-sidenav>
         <mat-sidenav-content>
             <router-outlet></router-outlet>

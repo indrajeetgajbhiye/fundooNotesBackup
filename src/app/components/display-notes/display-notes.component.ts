@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
 import { NoteService } from '../../service/note/note.service';
 import { DataService } from "../../service/data/data.service";
 export interface matdialog {
@@ -18,6 +18,7 @@ export class DisplayNotesComponent implements OnInit {
     @Output() pinEvent = new EventEmitter();
     @Input() search: boolean = true;
     searchValue: String;
+    innerWidth;
     model: any;
     constructor(private noteService: NoteService, private dataService: DataService) { 
     }
@@ -25,6 +26,13 @@ export class DisplayNotesComponent implements OnInit {
         this.dataService.currentMessage.subscribe(message => { this.searchValue = message });
         this.notes = this.notes.reverse();
         this.dataService.currentView.subscribe(message => { this.view = message });
+    }
+    @HostListener('window:resize', ['$event'])
+    onResize(event) {
+        this.innerWidth = window.innerWidth;
+        if(this.innerWidth<600){
+            this.view=false;
+        }
     }
     removeEvent($event, card) {
         if ($event) {

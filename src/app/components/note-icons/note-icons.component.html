@@ -16,10 +16,20 @@
       <mat-icon class="material-icons">color_lens</mat-icon>
     </button>
     </div>
-    <mat-menu #selectTheme="matMenu" fxLayoutAlign="space-around center">
-        <div fxLayout=row *ngFor='let row of colorArray'>
+    <mat-menu #selectTheme="matMenu">
+        <div fxLayout=row *ngFor='let row of colorArray' fxLayoutAlign="space-around center">
             <div *ngFor='let color of row'>
-                <button [ngStyle]="{'background-color': color.color }" (click)='changeColor(color.color)' matTooltip="{{color.name}}" mat-card-avatar></button>
+                <div *ngIf="color.color == card.color">
+                    <button [ngStyle]="{'background-color': color.color }" (click)='changeColor(color.color)' matTooltip="{{color.name}}" mat-card-avatar class="visible">
+                    <mat-icon>
+                      done
+                    </mat-icon>
+                  </button>
+                </div>
+                <div *ngIf="color.color != card.color">
+                    <button [ngStyle]="{'background-color': color.color }" (click)='changeColor(color.color)' matTooltip="{{color.name}}" mat-card-avatar class="visible"></button>
+                </div>
+
             </div>
         </div>
     </mat-menu>

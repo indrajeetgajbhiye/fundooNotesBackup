@@ -20,21 +20,21 @@ export class NoteIconsComponent implements OnInit {
   model: any;
   colorArray =
     [[
-      { 'color': '#B39DDB', 'name': 'purple' },
-      { 'color': '#F48FB1', 'name': 'pink' },
-      { 'color': '#a0855b', 'name': 'brown' },
-      { 'color': '#E0E0E0', 'name': 'gray' }
+      { 'color': '#ffffff', 'name': 'white' },
+      { 'color': '#f28b82', 'name': 'red' },
+      { 'color': '#fbbc04', 'name': 'orange' },
+      { 'color': '#fff475', 'name': 'yellow' }
     ],
     [
-      { 'color': '#FFFFFF', 'name': 'White' },
-      { 'color': '#d35656', 'name': 'Red' },
-      { 'color': '#fb9224', 'name': 'Orange' },
-      { 'color': '#eccd8f', 'name': 'Yellow' }],
+      { 'color': '#ccff90', 'name': 'green' },
+      { 'color': '#a7ffeb', 'name': 'teal' },
+      { 'color': '#cbf0f8', 'name': 'blue' },
+      { 'color': '#aecbfa', 'name': 'dark blue' }],
     [
-      { 'color': '#a1dd70 ', 'name': 'green' },
-      { 'color': '#69F0AE', 'name': 'teal' },
-      { 'color': '#81D4FA', 'name': 'blue' },
-      { 'color': '#0288D1', 'name': 'darkblue' }
+      { 'color': '#d7aefb', 'name': 'purple' },
+      { 'color': '#fdcfe8', 'name': 'pink' },
+      { 'color': '#e6c9a8', 'name': 'brown' },
+      { 'color': '#e8eaed', 'name': 'grey' }
     ]]
   constructor(private noteService: NoteService, private router: Router, public dialog: MatDialog, public dataService: DataService) { }
 
