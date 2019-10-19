@@ -16,7 +16,6 @@ import { LabelsComponent } from './components/labels/labels.component'
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { SearchComponent } from './components/search/search.component';
 import { ImageDialogComponent } from './components/image-dialog/image-dialog.component';
-import { MansonryComponent } from './components/mansonry/mansonry.component';
 import { CollaboratorDialogComponent } from './components/collaborator-dialog/collaborator-dialog.component';
 const routes: Routes = [
   {path: 'login',component: LoginComponent},
@@ -35,9 +34,8 @@ const routes: Routes = [
   {path:'update-note',component:NoteDialogComponent},
   {path:'update-label',component:LabelDialogComponent},
   {path:'upload-image',component:ImageDialogComponent},
-  {path: "masonry",component:MansonryComponent },
   {path:'collabs', component: CollaboratorDialogComponent},
-  {path:"**", redirectTo:"masonry"}
+  {path:"**", redirectTo:"home"}
 ];
 @NgModule({
   declarations: [],

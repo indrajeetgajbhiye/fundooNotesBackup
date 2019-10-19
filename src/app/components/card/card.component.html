@@ -42,13 +42,13 @@
             </div>
         </div>
     </div>
-    <div *ngIf='card.reminder.length'>
+    <div *ngIf='card.reminder'>
         <mat-chip class="sample" (mouseenter)="cancelIcon=true" (mouseleave)="cancelIcon=false" matTooltip="reminder">
             Tom {{card.reminder[0]|date:shortdate}}
             <mat-icon *ngIf=cancelIcon (click)="removeReminder(card.id)" matChipRemove>cancel</mat-icon>
         </mat-chip>
     </div>
-    <div *ngIf='card.noteLabels.length' fxLayoutGap='3%' fxLayout="row wrap" fxLayoutAlign="none center">
+    <div *ngIf='card.noteLabels' fxLayoutGap='3%' fxLayout="row wrap" fxLayoutAlign="none center">
         <div *ngFor='let item of card.noteLabels'>
             <mat-chip-list>
                 <mat-chip class="sample" (click)="openLabelNotes(item.label)" (mouseenter)="item.hover=true" (mouseleave)="item.hover=false" matTooltip="label">

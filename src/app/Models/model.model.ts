@@ -1,6 +1,6 @@
 export class Model {
     title: string = ""
-    description: string = ""
+    description?: string = ""
     color: string = "#ffffff"
     createdDate: Date
     modifiedDate: Date

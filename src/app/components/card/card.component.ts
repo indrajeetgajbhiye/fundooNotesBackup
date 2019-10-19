@@ -18,11 +18,12 @@ export class CardComponent implements OnInit {
   @Output() removeEvent = new EventEmitter();
   searchValue: String;
   model: any;
-  title: any;
+  
   isArchived: any;
   isDeleted: any;
   isPined: any;
   description: any;
+  title :any
   newList
   addCheck
   question
@@ -30,7 +31,7 @@ export class CardComponent implements OnInit {
   collaborators: any;
   constructor(public dialog: MatDialog, private router: Router, private noteService: NoteService) { }
   ngOnInit() {
-    // console.log(this.card);
+    this.card;
   }
   show() {
     this.description = this.card.description;
@@ -42,7 +43,7 @@ export class CardComponent implements OnInit {
   check() {
     if (!this.fullIcon) {
       this.openDialog(this.card);
-      // this.show();
+      this.show();
     }
     return;
   }
