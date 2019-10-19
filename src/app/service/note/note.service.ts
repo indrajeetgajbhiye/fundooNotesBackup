@@ -83,7 +83,7 @@ export class NoteService {
     return this.service.postJSON('notes/' + noteId + '/AddcollaboratorsNotes', data)
   }
   removeCollaborator(noteId, collaboratorId) {
-    return this.service.encodedPostFormDelete('/notes/' + noteId + '/removeCollaboratorsNotes/' + collaboratorId)
+    return this.service.encodedPostFormDelete('notes/' + noteId + '/removeCollaboratorsNotes/' + collaboratorId)
   }
 
 }

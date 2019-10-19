@@ -76,7 +76,7 @@ export class CollaboratorDialogComponent implements OnInit {
     console.log(this.collaborators)
     console.log(collaboratorId);
     console.log(this.data['id'])
-    if (this.data['id'] == !undefined) {
+    if (this.data['id'] !== undefined) {
       this.noteService.removeCollaborator(this.data['id'], collaboratorId).subscribe(result => {
         console.log(result);
       })
