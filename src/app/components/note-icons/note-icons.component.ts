@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material';
 import { DataService } from '../../service/data/data.service'
 import { Label } from '../../Models/model.model'
 import { Router } from '@angular/router';
+import { CollaboratorDialogComponent } from '../collaborator-dialog/collaborator-dialog.component'
 @Component({
   selector: 'app-note-icons',
   templateUrl: './note-icons.component.html',
@@ -96,17 +97,25 @@ export class NoteIconsComponent implements OnInit {
     }
     else {
       console.log("Card need to be deleted");
-      this.noteService.noteServiceJSON('notes/trashNotes', {
-
+      console.log(this.card.id)
+      let body={
         "isDeleted": true,
         "noteIdList": [this.card.id]
-      }).subscribe(data => {
+      }
+      this.noteService.noteServiceJSON('notes/trashNotes',body).subscribe(data => {
         this.remove(true);
       }, err => console.log(err))
     }
   }
   addCollaborator() {
-    console.log("add collabs")
+    const dialogRef = this.dialog.open(CollaboratorDialogComponent, {
+      width : 'auto',
+      height : 'auto',
+      data : {
+        collaborators : this.card.collaborators,
+        id : this.card.id
+      }
+    })
   }
   addLabelToggle() {
     this.addLabel = !this.addLabel;

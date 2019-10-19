@@ -30,8 +30,11 @@ export class DisplayNotesComponent implements OnInit {
     @HostListener('window:resize', ['$event'])
     onResize(event) {
         this.innerWidth = window.innerWidth;
-        if(this.innerWidth<600){
+        if(this.innerWidth<=600){
             this.view=false;
+        }
+        if(this.innerWidth>600){
+            this.view=true;
         }
     }
     removeEvent($event, card) {

@@ -40,10 +40,6 @@ export class HomeComponent implements OnInit, OnDestroy{
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
         this.mobileQuery.addListener(this._mobileQueryListener);
         this.innerWidth = window.innerWidth;
-        this.newImage = localStorage.getItem('imageUrl');
-        console.log("inside home constructor");
-        
-        this.img=environment.profileUrl + "/" +this.newImage
         this.router.navigate(['home'])
     }
     @HostListener('window:resize', ['$event'])

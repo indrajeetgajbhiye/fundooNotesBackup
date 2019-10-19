@@ -38,7 +38,8 @@ export class NotesComponent implements OnInit, OnChanges {
     getAllCard() {
         this.service.noteServiceGetData('notes/getNotesList').subscribe(data => {
             console.log(data)
-            this.cardData = data["data"].data;
+            this.cardData = data["data"].data
+            console.log("carddata", this.cardData)
             this.check();
             return
         })
