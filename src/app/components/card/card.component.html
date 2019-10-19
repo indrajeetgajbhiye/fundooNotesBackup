@@ -2,8 +2,9 @@
     <div (click)="check()" fxLayout="column">
         <div fxFlex=50 class="Border" fxLayout="row" fxLayoutAlign="space-between center" class="takenote">
             <div fxFlex='100' class="description">
-                <textarea fxFlex='100' cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3" class="textArea" [(ngModel)]="card.title">
+                <textarea fxFlex='100' cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3" class="textArea" [(ngModel)]="card.title">
                 </textarea>
+                <!-- #autosize="cdkTextareaAutosize" -->
             </div>
             <button *ngIf=!card.isDeleted fxFlex=10 mat-icon-button color="basic" (click)="changePin(card)" (click)="$event.stopPropagation()">
                 <div class="barpin" *ngIf=card.isPined>
@@ -15,7 +16,7 @@
             </button>
         </div>
         <div fxFlex=100 class="description">
-            <textarea fxFlex='100' cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="15" class="textArea" [(ngModel)]="card.description">
+            <textarea fxFlex='100' cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="15" class="textArea" [(ngModel)]="card.description">
             </textarea>
         </div>
         <div *ngIf='!display'>

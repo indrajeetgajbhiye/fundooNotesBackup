@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material';
 import { NoteDialogComponent } from '../note-dialog/note-dialog.component';
 import { NoteService } from '../../service/note/note.service';
 import { Router } from '@angular/router';
-
+import { CollaboratorDialogComponent } from '../collaborator-dialog/collaborator-dialog.component'
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class CardComponent implements OnInit {
   @Input() view;
   @Input() fullIcon;
-  @Input() card
+  @Input() card;
   @Input() search: boolean = true;
   @Output() pinEvent = new EventEmitter();
   @Output() removeEvent = new EventEmitter();
@@ -27,6 +27,7 @@ export class CardComponent implements OnInit {
   addCheck
   question
   display=true;
+  collaborators: any;
   constructor(public dialog: MatDialog, private router: Router, private noteService: NoteService) { }
   ngOnInit() {
     // console.log(this.card);
@@ -137,7 +138,15 @@ export class CardComponent implements OnInit {
 
   }
   openCollaborator() {
-   console.log("open Collabs")
+    const dialogRef = this.dialog.open(CollaboratorDialogComponent,{
+      panelClass : "myclass",
+      height : 'auto',
+      width : 'auto',
+      data :{
+        collaborators : this.card.collaborators,
+        id: this.card.id
+      }
+    })
   }
   addList() {
     console.log("add list")

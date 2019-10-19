@@ -8,15 +8,15 @@ export class SearchPipe implements PipeTransform {
   transform(value: any, args?: any): any {
     if (!value) {
       console.log("!value", value)
-      return value.reverse();
+      return value
     }
     if (value == '') {
       console.log("value", value)
-      return value.reverse();
+      return value
     }
     if (!args) {
       console.log("!args", value)
-      return value.reverse();
+      return value
     }
     return value.filter(array =>
       array.title.toLowerCase().indexOf(args.toLowerCase())!==-1 || array.description.toLowerCase().indexOf(args.toLowerCase()) !==-1 )
