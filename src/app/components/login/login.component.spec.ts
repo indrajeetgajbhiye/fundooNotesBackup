@@ -36,4 +36,7 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it("login should be login", ()=>{
+    expect(LoginComponent).toBe(LoginComponent);
+  })
 });

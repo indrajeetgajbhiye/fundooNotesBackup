@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Label } from '../../Models/model.model';
 import { NoteService } from '../../service/note/note.service';
+import { element } from '@angular/core/src/render3/instructions';
 @Component({
   selector: 'app-label-dialog',
   templateUrl: './label-dialog.component.html',
@@ -26,17 +27,29 @@ export class LabelDialogComponent implements OnInit {
     try {
       if (this.labelName != undefined && this.labelName !== '') {
         let userid = localStorage.getItem('userId');
+        let flag = true;
+        this.ArrayOfLabel.forEach(element=>{
+          if(element.label==this.labelName){
+            flag=false;
+            console.log("label already present")
+            return
+          }
+        })
         let label = {
           userId: userid,
           label: this.labelName,
           isDeleted: "false"
         }
-        this.noteService.noteLabel(label).subscribe(message => {
-          console.log(message);
-          this.labelName = '';
-          this.ArrayOfLabel.push(message);
-        })
-        return;
+        if(flag){
+          this.noteService.noteLabel(label).subscribe(message => {
+            console.log(message);
+            this.labelName = '';
+            this.ArrayOfLabel.push(message);
+          })
+          return;
+        }
+        
+       
       }
     }
     catch (error) {

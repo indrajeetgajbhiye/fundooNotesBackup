@@ -50,7 +50,8 @@ export class AddNotesComponent implements OnInit {
                         this.card.color = "#FFFFFF";
                         console.log(note['status']['details']);
                         this.card = new Model();
-                        this.card.reminder = [];
+                        this.card.reminder=[]
+                        console.log(this.card.reminder)
                         this.newNoteEvent.emit(note['status']['details']);
                     })
                 } catch (error) {

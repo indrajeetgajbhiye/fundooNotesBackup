@@ -44,7 +44,7 @@
     </div>
     <div *ngIf='card.reminder'>
         <mat-chip class="sample" (mouseenter)="cancelIcon=true" (mouseleave)="cancelIcon=false" matTooltip="reminder">
-            Tom {{card.reminder[0]|date:shortdate}}
+            {{card.reminder[0]|date:shortdate}}
             <mat-icon *ngIf=cancelIcon (click)="removeReminder(card.id)" matChipRemove>cancel</mat-icon>
         </mat-chip>
     </div>

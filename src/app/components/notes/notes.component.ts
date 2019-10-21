@@ -20,12 +20,17 @@ export class NotesComponent implements OnInit, OnChanges {
         this.cardData.push($event);
         if ($event["isArchived"] == false) {
             if ($event["isPined"] == false) {
-                this.unPinNotes.reverse().push($event);
+                this.unPinNotes.reverse()
+                this.unPinNotes.push($event);
                 this.unPinNotes.reverse();
             }
-            else
-                this.pinNotes.reverse().push($event);
+            else{
                 this.pinNotes.reverse();
+                this.pinNotes.push($event);
+                this.pinNotes.reverse();
+            }
+
+                
         }
     }
     printCards(){

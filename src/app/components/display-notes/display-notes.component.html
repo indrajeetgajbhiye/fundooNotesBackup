@@ -13,13 +13,15 @@
 
     </div>
     <div fxFlex='70' fxFlex.sm="80">
-        <ngx-masonry>
+        <!-- <div> -->
+        <ngx-masonry [options]="masonryOptions" [updateLayout]="updateMasonryLayout">
             <div fxLayoutGap="1%">
                 <div ngxMasonryItem *ngFor="let card of notes|search:(search?null:searchValue)" class="display">
-                    <app-card class="example-card" [card]="card" (removeEvent)="removeEvent($event,card)"></app-card>
+                    <app-card class="example-card" [card]="card" (load)="updateMasonryLayout!=updateMasonryLayout" (removeEvent)="removeEvent($event,card)"></app-card>
                 </div>
             </div>
         </ngx-masonry>
+        <!-- </div> -->
     </div>
     <div fxFlex="15" fxFlex.sm="10" fxFlex.xs="5">
 

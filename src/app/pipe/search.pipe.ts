@@ -7,15 +7,12 @@ export class SearchPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
     if (!value) {
-      console.log("!value", value)
       return value
     }
     if (value == '') {
-      console.log("value", value)
       return value
     }
     if (!args) {
-      console.log("!args", value)
       return value
     }
     return value.filter(array =>

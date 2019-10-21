@@ -125,12 +125,16 @@ export class NoteIconsComponent implements OnInit {
   labelToNote(label) {
     console.log(label);
     console.log(this.card.noteLabels.indexOf(label));
+    let flag=true; 
     this.card.noteLabels.forEach(list => {
       if (list.id == label.id) {
         console.log("Already label exist");
-        return;
+        flag=false;
       }
-    }, this.service(label));
+    });
+    if(flag){
+      this.service(label)
+    }
     this.addLabel=!this.addLabel
   }
   service(label) {
