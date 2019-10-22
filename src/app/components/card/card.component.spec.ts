@@ -38,10 +38,13 @@ describe('CardComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CardComponent);
     component = fixture.componentInstance;
+    console.log("componenet before")
     fixture.detectChanges();
   });
 
   it('should create', () => {
+    console.log("componenet creating")
     expect(component).toBeTruthy();
+    console.log("componenet created")
   });
 });

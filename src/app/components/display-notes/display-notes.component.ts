@@ -20,6 +20,7 @@ export class DisplayNotesComponent implements OnInit {
     searchValue: String;
     innerWidth;
     model: any;
+    card: any = {};
     constructor(private noteService: NoteService, private dataService: DataService) { 
     }
     ngOnInit() {

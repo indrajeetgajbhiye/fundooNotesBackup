@@ -17,6 +17,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { SearchComponent } from './components/search/search.component';
 import { ImageDialogComponent } from './components/image-dialog/image-dialog.component';
 import { CollaboratorDialogComponent } from './components/collaborator-dialog/collaborator-dialog.component';
+import { QuestionAnswerComponent } from './components/question-answer/question-answer.component';
 const routes: Routes = [
   {path: 'login',component: LoginComponent},
   {path: 'registration',component: RegisterComponent},
@@ -28,6 +29,7 @@ const routes: Routes = [
       {path:'trash',component:TrashComponent},
       {path:'reminder',component:RemindersComponent},
       {path:'label/:labelName',component:LabelsComponent},
+      {path:'questionAnswer/:cardId',component:QuestionAnswerComponent},
       {path: 'search', component: SearchComponent}
     ] 
   },
@@ -35,7 +37,7 @@ const routes: Routes = [
   {path:'update-label',component:LabelDialogComponent},
   {path:'upload-image',component:ImageDialogComponent},
   {path:'collabs', component: CollaboratorDialogComponent},
-  {path:"**", redirectTo:"home"}
+  
 ];
 @NgModule({
   declarations: [],

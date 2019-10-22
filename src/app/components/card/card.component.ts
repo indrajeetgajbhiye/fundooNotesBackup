@@ -12,28 +12,39 @@ import { CollaboratorDialogComponent } from '../collaborator-dialog/collaborator
 export class CardComponent implements OnInit {
   @Input() view;
   @Input() fullIcon;
-  @Input() card;
+
+  /** 
+   * @default {object} card to have default value
+   */
+  @Input()
+  card: any = {};
+
   @Input() search: boolean = true;
   @Output() pinEvent = new EventEmitter();
   @Output() removeEvent = new EventEmitter();
   searchValue: String;
   model: any;
-  
+  // card: any = {};
   isArchived: any;
   isDeleted: any;
   isPined: any;
   description: any;
-  title =null
+  title 
   newList
   addCheck
   question
   display=true;
   collaborators: any;
-  constructor(public dialog: MatDialog, private router: Router, private noteService: NoteService) { }
+  constructor(public dialog: MatDialog, private router: Router, private noteService: NoteService) { 
+    // setTimeout(() => {
+    //   console.log("card", this.card)
+    // }, 0);
+  }
   ngOnInit() {
     this.card;
   }
   show() {
+    console.log("this.card", this.card);
     this.description = this.card.description;
     this.title = this.card.title;
     this.isArchived = this.card.isArchived;
@@ -106,8 +117,8 @@ export class CardComponent implements OnInit {
       })
       .subscribe(
         (data) => {
-          console.log(data);
-          this.card.reminder = [];
+          console.log('response:', data);
+          this.card.reminder=[]
         },
         error => {
         })
@@ -153,7 +164,7 @@ export class CardComponent implements OnInit {
     console.log("add list")
   }
   openQandA() {
-    console.log("q and A")
+    this.router.navigate(['questionAnswer'])
   }
   openLabelNotes(labelName) {
     this.router.navigate(['label', labelName]);

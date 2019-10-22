@@ -152,7 +152,7 @@ export class NoteIconsComponent implements OnInit {
     console.log("isSelected")
   }
   openQandA() {
-    console.log("q and a ")
+    this.router.navigate(['questionAnswer', this.card.id]);
   }
   onClickedOutside($event){
     this.addLabel = true

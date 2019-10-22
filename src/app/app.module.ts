@@ -35,6 +35,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { CollaboratorDialogComponent } from './components/collaborator-dialog/collaborator-dialog.component';
+import { QuestionAnswerComponent } from './components/question-answer/question-answer.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { CollaboratorDialogComponent } from './components/collaborator-dialog/co
     CardComponent,
     SearchComponent,
     ImageDialogComponent,
-    CollaboratorDialogComponent
+    CollaboratorDialogComponent,
+    QuestionAnswerComponent
     ],
   imports: [
     BrowserModule,
