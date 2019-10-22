@@ -11,13 +11,15 @@ import { element } from '@angular/core/src/render3/instructions';
 export class LabelDialogComponent implements OnInit {
 
   labelName: string;
-  ArrayOfLabel: Label[];
+  ArrayOfLabel=[];
   label: Label;
   constructor(public dialogRef: MatDialogRef<LabelDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Label[], public noteService: NoteService) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, public noteService: NoteService) { 
+      this.ArrayOfLabel = data.data;
+    }
 
   ngOnInit() {
-    this.ArrayOfLabel = this.data;
+    // this.ArrayOfLabel = this.data;
   }
   clear() {
     this.labelName = ' ';

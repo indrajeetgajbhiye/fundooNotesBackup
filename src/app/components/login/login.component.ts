@@ -53,10 +53,12 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem('imageUrl', data.imageUrl)
                 if(data.id){
                     this.router.navigate(['home'])
+                    return true
                 }
                 else{
                     this.snackBar.open('login unsuccessfull', "okay")
                     this.router.navigate(['login'])
+                    return false
                 }
             })
         }

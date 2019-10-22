@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, OnDestroy, HostListener} from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
@@ -9,13 +9,13 @@ import { NoteService } from '../../service/note/note.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ImageDialogComponent } from '../image-dialog/image-dialog.component'
-import { environment} from '../../../environments/environment'
+import { environment } from '../../../environments/environment'
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy{
+export class HomeComponent implements OnInit, OnDestroy {
     view = true;
     name: string;
     email: string;
@@ -31,8 +31,8 @@ export class HomeComponent implements OnInit, OnDestroy{
     profile;
     imageFile = null;
     innerWidth: number;
-    header='notes'
-    ArrayOfLabel: Label;
+    header = 'notes'
+    ArrayOfLabel=[];
     public newImage
     img
     constructor(public dialog1: MatDialog, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router, private dataService: DataService, public noteService: NoteService) {
@@ -51,14 +51,14 @@ export class HomeComponent implements OnInit, OnDestroy{
         this.name = localStorage.getItem('firstName');
         this.email = localStorage.getItem('email');
         this.newImage = localStorage.getItem('imageUrl');
-        this.img=environment.profileUrl + "/" +this.newImage
+        this.img = environment.profileUrl + "/" + this.newImage
         console.log("inside home ngOnInit");
-        this.dataService.currentPhoto.subscribe(message => { 
+        this.dataService.currentPhoto.subscribe(message => {
             console.log("variable");
-            
+
             this.image = message
             this.newImage = localStorage.getItem('imageUrl');
-            this.img=environment.profileUrl + "/" +this.newImage
+            this.img = environment.profileUrl + "/" + this.newImage
         })
     }
     navigateArchive() {
@@ -77,7 +77,7 @@ export class HomeComponent implements OnInit, OnDestroy{
         this.router.navigate(['reminder']);
     }
     navigateCart() {
-      console.log("cart")
+        console.log("cart")
     }
     searchfor() {
         this.dataService.changeMessage(this.search);
@@ -103,8 +103,9 @@ export class HomeComponent implements OnInit, OnDestroy{
             this.noteService.getLabels()
                 .pipe(takeUntil(this.destroy$))
                 .subscribe(result => {
+                    this.ArrayOfLabel = result["data"]["details"];
                     this.dataService.updateLabels(result["data"]["details"]);
-                    this.dataService.currentLabels.subscribe(message => { this.ArrayOfLabel = message });
+                    // this.dataService.currentLabels.subscribe(message => {this.ArrayOfLabel = message });
                 })
         } catch{
             console.log("Error in getLabel");
@@ -112,7 +113,7 @@ export class HomeComponent implements OnInit, OnDestroy{
     }
     openLabelDialog() {
         const dialogRef = this.dialog1.open(LabelDialogComponent, {
-            data: this.ArrayOfLabel,
+            data: { data: this.ArrayOfLabel },
             width: 'auto',
             height: 'auto'
         });
@@ -125,28 +126,28 @@ export class HomeComponent implements OnInit, OnDestroy{
         this.dataService.changeView(this.view);
     }
 
-  onFileUpload(event) {
-    this.imageFile = event.path[0].files[0];
-    const uploadImage = new FormData();
-    uploadImage.append('file', this.imageFile, this.imageFile.name);
-    this.openPicture(event);
-  }
-  openPicture(data) {
-    const dialogRef = this.dialog1.open(ImageDialogComponent, {
-      width: 'auto',
-      height: 'auto',
-      data: data,
-    //   disableClose: true
-    })
-    dialogRef.afterClosed().subscribe(result => {
-      if (result == "imageChange") {
-        console.log("inside");
-      }
-      this.dataService.currentPhoto.subscribe(response => this.profile = response)
-      if (this.profile = true) {
-        this.imageProfile = localStorage.getItem('imageUrl');
-        this.img = environment.profileUrl + "/" +this.imageProfile;
-      }
-    })
-  }
+    onFileUpload(event) {
+        this.imageFile = event.path[0].files[0];
+        const uploadImage = new FormData();
+        uploadImage.append('file', this.imageFile, this.imageFile.name);
+        this.openPicture(event);
+    }
+    openPicture(data) {
+        const dialogRef = this.dialog1.open(ImageDialogComponent, {
+            width: 'auto',
+            height: 'auto',
+            data: data,
+            //   disableClose: true
+        })
+        dialogRef.afterClosed().subscribe(result => {
+            if (result == "imageChange") {
+                console.log("inside");
+            }
+            this.dataService.currentPhoto.subscribe(response => this.profile = response)
+            if (this.profile = true) {
+                this.imageProfile = localStorage.getItem('imageUrl');
+                this.img = environment.profileUrl + "/" + this.imageProfile;
+            }
+        })
+    }
 }

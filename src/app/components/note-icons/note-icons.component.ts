@@ -15,6 +15,7 @@ export class NoteIconsComponent implements OnInit {
   @Output() removeEvent = new EventEmitter();
   @Output() addNoteEvent = new EventEmitter();
   @Input() show = true;
+  
   labelList: Label
   addLabel: boolean = true;
   count: number = 0;

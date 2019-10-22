@@ -23,7 +23,7 @@ export class CardComponent implements OnInit {
   isDeleted: any;
   isPined: any;
   description: any;
-  title :any
+  title =null
   newList
   addCheck
   question
