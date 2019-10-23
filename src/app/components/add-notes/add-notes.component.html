@@ -1,6 +1,6 @@
 <div>
     <div *ngIf="flag" fxLayout="row" fxLayoutAlign="space-around center" class="NotesAddNote">
-        <mat-card (click)="flag=!flag" fxFlex="40" fxFlex.xs='90' class="matcard" fxLayoutAlign="space-between start">
+        <mat-card (click)="flag=!flag" fxFlex="60" fxFlex.xs='90' class="matcard" fxLayoutAlign="space-between start">
             <div class="Border" id="noteTitle" fxLayout="column" class="maincard">Take a note...
             </div>
             <div fxLayout="row" fxLayoutAlign="end start" fxFlex.xs="100">
@@ -11,7 +11,7 @@
         </mat-card>
     </div>
     <div *ngIf="!flag" fxLayout="row" fxLayoutAlign="space-around center" class="NotesAddNote">
-        <mat-card [style.background]=message fxLayout="column" class="matcard" fxFlex="40" fxFlex.xs='90' [style.backgroundColor]=card.color>
+        <mat-card [style.background]=message fxLayout="column" class="matcard" fxFlex="60" fxFlex.xs='90' [style.backgroundColor]=card.color>
             <div fxLayout="row" fxLayoutAlign="space-between center" class="takenote">
                 <textarea fxflex="80" class="textArea" matTextareaAutosize placeholder="Title " [formControl]="noteTitle"></textarea>
                 <button fxflex="80" mat-icon-button color="basic" (click)="changePin()">

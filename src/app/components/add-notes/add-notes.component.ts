@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { NoteService } from '../../service/note/note.service';
 import { Model } from '../../Models/model.model';
 import { MatDialog } from '@angular/material';
+import { SnackbarService } from 'src/app/service/snackbar.service';
 @Component({
     selector: 'app-add-notes',
     templateUrl: './add-notes.component.html',
@@ -16,7 +17,7 @@ export class AddNotesComponent implements OnInit {
     show = true;
     checklistOpen = [];
     @Output() newNoteEvent = new EventEmitter();
-    constructor(public dialog: MatDialog, private noteService: NoteService) {
+    constructor(public dialog: MatDialog, private noteService: NoteService, private snackbar : SnackbarService ) {
     }
     color: string = '#FFFFFF';
     ngOnInit() {
@@ -44,6 +45,7 @@ export class AddNotesComponent implements OnInit {
                 this.card.labelIdList = JSON.stringify(this.card.labelIdList);
                 try {
                     this.noteService.noteServiceEncoded('notes/addNotes',this.card).subscribe(data => {
+                        this.snackbar.open('Notes added Succesfully')
                         let note = data;
                         this.noteTitle.reset();
                         this.noteContent.reset();
@@ -55,7 +57,7 @@ export class AddNotesComponent implements OnInit {
                         this.newNoteEvent.emit(note['status']['details']);
                     })
                 } catch (error) {
-                    console.log(error + "Error in the note service of add note");
+                    this.snackbar.open("Error in adding note", 'retry')
                 }
             }
         }

@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router'
 import { HttpService } from 'src/app/service/http/http.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { SnackbarService } from 'src/app/service/snackbar.service';
 @Component({
     selector: 'app-forgot-password',
     templateUrl: './forgot-password.component.html',
     styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit {
-    constructor(private router: Router,  private service : HttpService, public snackBar: MatSnackBar) { 
+    constructor(private router: Router,  private service : HttpService, public snackbar: SnackbarService) { 
         if(localStorage.getItem("userToken")!=null){
             this.router.navigate([''])
         }
@@ -30,9 +30,10 @@ export class ForgotPasswordComponent implements OnInit {
             "email": email
         }
         this.service.postRequest('user/reset',user ).subscribe((data:any)=>{
-            if(data.success==true){
-                this.snackBar.open("mail sent", "Okay");
-            }
+            this.snackbar.open("Mail sent", "Okay");
+        },
+        error=>{
+            this.snackbar.open('Error sending mail', "Retry")
         })
     }
 }

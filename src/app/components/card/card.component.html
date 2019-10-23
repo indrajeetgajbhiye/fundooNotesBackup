@@ -2,8 +2,8 @@
     <div (click)="check()" fxLayout="column">
         <div fxFlex=50 class="Border" fxLayout="row" fxLayoutAlign="space-between center" class="takenote">
             <div fxFlex='100' class="description">
-                <textarea fxFlex='100' cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3" class="textArea" [(ngModel)]="card.title">
-                </textarea>
+                <textarea fxFlex='100' cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3" class="textArea" style="font-weight: bold;" [(ngModel)]="card.title">
+            </textarea>
                 <!-- #autosize="cdkTextareaAutosize" -->
             </div>
             <button *ngIf=!card.isDeleted fxFlex=10 mat-icon-button color="basic" (click)="changePin(card)" (click)="$event.stopPropagation()">

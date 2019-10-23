@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { NoteService } from '../../service/note/note.service';
+import { SnackbarService } from 'src/app/service/snackbar.service';
 @Component({
     selector: 'app-delete-icons',
     templateUrl: './delete-icons.component.html',
@@ -8,7 +9,7 @@ import { NoteService } from '../../service/note/note.service';
 export class DeleteIconsComponent implements OnInit {
     @Input() card: any;
     @Output() removeEvent = new EventEmitter();
-    constructor(private noteService: NoteService) { }
+    constructor(private noteService: NoteService, private snackbar: SnackbarService) { }
     ngOnInit() {
     }
     deleteNote(card) {
@@ -16,8 +17,11 @@ export class DeleteIconsComponent implements OnInit {
             "isDeleted": true,
             "noteIdList": [card.id]
         }).subscribe(message => {
-            console.log(message);
             this.remove();
+            this.snackbar.open('Note Deleted')
+        },
+        error=>{
+            this.snackbar.open('Error deleting note', 'try again')
         });
     }
     remove() {
@@ -29,7 +33,9 @@ export class DeleteIconsComponent implements OnInit {
             "noteIdList": [this.card.id]
         }).subscribe(data => {
             this.remove();
-            console.log(data);
-        }, err => console.log(err))
+            this.snackbar.open('Note Restored')
+        }, err =>{
+            this.snackbar.open('Error in restoring note')
+        })
     }
 }

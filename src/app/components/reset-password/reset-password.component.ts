@@ -42,6 +42,7 @@ export class ResetPasswordComponent implements OnInit {
             
             this.service.postUrlEncoded('user/reset-password', user).subscribe((data: any) => {
                 console.log('resolve',data);
+                this.snackBar.open("password reset");
                 this.router.navigate(['login'])
             }, (error:any)=>{
                 console.log('error',error);

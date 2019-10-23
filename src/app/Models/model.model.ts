@@ -16,6 +16,19 @@ export class Model {
     noteCheckLists: Array<Checklists> = []
     questionAndAnswerNotes: [Object]
     collaborators: any = [];
+    user?: {
+        createdDate?: Date
+        email: String
+        emailVerified: boolean
+        firstName: String
+        id: String
+        imageUrl: String
+        lastName: String
+        modifiedDate: Date
+        role: String
+        service: String
+        username: String
+    }
 }
 export interface Label {
     id: string

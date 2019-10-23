@@ -29,7 +29,7 @@
 </div>
 <div *ngIf="!view" fxLayoutAlign="space-around stretch">
 
-    <div fxLayout='column' fxLayoutAlign="center stretch" fxFlex="90" fxFlex.sm="90" fxLayoutGap="10px">
+    <div fxLayout='column' fxLayoutAlign="center stretch" fxFlex="60" fxFlex.sm="90" fxFlex.xs="90" fxLayoutGap="10px">
         <div *ngFor="let card of notes|search:(search?null:searchValue)">
             <app-card class="example-card" [view]='!view' [card]="card" (removeEvent)="removeEvent($event,card) "></app-card>
         </div>

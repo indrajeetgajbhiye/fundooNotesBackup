@@ -4,6 +4,7 @@ import { NoteDialogComponent } from '../note-dialog/note-dialog.component';
 import { NoteService } from '../../service/note/note.service';
 import { Router } from '@angular/router';
 import { CollaboratorDialogComponent } from '../collaborator-dialog/collaborator-dialog.component'
+import { SnackbarService } from 'src/app/service/snackbar.service';
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
@@ -35,16 +36,12 @@ export class CardComponent implements OnInit {
   question
   display=true;
   collaborators: any;
-  constructor(public dialog: MatDialog, private router: Router, private noteService: NoteService) { 
-    // setTimeout(() => {
-    //   console.log("card", this.card)
-    // }, 0);
+  constructor(public dialog: MatDialog, private router: Router, private noteService: NoteService, private snackbar : SnackbarService) { 
   }
   ngOnInit() {
     this.card;
   }
   show() {
-    console.log("this.card", this.card);
     this.description = this.card.description;
     this.title = this.card.title;
     this.isArchived = this.card.isArchived;
@@ -77,8 +74,10 @@ export class CardComponent implements OnInit {
             description: card.description
           }
           this.noteService.noteServiceEncodedPost('notes/updateNotes',this.model).subscribe(message => {
-
-            console.log(message);
+            this.snackbar.open('Note updated successfully')
+          },
+          error=>{
+            this.snackbar.open('Error updating note', 'Retry')
           })
         }
         else if (card.isPined != this.isPined) {
@@ -104,9 +103,11 @@ export class CardComponent implements OnInit {
       isPined: card.isPined
     }
     this.noteService.pinUnpinNote(this.model).subscribe(message => {
-      console.log(message);
+      this.snackbar.open('Pin changed','');
       this.removeEvent.emit('pin');
-
+    },
+    error=>{
+      this.snackbar.open('Error changing pin')
     })
   }
   removeReminder(id) {
@@ -117,10 +118,11 @@ export class CardComponent implements OnInit {
       })
       .subscribe(
         (data) => {
-          console.log('response:', data);
+          this.snackbar.open('Reminder Deleted')
           this.card.reminder=[]
         },
         error => {
+          this.snackbar.open('Error deleting reminder', 'Retry')
         })
   }
   removeLabelTag(labelId) {
@@ -130,8 +132,11 @@ export class CardComponent implements OnInit {
         "lableId": labelId
       })
       .subscribe(data => {
-        console.log(data);
         this.remove(labelId);
+        this.snackbar.open('Label Removed')
+      },
+      error=>{
+        this.snackbar.open('Error removing label', 'retry')
       })
   }
   removeEvent1($event) {

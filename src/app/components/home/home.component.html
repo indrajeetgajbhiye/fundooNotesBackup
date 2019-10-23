@@ -4,7 +4,7 @@
             <button mat-icon-button matTooltip="menu-bar" (click)="snav.toggle()">
 				<mat-icon>menu</mat-icon>
 			</button>
-            <div fxFlex="10" fxLayout.gt-xs="row" fxFlex.gt="500px" fxLayout="row">
+            <div *ngIf="innerWidth>600" fxFlex="10" fxLayout.gt-xs="row" fxFlex.gt="500px" fxLayout="row">
                 <img id="img1" src="../../../assets/images/logo.png" />
                 <div *ngIf="innerWidth>600" fxLayoutAlign="center center">
                     <h2>Fundoo</h2>

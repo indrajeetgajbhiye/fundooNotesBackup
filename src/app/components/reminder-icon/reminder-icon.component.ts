@@ -58,7 +58,7 @@ export class ReminderIconComponent implements OnInit {
   }
   saveReminder() {
     if (this.changed) {
-      console.log(this.model.reminder, "model")
+      console.log(this.model, "model")
       if (this.card.id == undefined) {
         this.card.reminder[0] = this.model.reminder;
       }

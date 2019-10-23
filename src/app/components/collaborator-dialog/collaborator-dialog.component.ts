@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NoteService } from '../../service/note/note.service';
-import { Label } from '../../Models/model.model';
+import { SnackbarService } from 'src/app/service/snackbar.service';
 
 @Component({
   selector: 'app-collaborator-dialog',
@@ -16,7 +16,7 @@ export class CollaboratorDialogComponent implements OnInit {
   collaborators: any[];
   collaboratorBody;
   constructor(public dialogRef: MatDialogRef<CollaboratorDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data, public noteService: NoteService) { }
+    @Inject(MAT_DIALOG_DATA) public data, public noteService: NoteService, private snackbar: SnackbarService) { }
 
   ngOnInit() {
     this.name = localStorage.getItem('firstName');
@@ -49,14 +49,15 @@ export class CollaboratorDialogComponent implements OnInit {
         }
         else {
           this.noteService.addCollaborator(this.data['id'], this.collaboratorBody).subscribe(result => {
+
             this.collaborators.push(this.collaboratorBody);
             this.collaborator = "";
-            console.log(result)
+            this.snackbar.open("Collaborator added successfully")
           })
         }
       }
     } catch (error) {
-      console.log(error + "Error during adding collaborator");
+      this.snackbar.open("Error during adding collaborator",'Retry');
     }
   }
   setCollaborator(userDetails) {
@@ -73,22 +74,18 @@ export class CollaboratorDialogComponent implements OnInit {
     }
   }
   removeCollaborator(collaboratorId) {
-    console.log(this.collaborators)
-    console.log(collaboratorId);
-    console.log(this.data['id'])
     if (this.data['id'] !== undefined) {
       this.noteService.removeCollaborator(this.data['id'], collaboratorId).subscribe(result => {
-        console.log(result);
+        this.snackbar.open('Collaborator removed successfully')
+      },
+      error=>{
+        this.snackbar.open('Error in removing Collaborator', 'Retry')
       })
     }
     var count = 0;
     this.collaborators.forEach(collaborator => {
-      console.log("enter for each")
-      console.log(collaborator.userId + "=" + collaboratorId)
       if (collaborator.userId == collaboratorId) {
-        console.log("enter each")
         this.collaborators.splice(count, 1);
-        console.log(this.collaborators);
       }
       else
         count++;

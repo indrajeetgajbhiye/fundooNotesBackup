@@ -10,6 +10,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ImageDialogComponent } from '../image-dialog/image-dialog.component'
 import { environment } from '../../../environments/environment'
+import { SnackbarService } from 'src/app/service/snackbar.service';
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
@@ -35,7 +36,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     ArrayOfLabel=[];
     public newImage
     img
-    constructor(public dialog1: MatDialog, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router, private dataService: DataService, public noteService: NoteService) {
+    constructor(public dialog1: MatDialog, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router, private dataService: DataService, public noteService: NoteService, private snackbar : SnackbarService) {
         this.mobileQuery = media.matchMedia('(max-width: 600px)');
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
         this.mobileQuery.addListener(this._mobileQueryListener);
@@ -52,10 +53,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.email = localStorage.getItem('email');
         this.newImage = localStorage.getItem('imageUrl');
         this.img = environment.profileUrl + "/" + this.newImage
-        console.log("inside home ngOnInit");
         this.dataService.currentPhoto.subscribe(message => {
-            console.log("variable");
-
             this.image = message
             this.newImage = localStorage.getItem('imageUrl');
             this.img = environment.profileUrl + "/" + this.newImage
@@ -105,10 +103,8 @@ export class HomeComponent implements OnInit, OnDestroy {
                 .subscribe(result => {
                     this.ArrayOfLabel = result["data"]["details"];
                     this.dataService.updateLabels(result["data"]["details"]);
-                    // this.dataService.currentLabels.subscribe(message => {this.ArrayOfLabel = message });
                 })
         } catch{
-            console.log("Error in getLabel");
         }
     }
     openLabelDialog() {

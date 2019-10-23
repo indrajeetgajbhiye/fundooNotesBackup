@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DataService } from '../../service/data/data.service';
 import { NoteService } from '../../service/note/note.service';
 import { environment } from '../../../environments/environment'
+import { SnackbarService } from 'src/app/service/snackbar.service';
 @Component({
   selector: 'app-image-dialog',
   templateUrl: './image-dialog.component.html',
@@ -13,7 +14,8 @@ export class ImageDialogComponent implements OnInit {
   imageBefore = environment.profileUrl+"/"+ localStorage.getItem("imageUrl")
   imageChangedEvent: any = null;
   croppedImage: any = null;
-  constructor(public dialogRef: MatDialogRef<ImageDialogComponent>, @Inject(MAT_DIALOG_DATA) public data, public dataService: DataService, public noteService: NoteService) { }
+  constructor(public dialogRef: MatDialogRef<ImageDialogComponent>, @Inject(MAT_DIALOG_DATA) public data, public dataService: DataService, public noteService: NoteService,
+  private snackbar: SnackbarService) { }
   ngOnInit() {
   }
   fileChangeEvent(event: any): void {
@@ -21,15 +23,13 @@ export class ImageDialogComponent implements OnInit {
     this.imageChangedEvent = event;
   }
   imageCropped(event:ImageCroppedEvent) {
-    console.log("event-----",event)
     this.croppedImage = event.file;
-    console.log(this.croppedImage)
   }
   imageLoaded() {
-    console.log("image loaded")
+  
   }
   loadImageFailed() {
-    console.log("image failed")
+    this.snackbar.open("Image loading failed")
   }
   onNoClick(): void {
     this.dialogRef.close();
@@ -41,9 +41,9 @@ export class ImageDialogComponent implements OnInit {
     console.log("uploadData", uploadData);
     this.noteService.uploadImage(uploadData).subscribe(data => {
       localStorage.setItem('imageUrl', data['status'].imageUrl)
+      this.snackbar.open("Profile image chnaged")
       this.dataService.changeImage(true)
       this.dialogRef.close("imageChange")
-      console.log(data)
     })
 
 

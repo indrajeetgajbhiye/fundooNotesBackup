@@ -2,8 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NoteService } from '../../service/note/note.service';
 import { Model } from '../../Models/model.model';
-import { environment } from 'src/environments/environment';
-import {Location} from '@angular/common';
+import { environment } from '../../../../src/environments/environment';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-question-answer',
@@ -35,15 +35,16 @@ export class QuestionAnswerComponent implements OnInit {
     });
     this.noteService.getNoteDetails(this.cardId).subscribe(result => {
       this.card = result['data']['data'][0];
+      console.log('card===============', this.card.user.imageUrl)
       this.qA = result['data']['data'][0].questionAndAnswerNotes;
-      console.log(this.card);
-      console.log(this.card.questionAndAnswerNotes.length);
+      this.image = environment.profileUrl+'/'+this.card.user.imageUrl;
       this.show = result['data']['data'][0].questionAndAnswerNotes.length;
-      if (this.show != 0) {
+      if (this.show) {
         this.questions = result['data']['data'][0].questionAndAnswerNotes[0];
+        console.log("questions", this.questions)
       }
     })
-    this.image = environment.profileUrl;
+    
   }
   close() {
     this._location.back();
@@ -81,14 +82,14 @@ export class QuestionAnswerComponent implements OnInit {
     })
   }
   averageRating(rateArray) {
-    // this.value = 0;
-    // if (rateArray.length != 0) {
-    //   for (let i = 0; i < rateArray.length; i++) {
-    //     this.value += rateArray[i].rate
-    //   }
-    //   this.avgRate = this.value / rateArray.length;
-    //   return this.avgRate.toFixed(1);
-    // }
+    let value = 0;
+    if (rateArray.length != 0) {
+      for (let i = 0; i < rateArray.length; i++) {
+        value += rateArray[i].rate
+      }
+      let avgRate = value / rateArray.length;
+      return avgRate.toFixed(1);
+    }
   }
   checkRating(rateArray) {
     this.rate = 0;
@@ -107,7 +108,9 @@ export class QuestionAnswerComponent implements OnInit {
       "message": this.editorContent,
     }
     this.noteService.replyQuestionAndAnswer(this.qID, replyRequest).subscribe(response => {
-      // this.getNote();
+      if(response){
+        console.log('done')
+      }
     })
   }
   replyDown(replyId) {
