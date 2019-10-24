@@ -31,7 +31,6 @@
         "ngx-bar-rating": "^1.1.0",
         "ngx-image-cropper": "^1.4.1",
         "ngx-masonry": "^1.1.4",
-        "ngx-masonry-gallery": "^3.0.0",
         "rxjs": "~6.2.0",
         "zone.js": "~0.8.26"
     },

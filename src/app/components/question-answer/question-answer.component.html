@@ -29,16 +29,17 @@
             <div [innerHTML]="questions.message"></div>
             <div fxLayout="row" fxLayoutAlign="space-around center">
                 <mat-icon matTooltip="Reply" (click)="answer(questions.id)">reply</mat-icon>
-                <mat-icon matTooltip="Like">thumb_up_alt</mat-icon>
+                <mat-icon matTooltip="Like" (click)="addRemoveLike()">thumb_up_alt</mat-icon>
                 <div> {{questions.like.length}}</div>
-                <div *ngIf="checkRating(questions.rate)">
-                    <bar-rating matTooltip="Rate" [(rate)]="rate" [max]="5" (rateChange)="rating(questions, $event)"></bar-rating>
-                </div>
+
                 <div>{{averageRating(questions.rate)}}</div>
+
                 <div>
                     <mat-icon *ngIf="open==true" (click)="open=!open">keyboard_arrow_down</mat-icon>
                     <mat-icon matTooltip="Hide {{viewReplies(questions)}} replies" *ngIf="open==false" (click)="open = !open">keyboard_arrow_up</mat-icon>
                 </div>
+
+                <bar-rating [(rate)]="rate" [max]="5" (rateChange)="rating(questions, $event)"></bar-rating>
             </div>
             <div *ngIf="show==0 && cardId==card.id">
                 <div [froalaEditor] [(froalaModel)]="question"></div>
@@ -69,7 +70,7 @@
                     </div>
                     <div fxLayout="column">
                         <div fxLayout="row" fxLayout.xs="column">
-                            <div>{{item.user.firstName}} {{item.user.lastName}}</div>
+                            <div>{{item.user.firstName | titlecase}} {{item.user.lastName | titlecase}}</div>
                             <div fxLayout="row ">{{item.modifiedDate | date:'medium'}}</div>
                         </div>
                         <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="space-between center">

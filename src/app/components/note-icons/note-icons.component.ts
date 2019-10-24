@@ -5,6 +5,7 @@ import { DataService } from '../../service/data/data.service'
 import { Label } from '../../Models/model.model'
 import { Router } from '@angular/router';
 import { CollaboratorDialogComponent } from '../collaborator-dialog/collaborator-dialog.component'
+import { SnackbarService } from 'src/app/service/snackbar.service';
 @Component({
   selector: 'app-note-icons',
   templateUrl: './note-icons.component.html',
@@ -38,7 +39,7 @@ export class NoteIconsComponent implements OnInit {
       { 'color': '#e6c9a8', 'name': 'brown' },
       { 'color': '#e8eaed', 'name': 'grey' }
     ]]
-  constructor(private noteService: NoteService, private router: Router, public dialog: MatDialog, public dataService: DataService) { 
+  constructor(private noteService: NoteService, private router: Router, public dialog: MatDialog, public dataService: DataService, private snackbar: SnackbarService) { 
   }
 
   ngOnInit() {
@@ -59,9 +60,10 @@ export class NoteIconsComponent implements OnInit {
         "color": color,
         'noteIdList': [this.card.id]
       }).subscribe(data => {
+        this.snackbar.open("Note Color changed")
       },
         err => {
-          console.log(err, "err");
+          this.snackbar.open("Error in changing note color", 'retry')
         })
     }
   }
@@ -94,7 +96,7 @@ export class NoteIconsComponent implements OnInit {
 
   trashNote() {
     if (this.card.id == undefined) {
-      console.log("can't delete creating note");
+      this.snackbar.open('Cant delete this note')
       return;
     }
     else {
@@ -105,8 +107,11 @@ export class NoteIconsComponent implements OnInit {
         "noteIdList": [this.card.id]
       }
       this.noteService.noteServiceJSON('notes/trashNotes',body).subscribe(data => {
+        this.snackbar.open('Note trashed')
         this.remove(true);
-      }, err => console.log(err))
+      }, err => {
+        this.snackbar.open('Error trashing note')
+      })
     }
   }
   addCollaborator() {
@@ -129,7 +134,7 @@ export class NoteIconsComponent implements OnInit {
     let flag=true; 
     this.card.noteLabels.forEach(list => {
       if (list.id == label.id) {
-        console.log("Already label exist");
+      this.snackbar.open('Label already exists')
         flag=false;
       }
     });
@@ -142,6 +147,7 @@ export class NoteIconsComponent implements OnInit {
     this.card.noteLabels.push(label);
     if (this.card.id != undefined) {
       this.noteService.addLabelToNote(this.card.id, label.id, '').subscribe(message => {
+        this.snackbar.open("Label Added Successfully")
         console.log(message);
       })
     }

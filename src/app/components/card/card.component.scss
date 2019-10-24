@@ -1,3 +1,4 @@
+@import "../../../scss/colors.scss";
 .sample {
     background: transparent;
 }
@@ -7,25 +8,18 @@
     border: none;
     outline: none;
     user-select: none;
-    font-family: roboto;
-    // min-height: auto;
-    // resize: none;
 }
 
 .display-note {
     border-radius: 14px;
-    // offset: 30;
 }
 
-// .display-note:hover {
-//     box-shadow: 2px 2px 2px 2px #888888;
-// }
 .mat-icon {
-    color: rgb(103, 107, 110);
+    color: $color-darkGrey;
 }
 
 .mat-icon:hover {
-    color: black;
+    color: $color-black;
 }
 
 .display-note {

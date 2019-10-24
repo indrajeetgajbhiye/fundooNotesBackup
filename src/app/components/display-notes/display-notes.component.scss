@@ -1,3 +1,4 @@
+@import "../../../scss/colors.scss";
 .display-note {
     box-sizing: border-box;
 }
@@ -21,7 +22,7 @@
 }
 
 ::ng-deep .temp {
-    background-color: black;
+    background-color: $color-black;
 }
 
 .display {

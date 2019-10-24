@@ -78,9 +78,11 @@ export class RegisterComponent implements OnInit {
                 console.log('data==========',data)
                 if(data.data.success==true){
                     console.log("inside")
-                    this.snackBar.open("User Registerd", "Okay");
+                    this.snackBar.open("User Registerd");
                     this.router.navigate(['login'])
                 }
+            },error=>{
+                this.snackBar.open("Registration Error", 'Retry')
             })
         }
         else{

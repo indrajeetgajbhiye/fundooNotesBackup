@@ -37,7 +37,7 @@ const routes: Routes = [
   {path:'update-label',component:LabelDialogComponent},
   {path:'upload-image',component:ImageDialogComponent},
   {path:'collabs', component: CollaboratorDialogComponent},
-  {path:'**', redirectTo: 'home'}
+  {path:'**', redirectTo: ''}
 ];
 @NgModule({
   declarations: [],

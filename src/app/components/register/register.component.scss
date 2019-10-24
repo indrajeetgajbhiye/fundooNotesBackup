@@ -1,17 +1,19 @@
-#registerPage{
+#registerPage {
     font-size: 25px;
 }
-@import '../../../styles.scss';
 
-.visible{
+@import '../../../scss/colors.scss';
+@import '../../../styles.scss';
+.visible {
     cursor: pointer;
 }
 
-.main{
-    background: rgb(209, 209, 209);
+.main {
+    background: $color-grey;
     height: 100%;
 }
-.card{
+
+.card {
     height: 100vh;
     min-height: 640px;
     min-width: 360px;

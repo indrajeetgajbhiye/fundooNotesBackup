@@ -36,6 +36,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     ArrayOfLabel=[];
     public newImage
     img
+    dark = false;
     constructor(public dialog1: MatDialog, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router, private dataService: DataService, public noteService: NoteService, private snackbar : SnackbarService) {
         this.mobileQuery = media.matchMedia('(max-width: 600px)');
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -75,7 +76,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.router.navigate(['reminder']);
     }
     navigateCart() {
-        console.log("cart")
+        this.dark=!this.dark
     }
     searchfor() {
         this.dataService.changeMessage(this.search);

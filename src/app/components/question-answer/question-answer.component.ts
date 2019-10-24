@@ -41,6 +41,7 @@ export class QuestionAnswerComponent implements OnInit {
       this.show = result['data']['data'][0].questionAndAnswerNotes.length;
       if (this.show) {
         this.questions = result['data']['data'][0].questionAndAnswerNotes[0];
+        this.rate = this.questions.rate['0'].rate;
         console.log("questions", this.questions)
       }
     })
@@ -88,7 +89,18 @@ export class QuestionAnswerComponent implements OnInit {
         value += rateArray[i].rate
       }
       let avgRate = value / rateArray.length;
+
       return avgRate.toFixed(1);
+    }
+  }
+  addRemoveLike(){
+    if(this.questions.like.length == 0){
+      this.noteService.likeQuestionAndAnswer(this.questions.id, true).subscribe(data=>{
+        console.log(data);
+      })
+    }
+    else{
+      this.noteService.likeQuestionAndAnswer(this.questions.id, false)
     }
   }
   checkRating(rateArray) {

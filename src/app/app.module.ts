@@ -62,7 +62,7 @@ import { QuestionAnswerComponent } from './components/question-answer/question-a
     SearchComponent,
     ImageDialogComponent,
     CollaboratorDialogComponent,
-    QuestionAnswerComponent
+    QuestionAnswerComponent,
     ],
   imports: [
     BrowserModule,
@@ -71,11 +71,11 @@ import { QuestionAnswerComponent } from './components/question-answer/question-a
     BrowserAnimationsModule,
     AppMaterialModule,
     HttpClientModule,
-    BarRatingModule,
     ImageCropperModule,
     MatDialogModule,
     NgxMasonryModule,
     ClickOutsideModule,
+    BarRatingModule,
     FroalaEditorModule.forRoot(), FroalaViewModule.forRoot()
   ],
   providers: [],

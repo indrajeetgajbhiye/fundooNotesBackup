@@ -10,7 +10,6 @@
                     <h2>Fundoo</h2>
                 </div>
             </div>
-
         </div>
         <div fxFlex="80" fxLayoutAlign="space-around center" *ngIf="innerWidth>600">
             <mat-form-field appearance="outline" [style.fontSize.px]="2" class="search">
@@ -20,7 +19,7 @@
                 <input fxFlex="90" (click)="navigateSearch()" [(ngModel)]="search" (keyup)="searchfor()" matInput placeholder="search" [style.fontSize.px]="18" class="searchText" autocomplete="off">
             </mat-form-field>
         </div>
-        <div fxFlex="100" fxFlex.xs="60" fxLayoutAlign="space-around center" *ngIf="innerWidth<600">
+        <div fxFlex="80" fxFlex.xs="60" fxLayoutAlign="space-around center" *ngIf="innerWidth<600">
             <mat-icon *ngIf="hide" class="searchIcon" (click)="showSearch()">search</mat-icon>
             <mat-form-field *ngIf="!hide" appearance="outline" [style.fontSize.px]="2" class="search">
                 <button mat-icon-button>
@@ -32,15 +31,18 @@
 				</button>
             </mat-form-field>
         </div>
-        <div fxFlex="25" fxLayoutAlign="space-around center" class="settingbtn">
+        <div fxFlex="10">
+
+        </div>
+        <div fxFlex="15" fxLayoutAlign="space-around center" class="settingbtn">
             <button fxFlex="20" aria-label="Toggle sidenav" matTooltip="cart" mat-icon-button (click)="navigateCart()">
 				<mat-icon>shopping_cart</mat-icon>
 			</button>
-            <button *ngIf="innerWidth>600" mat-icon-button color="basic" id="grid" (click)="changeView()" matTooltip="grid">
+            <button fxFlex="20" *ngIf="innerWidth>600" mat-icon-button color="basic" id="grid" (click)="changeView()" matTooltip="grid">
 				<mat-icon *ngIf=view>view_stream</mat-icon>
 				<mat-icon *ngIf=!view>view_module</mat-icon>
 			</button>
-            <div class="profilepic">
+            <div fxFlex="20" class="profilepic">
                 <button *ngIf="newImage" (click)="$event.stopPropagation()" matTooltip="fundoo Account" mat-mini-fab [ngStyle]="{'background-image':'url('+img+')','background-size':'cover'}" [matMenuTriggerFor]="account" class="imageText">
 				</button>
                 <button *ngIf="!newImage" (click)="$event.stopPropagation()" matTooltip="fundoo Account" mat-mini-fab [matMenuTriggerFor]="account" class="imageText">
@@ -61,14 +63,12 @@
                 </div>
             </div>
             <div fxLayoutAlign="center center">
-
-                <button mat-button (click)="logout()" class="logoutButton">Log Out</button>
+                <button mat-raised-button (click)="logout()" color="primary" class="logoutButton">Log Out</button>
             </div>
         </mat-menu>
     </mat-toolbar>
     <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
         <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'">
-            <!-- <mat-nav-list> -->
             <mat-list role="List">
                 <mat-list-item role="listitem" id="note" (click)="navigateHome()" (click)=" header='notes'" class="navField" [ngClass]="{'highlight':header=='notes', 'normal':header!='notes'}">
                     <img id="img1" src="../../../assets/images/bulb.svg" />Note
@@ -79,12 +79,9 @@
                 <mat-divider></mat-divider>
                 <p id="para">labels</p>
                 <div *ngFor='let label of ArrayOfLabel'>
-                    <mat-nav-list>
-                        <mat-list-item class="navField" (click)="openLabelNotes(label.label)" (click)="header= label.label" [ngClass]="{'highlight':header==label.label, 'normal':header!=label.label}">
-                            <mat-icon>label_outline</mat-icon>
-                            {{label.label}}
-                        </mat-list-item>
-                    </mat-nav-list>
+                    <mat-list-item class="navField" (click)="openLabelNotes(label.label)" (click)="header= label.label" [ngClass]="{'highlight':header==label.label, 'normal':header!=label.label}">
+                        <mat-icon>label_outlined</mat-icon> {{label.label}}
+                    </mat-list-item>
                 </div>
                 <mat-list-item role="listitem" id="lable" class="navField" (click)="openLabelDialog()" (click)="header='editLabel'" [ngClass]="{'highlight':header=='editLabel', 'normal':header!='editLabel'}">
                     <mat-icon id="edit">edit</mat-icon>
@@ -98,7 +95,6 @@
                     <img id="img5" src="../../../assets/images/trash.svg" /> Trash
                 </mat-list-item>
             </mat-list>
-            <!-- </mat-nav-list> -->
         </mat-sidenav>
         <mat-sidenav-content>
             <router-outlet></router-outlet>

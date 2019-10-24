@@ -72,22 +72,25 @@
         </span>
       </button>
         </div>
-        <div (clickOutside)="onClickedOutside($event)" *ngIf=!addLabel fxLayout="column" fxLayoutAlign="space-around start">
-            <div fxLayout="column" fxLayoutAlign="space-around start">
-                <span>Label note</span>
-                <div>
-                    <input class="textArea" fxFlex=80 [(ngModel)]="labelName" placeholder="Search for Label">
-                </div>
-                <div *ngFor="let label of labelList">
-                    <div *ngIf="label.id!=''">
-                        <mat-checkbox (click)="labelToNote(label)">
-                            {{label.label}}</mat-checkbox>
+        <div fxLayoutAlign="space-around center">
+            <div (clickOutside)="onClickedOutside($event)" *ngIf=!addLabel fxLayout="column" fxLayoutAlign="space-around start">
+                <div fxLayout="column" fxLayoutAlign="space-around start">
+                    <span>Label note</span>
+                    <div>
+                        <input class="textArea" fxFlex=80 [(ngModel)]="labelName" placeholder="Search for Label">
+                    </div>
+                    <div *ngFor="let label of labelList">
+                        <div *ngIf="label.id!=''">
+                            <mat-checkbox (click)="labelToNote(label)">
+                                {{label.label}}</mat-checkbox>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </mat-menu>
     <div *ngIf="show">
-        <button class="addnote" color="primary" mat-button (click)="updateNote()">close</button>
+        <button class="addnote" color="primary" mat-button (click)="updateNote()"><b>close</b></button>
     </div>
 </div>

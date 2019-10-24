@@ -61,6 +61,7 @@ export class LabelDialogComponent implements OnInit {
   deleteLabel(labelid) {
     try {
       this.noteService.deleteLabel(labelid).subscribe(data => {
+        this.snackbar.open('Label deleted')
         console.log(data);
         let count = 0;
         this.ArrayOfLabel.forEach(label => {
@@ -72,7 +73,7 @@ export class LabelDialogComponent implements OnInit {
         });
       })
     } catch (error) {
-      console.log("Errror in delete label" + error);
+      this.snackbar.open("Error in deleting the label");
     }
 
   }
@@ -85,7 +86,11 @@ export class LabelDialogComponent implements OnInit {
       "userId": localStorage.getItem('userid')
     }
     this.noteService.updateLabel(label.id, body).subscribe(message => {
+      this.snackbar.open("Label Updated");
       console.log(message);
+    },
+    error=>{
+      this.snackbar.open("Error in Updating the label");
     })
   }
   close() {

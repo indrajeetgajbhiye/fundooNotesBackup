@@ -1,7 +1,8 @@
+@import '../../../scss/colors.scss';
 .mat-icon {
-    color: rgb(103, 107, 110);
+    color: $color-darkGrey;
 }
 
 .mat-icon:hover {
-    color: black;
+    color: $color-black;
 }

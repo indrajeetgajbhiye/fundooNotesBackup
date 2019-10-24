@@ -49,7 +49,6 @@ export class CollaboratorDialogComponent implements OnInit {
         }
         else {
           this.noteService.addCollaborator(this.data['id'], this.collaboratorBody).subscribe(result => {
-
             this.collaborators.push(this.collaboratorBody);
             this.collaborator = "";
             this.snackbar.open("Collaborator added successfully")

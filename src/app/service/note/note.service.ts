@@ -86,7 +86,7 @@ export class NoteService {
     return this.service.encodedPostFormDelete('notes/' + noteId + '/removeCollaboratorsNotes/' + collaboratorId)
   }
   addQuestionAndAnswer(body) {
-    return this.service.postJSON('/questionAndAnswerNotes/addQuestionAndAnswer', body)
+    return this.service.postJSON('questionAndAnswerNotes/addQuestionAndAnswer', body)
   }
   ratingQuestionAndAnswer(id, data) {
     return this.service.postJSON('questionAndAnswerNotes/rate/' + id, data)
@@ -97,5 +97,4 @@ export class NoteService {
   likeQuestionAndAnswer(id, data) {
     return this.service.postJSON('questionAndAnswerNotes/like/' + id, data)
   }
-
 }

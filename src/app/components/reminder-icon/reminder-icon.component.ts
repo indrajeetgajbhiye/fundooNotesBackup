@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NoteService } from '../../service/note/note.service';
+import { SnackbarService } from 'src/app/service/snackbar.service';
 
 @Component({
   selector: 'app-reminder-icon',
@@ -26,7 +27,7 @@ export class ReminderIconComponent implements OnInit {
     { value: "option4", timeZone: 'Night', time: '9:00PM', timeCount: 20 },
   ]
   private currentDate = new Date();
-  constructor(public noteService: NoteService) { }
+  constructor(public noteService: NoteService, private snackbar: SnackbarService) { }
   ngOnInit() {
   }
   toggle() {
@@ -65,6 +66,7 @@ export class ReminderIconComponent implements OnInit {
       else {
         this.noteService.addUpdateReminderNote(this.model).subscribe(response => {
           // this.remindEvent.emit();
+          this.snackbar.open("Reminder Added")
           console.log(response, "responce");
           this.card.reminder[0] = this.model.reminder;
         })

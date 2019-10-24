@@ -4,6 +4,7 @@ import { NoteService } from '../../service/note/note.service';
 import { Model } from '../../Models/model.model';
 import { MatDialog } from '@angular/material';
 import { SnackbarService } from 'src/app/service/snackbar.service';
+import { CollaboratorDialogComponent } from '../collaborator-dialog/collaborator-dialog.component';
 @Component({
     selector: 'app-add-notes',
     templateUrl: './add-notes.component.html',
@@ -13,11 +14,11 @@ export class AddNotesComponent implements OnInit {
     flag = true;
     flag2 = false;
     card: any;
- 
+
     show = true;
     checklistOpen = [];
     @Output() newNoteEvent = new EventEmitter();
-    constructor(public dialog: MatDialog, private noteService: NoteService, private snackbar : SnackbarService ) {
+    constructor(public dialog: MatDialog, private noteService: NoteService, private snackbar: SnackbarService) {
     }
     color: string = '#FFFFFF';
     ngOnInit() {
@@ -44,7 +45,7 @@ export class AddNotesComponent implements OnInit {
                 this.card.noteLabels = JSON.stringify(this.card.noteLabels);
                 this.card.labelIdList = JSON.stringify(this.card.labelIdList);
                 try {
-                    this.noteService.noteServiceEncoded('notes/addNotes',this.card).subscribe(data => {
+                    this.noteService.noteServiceEncoded('notes/addNotes', this.card).subscribe(data => {
                         this.snackbar.open('Notes added Succesfully')
                         let note = data;
                         this.noteTitle.reset();
@@ -52,7 +53,7 @@ export class AddNotesComponent implements OnInit {
                         this.card.color = "#FFFFFF";
                         console.log(note['status']['details']);
                         this.card = new Model();
-                        this.card.reminder=[]
+                        this.card.reminder = []
                         console.log(this.card.reminder)
                         this.newNoteEvent.emit(note['status']['details']);
                     })
@@ -63,7 +64,14 @@ export class AddNotesComponent implements OnInit {
         }
     }
     openCollaborator() {
-        console.log('collabs')
+        this.dialog.open(CollaboratorDialogComponent, {
+            width: 'auto',
+            height: 'auto',
+            data: {
+                collaborators: this.card.collaborators,
+                id: this.card.id
+            }
+        })
     }
     removeReminder() {
         this.card.reminder = [];

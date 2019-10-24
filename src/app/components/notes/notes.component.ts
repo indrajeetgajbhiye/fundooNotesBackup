@@ -29,8 +29,6 @@ export class NotesComponent implements OnInit, OnChanges {
                 this.pinNotes.push($event);
                 this.pinNotes.reverse();
             }
-
-                
         }
     }
     printCards(){
