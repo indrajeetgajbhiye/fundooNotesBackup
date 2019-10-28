@@ -39,7 +39,9 @@ export class CardComponent implements OnInit {
   constructor(public dialog: MatDialog, private router: Router, private noteService: NoteService, private snackbar : SnackbarService) { 
   }
   ngOnInit() {
-    this.card;
+    if(this.card.questionAndAnswerNotes.length!>0){
+      this.question=this.card.questionAndAnswerNotes[0].message
+    }
   }
   show() {
     this.description = this.card.description;
@@ -169,7 +171,7 @@ export class CardComponent implements OnInit {
     console.log("add list")
   }
   openQandA() {
-    this.router.navigate(['questionAnswer'])
+    this.router.navigate(['questionAnswer', this.card.id])
   }
   openLabelNotes(labelName) {
     this.router.navigate(['label', labelName]);

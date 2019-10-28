@@ -76,7 +76,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.router.navigate(['reminder']);
     }
     navigateCart() {
-        this.dark=!this.dark
+        this.router.navigate(['cart'])
     }
     searchfor() {
         this.dataService.changeMessage(this.search);

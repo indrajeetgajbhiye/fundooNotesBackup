@@ -36,6 +36,9 @@ import { ClickOutsideModule } from 'ng-click-outside';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { CollaboratorDialogComponent } from './components/collaborator-dialog/collaborator-dialog.component';
 import { QuestionAnswerComponent } from './components/question-answer/question-answer.component';
+import { CartComponent } from './components/cart/cart.component';
+import { ConfirmProductComponent } from './components/confirm-product/confirm-product.component';
+import { ProductComponent } from './components/product/product.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +66,9 @@ import { QuestionAnswerComponent } from './components/question-answer/question-a
     ImageDialogComponent,
     CollaboratorDialogComponent,
     QuestionAnswerComponent,
+    CartComponent,
+    ConfirmProductComponent,
+    ProductComponent
     ],
   imports: [
     BrowserModule,

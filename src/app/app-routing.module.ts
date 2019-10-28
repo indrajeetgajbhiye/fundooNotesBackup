@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {RouterModule, Routes} from '@angular/router';
+import { RouterModule, Routes} from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
@@ -18,6 +18,9 @@ import { SearchComponent } from './components/search/search.component';
 import { ImageDialogComponent } from './components/image-dialog/image-dialog.component';
 import { CollaboratorDialogComponent } from './components/collaborator-dialog/collaborator-dialog.component';
 import { QuestionAnswerComponent } from './components/question-answer/question-answer.component';
+import { CartComponent } from './components/cart/cart.component';
+import { ConfirmProductComponent } from './components/confirm-product/confirm-product.component';
+import { ProductComponent } from './components/product/product.component';
 const routes: Routes = [
   {path: 'login',component: LoginComponent},
   {path: 'registration',component: RegisterComponent},
@@ -30,13 +33,16 @@ const routes: Routes = [
       {path:'reminder',component:RemindersComponent},
       {path:'label/:labelName',component:LabelsComponent},
       {path:'questionAnswer/:cardId',component:QuestionAnswerComponent},
-      {path: 'search', component: SearchComponent}
+      {path: 'search', component: SearchComponent},
+      {path: 'cart', component: CartComponent}
     ] 
   },
   {path:'update-note',component:NoteDialogComponent},
   {path:'update-label',component:LabelDialogComponent},
   {path:'upload-image',component:ImageDialogComponent},
   {path:'collabs', component: CollaboratorDialogComponent},
+  {path:'confirm-product', component: ConfirmProductComponent},
+  {path:'product', component: ProductComponent},
   {path:'**', redirectTo: ''}
 ];
 @NgModule({
