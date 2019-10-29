@@ -70,8 +70,9 @@
         </app-note-icons>
         <app-delete-icons *ngIf=card.isDeleted (removeEvent)="removeEvent1(true)" [card]=card></app-delete-icons>
     </div>
-    <div *ngIf="question!=undefined" (click)="openQandA()">
+    <div *ngIf="question" (click)="openQandA()">
         <mat-divider></mat-divider>
+        <h3>Question</h3>
         <div [innerHTML]="question"></div>
     </div>
 </mat-card>

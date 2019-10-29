@@ -17,8 +17,7 @@ export class CardComponent implements OnInit {
   /** 
    * @default {object} card to have default value
    */
-  @Input()
-  card: any = {};
+  @Input() card: any = {};
 
   @Input() search: boolean = true;
   @Output() pinEvent = new EventEmitter();
