@@ -1,4 +1,4 @@
-<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+<div class="example-container">
     <mat-toolbar class="example-toolbar" fxLayoutAlign="space-between center">
         <div fxFlex="5" fxLayoutAlign="space-between center">
             <button mat-icon-button matTooltip="menu-bar" (click)="snav.toggle()">
@@ -67,8 +67,8 @@
             </div>
         </mat-menu>
     </mat-toolbar>
-    <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-        <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'">
+    <mat-sidenav-container class="example-sidenav-container">
+        <mat-sidenav #snav [mode]="innerWidth>600 ? 'side' : 'over'">
             <mat-list role="List">
                 <mat-list-item role="listitem" id="note" (click)="navigateHome()" (click)=" header='notes'" class="navField" [ngClass]="{'highlight':header=='notes', 'normal':header!='notes'}">
                     <img id="img1" src="../../../assets/images/bulb.svg" />Note

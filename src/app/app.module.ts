@@ -39,7 +39,6 @@ import { QuestionAnswerComponent } from './components/question-answer/question-a
 import { CartComponent } from './components/cart/cart.component';
 import { ConfirmProductComponent } from './components/confirm-product/confirm-product.component';
 import { ProductComponent } from './components/product/product.component';
-
 @NgModule({
   declarations: [
     AppComponent,
