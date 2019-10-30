@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NoteService } from '../../service/note/note.service';
-import { SnackbarService } from 'src/app/service/snackbar.service';
+import { SnackbarService } from '../../service/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-reminder-icon',

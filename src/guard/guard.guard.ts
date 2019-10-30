@@ -9,17 +9,20 @@ export class GuardGuard implements CanActivate {
   canActivate(
     path: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if (!this.isAuthenticated()) {
-
-      this.router.navigate(['login']);
+    if (this.isAuthenticated()) {
+      return true;
+    }
+    else{
+      this.router.navigate(['login'])
       return false;
     }
-    return true;
+    
   }
   isAuthenticated(): boolean {
     const token = localStorage.getItem('userToken');
     if (token)
       return true;
+    else
     return false;
   }
 }

@@ -4,7 +4,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DataService } from '../../service/data/data.service';
 import { NoteService } from '../../service/note/note.service';
 import { environment } from '../../../environments/environment'
-import { SnackbarService } from 'src/app/service/snackbar.service';
+import { SnackbarService } from '../../service/snackbar/snackbar.service';
 @Component({
   selector: 'app-image-dialog',
   templateUrl: './image-dialog.component.html',

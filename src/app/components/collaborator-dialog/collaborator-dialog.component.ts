@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NoteService } from '../../service/note/note.service';
-import { SnackbarService } from 'src/app/service/snackbar.service';
+import { SnackbarService } from '../../service/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-collaborator-dialog',

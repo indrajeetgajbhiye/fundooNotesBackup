@@ -10,7 +10,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ImageDialogComponent } from '../image-dialog/image-dialog.component'
 import { environment } from '../../../environments/environment'
-import { SnackbarService } from 'src/app/service/snackbar.service';
+import { SnackbarService } from '../../service/snackbar/snackbar.service';
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
         this.mobileQuery.addListener(this._mobileQueryListener);
         this.innerWidth = window.innerWidth;
-        this.router.navigate(['home'])
+        // this.router.navigate(['home'])
     }
     @HostListener('window:resize', ['$event'])
     onResize(event) {

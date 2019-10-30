@@ -4,7 +4,7 @@ import { NoteDialogComponent } from '../note-dialog/note-dialog.component';
 import { NoteService } from '../../service/note/note.service';
 import { Router } from '@angular/router';
 import { CollaboratorDialogComponent } from '../collaborator-dialog/collaborator-dialog.component'
-import { SnackbarService } from 'src/app/service/snackbar.service';
+import { SnackbarService } from '../../service/snackbar/snackbar.service';
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',

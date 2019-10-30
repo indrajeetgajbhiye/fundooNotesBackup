@@ -4,7 +4,7 @@
             <div class="Border" id="noteTitle" fxLayout="column" class="maincard">Take a note...
             </div>
             <div fxLayout="row" fxLayoutAlign="end start" fxFlex.xs="100">
-                <mat-icon class="check" matTooltip="New List" disabled>check_box</mat-icon>
+                <mat-icon class="check" matTooltip="New List" disabled (click)="listToggle= !listToggle">check_box</mat-icon>
                 <mat-icon class="brush" matTooltip="New note with drawing">brush</mat-icon>
                 <mat-icon class="insert" matTooltip="New note with image">insert_photo</mat-icon>
             </div>
@@ -26,7 +26,7 @@
             <div class="Border" fxLayout="column" class="takenote">
                 <textarea class="textArea" matTextareaAutosize placeholder="Take a note.. " [formControl]="noteContent"></textarea>
             </div>
-            <div *ngIf='show==false'>
+            <div *ngIf='listToggle'>
                 <div *ngFor='let list of checklistOpen'>
                     <div *ngIf='list.status=="open"'>
                         <div fxLayoutAlign='space-between center'>

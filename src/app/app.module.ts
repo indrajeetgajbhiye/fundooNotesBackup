@@ -39,6 +39,7 @@ import { QuestionAnswerComponent } from './components/question-answer/question-a
 import { CartComponent } from './components/cart/cart.component';
 import { ConfirmProductComponent } from './components/confirm-product/confirm-product.component';
 import { ProductComponent } from './components/product/product.component';
+// import { SnackbarService } from './service/snackbar/snackbar.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,7 +68,8 @@ import { ProductComponent } from './components/product/product.component';
     QuestionAnswerComponent,
     CartComponent,
     ConfirmProductComponent,
-    ProductComponent
+    ProductComponent,
+    
     ],
   imports: [
     BrowserModule,

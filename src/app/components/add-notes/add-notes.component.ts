@@ -1,9 +1,9 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { NoteService } from '../../service/note/note.service';
-import { Model } from '../../Models/model.model';
+import { Model, Checklists } from '../../Models/model.model';
 import { MatDialog } from '@angular/material';
-import { SnackbarService } from 'src/app/service/snackbar.service';
+import { SnackbarService } from '../../service/snackbar/snackbar.service';
 import { CollaboratorDialogComponent } from '../collaborator-dialog/collaborator-dialog.component';
 @Component({
     selector: 'app-add-notes',
@@ -14,8 +14,7 @@ export class AddNotesComponent implements OnInit {
     flag = true;
     flag2 = false;
     card: any;
-
-    show = true;
+    listToggle : boolean = false;
     checklistOpen = [];
     @Output() newNoteEvent = new EventEmitter();
     constructor(public dialog: MatDialog, private noteService: NoteService, private snackbar: SnackbarService) {
@@ -30,6 +29,7 @@ export class AddNotesComponent implements OnInit {
     }
     noteTitle = new FormControl('', [Validators.required]);
     noteContent = new FormControl('');
+
     addNote() {
         this.flag = !this.flag;
         if (this.flag) {
@@ -75,5 +75,8 @@ export class AddNotesComponent implements OnInit {
     }
     removeReminder() {
         this.card.reminder = [];
+    }
+    addCheckList(){
+
     }
 }

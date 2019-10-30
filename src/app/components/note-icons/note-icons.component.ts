@@ -5,7 +5,7 @@ import { DataService } from '../../service/data/data.service'
 import { Label } from '../../Models/model.model'
 import { Router } from '@angular/router';
 import { CollaboratorDialogComponent } from '../collaborator-dialog/collaborator-dialog.component'
-import { SnackbarService } from 'src/app/service/snackbar.service';
+import { SnackbarService } from '../../service/snackbar/snackbar.service';
 @Component({
   selector: 'app-note-icons',
   templateUrl: './note-icons.component.html',

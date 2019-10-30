@@ -1,3 +1,8 @@
+@import '../../../scss/colors.scss';
+.toolbar {
+    background-color: $color-darkYellow;
+}
+
 .fontSize {
     font-size: 24px;
     color: gray;

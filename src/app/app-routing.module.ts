@@ -34,7 +34,8 @@ const routes: Routes = [
       {path:'label/:labelName',component:LabelsComponent},
       {path:'questionAnswer/:cardId',component:QuestionAnswerComponent},
       {path: 'search', component: SearchComponent},
-      {path: 'cart', component: CartComponent}
+      {path: 'cart', component: CartComponent},
+      {path:'**', redirectTo: 'home'}
     ] 
   },
   {path:'update-note',component:NoteDialogComponent},
@@ -43,7 +44,7 @@ const routes: Routes = [
   {path:'collabs', component: CollaboratorDialogComponent},
   {path:'confirm-product', component: ConfirmProductComponent},
   {path:'product', component: ProductComponent},
-  {path:'**', redirectTo: ''}
+  {path:'**', redirectTo: 'home'}
 ];
 @NgModule({
   declarations: [],

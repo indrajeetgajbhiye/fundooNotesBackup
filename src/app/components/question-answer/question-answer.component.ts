@@ -27,6 +27,10 @@ export class QuestionAnswerComponent implements OnInit {
   private rID;
   public editorContent: string ;
   qA;
+  firstName: String;
+  lastName: String;
+  modifiedDate: Date;
+  like: boolean = false;
   constructor(private _location: Location,private routes: ActivatedRoute, public router: Router, public noteService: NoteService) { }
 
   ngOnInit() {
@@ -39,6 +43,9 @@ export class QuestionAnswerComponent implements OnInit {
       this.qA = result['data']['data'][0].questionAndAnswerNotes;
       this.image = environment.profileUrl+'/'+this.card.user.imageUrl;
       this.show = result['data']['data'][0].questionAndAnswerNotes.length;
+      this.firstName = this.card.user.firstName;
+      this.lastName = this.card.user.lastName;
+      this.modifiedDate = this.card.modifiedDate;
       if (this.show) {
         this.questions = result['data']['data'][0].questionAndAnswerNotes[0];
         this.rate = this.questions.rate['0'].rate;
@@ -94,13 +101,13 @@ export class QuestionAnswerComponent implements OnInit {
     }
   }
   addRemoveLike(){
-    if(this.questions.like.length == 0){
-      this.noteService.likeQuestionAndAnswer(this.questions.id, true).subscribe(data=>{
+    console.log('ghauhgajh', this.like)
+    if(this.questions.like){
+      this.like= !this.like;
+          console.log('ghauhgajh', this.like)
+      this.noteService.likeQuestionAndAnswer(this.questions.id, {"like":this.like}).subscribe(data=>{
         console.log(data);
       })
-    }
-    else{
-      this.noteService.likeQuestionAndAnswer(this.questions.id, false)
     }
   }
   checkRating(rateArray) {
@@ -132,5 +139,13 @@ export class QuestionAnswerComponent implements OnInit {
   answer(id) {
     this.replyShow = !this.replyShow;
     this.qID = id;
+  }
+  likeDislike(reply){
+      this.like= !this.like;
+      console.log('ghauhgajh', reply)
+      this.noteService.likeQuestionAndAnswer(reply.id, {"like":this.like}).subscribe(data=>{
+        console.log(data);
+      })
+ 
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router'
 import { HttpService } from 'src/app/service/http/http.service';
-import { SnackbarService } from 'src/app/service/snackbar.service';
+import { SnackbarService } from '../../service/snackbar/snackbar.service';
 @Component({
     selector: 'app-forgot-password',
     templateUrl: './forgot-password.component.html',

@@ -14,7 +14,7 @@ export class ProductComponent implements OnInit {
   constructor(public dialog: MatDialog,public router:Router,public cartService:CartService,) { }
   private records;
   private clicked = false;
-  private cards=[];
+  public cards=[];
   private service;
 
   ngOnInit() {
