@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { HttpService } from '../../service/http/http.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackbarService } from 'src/app/service/snackbar/snackbar.service';
+
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
     public password = new FormControl('', [Validators.required, Validators.minLength(8)])
 
     constructor(private router: Router, 
-        private service : HttpService,  public snackBar: MatSnackBar) {
+        private service : HttpService,  public snackBar: SnackbarService) {
          }
     ngOnInit() {
         console.log(this.router)
@@ -55,11 +56,9 @@ export class LoginComponent implements OnInit {
                     this.router.navigate(['home'])
                     return true
                 }
-                else{
-                    this.snackBar.open('login unsuccessfull', "okay")
-                    this.router.navigate(['login'])
-                    return false
-                }
+            },
+            error=>{
+                this.snackBar.open('login unsuccessfull try again', "okay")
             })
         }
     }
