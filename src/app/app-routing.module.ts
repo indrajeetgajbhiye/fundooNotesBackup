@@ -21,6 +21,7 @@ import { QuestionAnswerComponent } from './components/question-answer/question-a
 import { CartComponent } from './components/cart/cart.component';
 import { ConfirmProductComponent } from './components/confirm-product/confirm-product.component';
 import { ProductComponent } from './components/product/product.component';
+import { AddImageComponent } from './components/add-image/add-image.component';
 const routes: Routes = [
   {path: 'login',component: LoginComponent},
   {path: 'registration',component: RegisterComponent},
@@ -34,6 +35,7 @@ const routes: Routes = [
       {path:'label/:labelName',component:LabelsComponent},
       {path:'questionAnswer/:cardId',component:QuestionAnswerComponent},
       {path: 'search', component: SearchComponent},
+      {path: 'add-image', component: AddImageComponent},
       {path: 'cart', component: CartComponent},
       {path:'**', redirectTo: 'home'}
     ] 

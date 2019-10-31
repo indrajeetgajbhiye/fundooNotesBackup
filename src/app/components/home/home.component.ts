@@ -3,7 +3,6 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { DataService } from '../../service/data/data.service';
-import { Label } from '../../Models/model.model';
 import { LabelDialogComponent } from '../label-dialog/label-dialog.component';
 import { NoteService } from '../../service/note/note.service';
 import { takeUntil } from 'rxjs/operators';
@@ -37,6 +36,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     public newImage
     img
     dark = false;
+    public loading = false;
     constructor(public dialog1: MatDialog, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router, private dataService: DataService, public noteService: NoteService, private snackbar : SnackbarService) {
         this.mobileQuery = media.matchMedia('(max-width: 600px)');
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -54,17 +54,21 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.email = localStorage.getItem('email');
         this.newImage = localStorage.getItem('imageUrl');
         this.img = environment.profileUrl + "/" + this.newImage
+        this.loading = true;
         this.dataService.currentPhoto.subscribe(message => {
             this.image = message
             this.newImage = localStorage.getItem('imageUrl');
             this.img = environment.profileUrl + "/" + this.newImage
+            this.loading=false;
         })
     }
     navigateArchive() {
         this.router.navigate(['archive']);
     }
     navigateHome() {
+        this.loading = true;
         this.router.navigate(['home']);
+        this.loading = false;
     }
     navigateTrash() {
         this.router.navigate(['trash']);
@@ -124,6 +128,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     onFileUpload(event) {
+        this.loading = true;
         this.imageFile = event.path[0].files[0];
         const uploadImage = new FormData();
         uploadImage.append('file', this.imageFile, this.imageFile.name);

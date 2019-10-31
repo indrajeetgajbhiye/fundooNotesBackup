@@ -7,23 +7,32 @@ import { HttpService } from '../http/http.service';
 export class NoteService {
 
   constructor(private service: HttpService) { }
-  noteServiceEncoded(url, data) {
-    return this.service.postUrlEncoded(url, data)
+  getnotes() {
+    return this.service.httpGetData('notes/getNotesList');
   }
-  noteServiceGetData(url) {
-    return this.service.httpGetData(url);
+  addnote(data) {
+    return this.service.postUrlEncoded('notes/addNotes', data);
   }
-  noteServiceEncodedPost(url, data) {
-    return this.service.encodedPostForm(url, data)
+  updatenote(data) {
+    return this.service.encodedPostForm('notes/updateNotes', data)
   }
-  noteServiceJSON(url, data) {
-    return this.service.postJSON(url, data)
+  updateImageNote(data){
+    return this.service.postImage('notes/updateNotes', data)
+  }
+  updateColor(data) {
+    return this.service.postJSON('notes/changesColorNotes', data)
+  }
+  deleteNote(data) {
+    return this.service.postJSON('notes/deleteForeverNotes', data)
   }
   archiveNote(data) {
     return this.service.postJSON('notes/archiveNotes', data)
   }
   archiveNotes() {
     return this.service.httpGetData('notes/getArchiveNotesList')
+  }
+  trashNote(data) {
+    return this.service.postJSON('notes/trashNotes', data)
   }
   trashNotes() {
     return this.service.httpGetData('notes/getTrashNotesList')

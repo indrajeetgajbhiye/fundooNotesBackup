@@ -1,0 +1,23 @@
+<div fxLayout="column" style="padding:5px;height:80%;">
+    <div mat-dialog-title>
+        <span>Select Image</span>
+    </div>
+    <div class="body" fxLayout="column" fxLayoutAlign="space-around center">
+        <button mat-button (click)="photoInput.click()">Select a photo from your computer</button>
+
+        <input #photoInput type="file" style="display:none" (change)="fileChangeEvent($event)">
+        <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1" [resizeToWidth]="168" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (loadImageFailed)="loadImageFailed()"></image-cropper>
+
+
+        <img [src]="imageBefore" />
+    </div>
+    <div fxLayoutAlign="space-around center" fxLayout="row">
+        <div style="padding:5px;">
+            <button mat-raised-button color="primary" [mat-dialog-close]="{'image':croppedImage}" (click)=setimage()>Save</button>
+        </div>
+        <div style="padding:5px;">
+            <button mat-button [mat-dialog-close]="{'title':false}" cdkFocusInitial>Cancel</button>
+        </div>
+
+    </div>
+</div>

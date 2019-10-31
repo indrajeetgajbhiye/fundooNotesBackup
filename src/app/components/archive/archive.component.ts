@@ -8,6 +8,7 @@ import { NoteService } from '../../service/note/note.service'
 })
 export class ArchiveComponent implements OnInit {
   cardData: any
+  public loading = false;
   constructor(private service: NoteService) { }
 
   ngOnInit() {
@@ -15,7 +16,9 @@ export class ArchiveComponent implements OnInit {
 
   }
   getAllArchiveCard() {
+    this.loading=true;
     this.service.archiveNotes().subscribe(data => {
+      this.loading=false;
       this.cardData = data["data"]["data"];
       console.log(data);
       return

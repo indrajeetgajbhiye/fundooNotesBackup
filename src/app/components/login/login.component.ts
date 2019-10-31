@@ -15,13 +15,15 @@ export class LoginComponent implements OnInit {
     public hide = true;
     public email = new FormControl('', [Validators.required, Validators.email]);
     public password = new FormControl('', [Validators.required, Validators.minLength(8)])
-
+    public loading = false;
     constructor(private router: Router, 
-        private service : HttpService,  public snackBar: SnackbarService) {
+        private service : HttpService,  
+        public snackBar: SnackbarService) {
+            if(localStorage.getItem('userToken')){
+                this.router.navigate([''])
+            }
          }
     ngOnInit() {
-        console.log(this.router)
-        console.log(this.service)
     }
 
     getEmailErrorMessage(): String {
@@ -39,12 +41,14 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['forgot'])
     }
     secureLogin(email, password){
+        this.loading = true;
         if(email != null && password != null){
             var user = {
                 "email" : email,
                 "password" : password
             }
             this.service.postRequest('user/login', user).subscribe((data:any)=>{
+                this.loading = false;
                 console.log(data);
                 localStorage.setItem('userToken', data.id);
                 localStorage.setItem('userId', data.userId)
@@ -58,6 +62,7 @@ export class LoginComponent implements OnInit {
                 }
             },
             error=>{
+                this.loading = false;
                 this.snackBar.open('login unsuccessfull try again', "okay")
             })
         }

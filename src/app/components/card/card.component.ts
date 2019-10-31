@@ -5,6 +5,8 @@ import { NoteService } from '../../service/note/note.service';
 import { Router } from '@angular/router';
 import { CollaboratorDialogComponent } from '../collaborator-dialog/collaborator-dialog.component'
 import { SnackbarService } from '../../service/snackbar/snackbar.service';
+import { environment } from 'src/environments/environment.prod';
+import { DataService } from 'src/app/service/data/data.service';
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
@@ -35,12 +37,25 @@ export class CardComponent implements OnInit {
   question
   display=true;
   collaborators: any;
-  constructor(public dialog: MatDialog, private router: Router, private noteService: NoteService, private snackbar : SnackbarService) { 
+  imageUrl: any;
+  img 
+  loading: boolean= false
+  image: any;
+  constructor(public dialog: MatDialog, private router: Router, private noteService: NoteService, private snackbar : SnackbarService , private dataService: DataService) { 
   }
   ngOnInit() {
+    this.loading=true;
     if(this.card.questionAndAnswerNotes.length!>0){
       this.question=this.card.questionAndAnswerNotes[0].message
     }
+
+    console.log("hgshgs",this.card.imageUrl)
+    this.img = environment.profileUrl+"/"+this.imageUrl
+    this.dataService.currentPhoto.subscribe(message => {
+      this.image = message
+      this.img = environment.profileUrl + "/" + this.image
+      this.loading=false;
+  })
   }
   show() {
     this.description = this.card.description;
@@ -48,6 +63,8 @@ export class CardComponent implements OnInit {
     this.isArchived = this.card.isArchived;
     this.isDeleted = this.card.isDeleted;
     this.isPined = this.card.isPined;
+    this.imageUrl = this.card.imageUrl;
+    this.img = environment.profileUrl+"/"+this.imageUrl
   }
   check() {
     if (!this.fullIcon) {
@@ -74,7 +91,7 @@ export class CardComponent implements OnInit {
             title: card.title,
             description: card.description
           }
-          this.noteService.noteServiceEncodedPost('notes/updateNotes',this.model).subscribe(message => {
+          this.noteService.updatenote(this.model).subscribe(message => {
             this.snackbar.open('Note updated successfully')
           },
           error=>{

@@ -12,6 +12,7 @@ export class LabelsComponent implements OnInit {
   constructor(private router: Router, private routes: ActivatedRoute, public noteService: NoteService) { }
   sub
   labelName
+  public loading = false;
   ngOnInit() {
     this.sub = this.routes.params.subscribe(params => {
       console.log(params);
@@ -20,7 +21,9 @@ export class LabelsComponent implements OnInit {
     });
   }
   getLabel() {
+    this.loading=true;
     this.noteService.getNotesListByLabel(this.labelName).subscribe(message => {
+      this.loading=false;
       this.labelNotes = message['data']['data']
     })
   }

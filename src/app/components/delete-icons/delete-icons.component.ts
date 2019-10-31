@@ -13,7 +13,7 @@ export class DeleteIconsComponent implements OnInit {
     ngOnInit() {
     }
     deleteNote(card) {
-        this.noteService.noteServiceJSON('notes/deleteForeverNotes', {
+        this.noteService.deleteNote({
             "isDeleted": true,
             "noteIdList": [card.id]
         }).subscribe(message => {
@@ -28,7 +28,7 @@ export class DeleteIconsComponent implements OnInit {
         this.removeEvent.emit();
     }
     restoreNote() {
-        this.noteService.noteServiceJSON('notes/trashNotes', {
+        this.noteService.trashNote({
             "isDeleted": false,
             "noteIdList": [this.card.id]
         }).subscribe(data => {

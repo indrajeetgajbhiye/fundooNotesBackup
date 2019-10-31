@@ -6,6 +6,7 @@ import { Label } from '../../Models/model.model'
 import { Router } from '@angular/router';
 import { CollaboratorDialogComponent } from '../collaborator-dialog/collaborator-dialog.component'
 import { SnackbarService } from '../../service/snackbar/snackbar.service';
+import { AddImageComponent } from '../add-image/add-image.component';
 @Component({
   selector: 'app-note-icons',
   templateUrl: './note-icons.component.html',
@@ -56,7 +57,7 @@ export class NoteIconsComponent implements OnInit {
     }
     else {
       this.card.color = color;
-      this.noteService.noteServiceJSON('notes/changesColorNotes', {
+      this.noteService.updateColor({
         "color": color,
         'noteIdList': [this.card.id]
       }).subscribe(data => {
@@ -106,7 +107,7 @@ export class NoteIconsComponent implements OnInit {
         "isDeleted": true,
         "noteIdList": [this.card.id]
       }
-      this.noteService.noteServiceJSON('notes/trashNotes',body).subscribe(data => {
+      this.noteService.trashNote(body).subscribe(data => {
         this.snackbar.open('Note trashed')
         this.remove(true);
       }, err => {
@@ -121,6 +122,18 @@ export class NoteIconsComponent implements OnInit {
       data : {
         collaborators : this.card.collaborators,
         id : this.card.id
+      }
+    })
+  }
+  addImage(){
+    const dialogRef = this.dialog.open(AddImageComponent,{
+      height:'auto',
+      width: 'auto',
+      data:{
+        id: this.card.id,
+        title: this.card.title,
+        description: this.card.description,
+        imageUrl : this.card.imageUrl
       }
     })
   }

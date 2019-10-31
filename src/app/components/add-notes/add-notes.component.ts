@@ -45,7 +45,7 @@ export class AddNotesComponent implements OnInit {
                 this.card.noteLabels = JSON.stringify(this.card.noteLabels);
                 this.card.labelIdList = JSON.stringify(this.card.labelIdList);
                 try {
-                    this.noteService.noteServiceEncoded('notes/addNotes', this.card).subscribe(data => {
+                    this.noteService.addnote(this.card).subscribe(data => {
                         this.snackbar.open('Notes added Succesfully')
                         let note = data;
                         this.noteTitle.reset();

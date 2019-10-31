@@ -39,6 +39,8 @@ import { QuestionAnswerComponent } from './components/question-answer/question-a
 import { CartComponent } from './components/cart/cart.component';
 import { ConfirmProductComponent } from './components/confirm-product/confirm-product.component';
 import { ProductComponent } from './components/product/product.component';
+import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
+import { AddImageComponent } from './components/add-image/add-image.component';
 // import { SnackbarService } from './service/snackbar/snackbar.service';
 @NgModule({
   declarations: [
@@ -69,6 +71,7 @@ import { ProductComponent } from './components/product/product.component';
     CartComponent,
     ConfirmProductComponent,
     ProductComponent,
+    AddImageComponent
     
     ],
   imports: [
@@ -83,7 +86,15 @@ import { ProductComponent } from './components/product/product.component';
     NgxMasonryModule,
     ClickOutsideModule,
     BarRatingModule,
-    FroalaEditorModule.forRoot(), FroalaViewModule.forRoot()
+    FroalaEditorModule.forRoot(), FroalaViewModule.forRoot(),
+    NgxLoadingModule.forRoot({
+      animationType: ngxLoadingAnimationTypes.wanderingCubes,
+      backdropBackgroundColour: 'rgba(0,0,0,0)', 
+      backdropBorderRadius: '12px',
+      primaryColour: ' #f28b82', 
+      secondaryColour: ' #fbbc04', 
+      tertiaryColour: '#d7aefb'
+  })
   ],
   providers: [],
   bootstrap: [AppComponent]

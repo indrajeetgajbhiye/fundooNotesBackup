@@ -86,4 +86,6 @@ export class HttpService {
   getConfig(url) {
     return this.http.get(environment.baseUrl + url);
   }
+  
+
 } 

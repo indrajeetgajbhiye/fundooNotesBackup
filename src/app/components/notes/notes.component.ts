@@ -12,6 +12,7 @@ export class NotesComponent implements OnInit, OnChanges {
     pinNotes = [];
     unPinNotes = [];
     cardData = [];
+    public loading = false;
     constructor(private service: NoteService, private dataService : DataService, public router: Router, private location: Location) { }
     ngOnInit() {
         this.getAllCard();
@@ -39,7 +40,9 @@ export class NotesComponent implements OnInit, OnChanges {
         console.log("Onchanges");
     }
     getAllCard() {
-        this.service.noteServiceGetData('notes/getNotesList').subscribe(data => {
+        this.loading = true;
+        this.service.getnotes().subscribe(data => {
+            this.loading = false;
             console.log(data)
             this.cardData = data["data"].data
             console.log("carddata", this.cardData)

@@ -18,7 +18,7 @@ export class SearchComponent implements OnInit {
     this.getAllCard();
   }
   getAllCard() {
-    this.noteService.noteServiceGetData('notes/getNotesList').pipe(takeUntil(this.destroy))
+    this.noteService.getnotes().pipe(takeUntil(this.destroy))
       .subscribe(data => {
         this.cardData = [];
         for (var i = data["data"]['data'].length - 1; i >= 0; i--) {
