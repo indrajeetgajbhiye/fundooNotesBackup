@@ -24,7 +24,10 @@ export class DisplayNotesComponent implements OnInit {
     constructor(private noteService: NoteService, private dataService: DataService) { 
     }
     ngOnInit() {
-        this.dataService.currentMessage.subscribe(message => { this.searchValue = message });
+        this.dataService.currentMessage.subscribe(message => { 
+            if(message!='' || message != null){
+                this.searchValue = message 
+            }});
         this.dataService.currentView.subscribe(message => { this.view = message });
     }
     @HostListener('window:resize', ['$event'])

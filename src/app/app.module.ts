@@ -41,7 +41,6 @@ import { ConfirmProductComponent } from './components/confirm-product/confirm-pr
 import { ProductComponent } from './components/product/product.component';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { AddImageComponent } from './components/add-image/add-image.component';
-// import { SnackbarService } from './service/snackbar/snackbar.service';
 @NgModule({
   declarations: [
     AppComponent,
