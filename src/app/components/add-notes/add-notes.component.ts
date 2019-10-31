@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { NoteService } from '../../service/note/note.service';
-import { Model, Checklists } from '../../Models/model.model';
+import { Model} from '../../Models/model.model';
 import { MatDialog } from '@angular/material';
 import { SnackbarService } from '../../service/snackbar/snackbar.service';
 import { CollaboratorDialogComponent } from '../collaborator-dialog/collaborator-dialog.component';
@@ -22,7 +22,6 @@ export class AddNotesComponent implements OnInit {
     color: string = '#FFFFFF';
     ngOnInit() {
         this.card = new Model();
-        // console.log(this.view)
     }
     changePin() {
         this.card.isPined = !this.card.isPined;
@@ -51,10 +50,8 @@ export class AddNotesComponent implements OnInit {
                         this.noteTitle.reset();
                         this.noteContent.reset();
                         this.card.color = "#FFFFFF";
-                        console.log(note['status']['details']);
                         this.card = new Model();
                         this.card.reminder = []
-                        console.log(this.card.reminder)
                         this.newNoteEvent.emit(note['status']['details']);
                     })
                 } catch (error) {

@@ -1,3 +1,2 @@
-<div>
-  <app-display-notes class="container" [notes]="cardData" [search]=false></app-display-notes>
-</div>
+<ngx-loading [show]="loading" [template]="customLoadingTemplate"></ngx-loading>
+<app-display-notes class="container" [notes]="cardData" [search]=false></app-display-notes>

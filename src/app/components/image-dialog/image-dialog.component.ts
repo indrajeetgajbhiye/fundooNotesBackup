@@ -36,9 +36,7 @@ export class ImageDialogComponent implements OnInit {
   }
   setimage() {
     const uploadData = new FormData();
-    console.log("croppeed image", this.croppedImage)
     uploadData.append('file', this.croppedImage)
-    console.log("uploadData", uploadData);
     this.noteService.uploadImage(uploadData).subscribe(data => {
       localStorage.setItem('imageUrl', data['status'].imageUrl)
       this.snackbar.open("Profile image chnaged")

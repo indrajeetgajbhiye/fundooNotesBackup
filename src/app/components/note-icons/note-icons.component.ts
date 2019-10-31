@@ -90,7 +90,6 @@ export class NoteIconsComponent implements OnInit {
       isArchived: this.card.isArchived
     }
     this.noteService.unarchiveNote(this.model).subscribe(message => {
-      console.log(message);
       this.remove(true);
     })
   }
@@ -168,7 +167,6 @@ export class NoteIconsComponent implements OnInit {
       this.card.labelIdList.push(label.id);
   }
   isSelected(id) {
-    console.log("isSelected")
   }
   openQandA() {
     this.router.navigate(['questionAnswer', this.card.id]);

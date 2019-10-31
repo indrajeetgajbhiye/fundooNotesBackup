@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
     templateUrl: './notes.component.html',
     styleUrls: ['./notes.component.scss']
 })
-export class NotesComponent implements OnInit, OnChanges {
+export class NotesComponent implements OnInit {
     pinNotes = [];
     unPinNotes = [];
     cardData = [];
@@ -36,16 +36,11 @@ export class NotesComponent implements OnInit, OnChanges {
         this.pinNotes;
         this.unPinNotes;
     }
-    ngOnChanges() {
-        console.log("Onchanges");
-    }
     getAllCard() {
         this.loading = true;
         this.service.getnotes().subscribe(data => {
             this.loading = false;
-            console.log(data)
             this.cardData = data["data"].data
-            console.log("carddata", this.cardData)
             this.check();
             return
         })

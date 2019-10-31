@@ -49,7 +49,6 @@ export class LoginComponent implements OnInit {
             }
             this.service.postRequest('user/login', user).subscribe((data:any)=>{
                 this.loading = false;
-                console.log(data);
                 localStorage.setItem('userToken', data.id);
                 localStorage.setItem('userId', data.userId)
                 localStorage.setItem('email', data.email)

@@ -21,7 +21,6 @@ export class CollaboratorDialogComponent implements OnInit {
   ngOnInit() {
     this.name = localStorage.getItem('firstName');
     this.email = localStorage.getItem('email');
-    console.log(this.data.collaborators)
     this.collaborators = this.data.collaborators
     if (this.data['id'] == undefined) {
       if (this.data['collaborators'] == undefined) {
@@ -34,7 +33,6 @@ export class CollaboratorDialogComponent implements OnInit {
     if (data != '') {
       this.noteService.searchUserList(
         { "searchWord": data }).subscribe(data => {
-          console.log(data)
           this.searchResultList = data['data']['details'];
         })
     }
@@ -60,10 +58,8 @@ export class CollaboratorDialogComponent implements OnInit {
     }
   }
   setCollaborator(userDetails) {
-    console.log(userDetails)
     if (this.email !== userDetails.email && userDetails.email != '') {
       this.collaborator = userDetails.email;
-      console.log(userDetails);
       this.collaboratorBody = {
         "firstName": userDetails.firstName,
         "lastName": userDetails.lastName,

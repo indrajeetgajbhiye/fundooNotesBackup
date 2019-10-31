@@ -49,7 +49,6 @@ export class CardComponent implements OnInit {
       this.question=this.card.questionAndAnswerNotes[0].message
     }
 
-    console.log("hgshgs",this.card.imageUrl)
     this.img = environment.profileUrl+"/"+this.imageUrl
     this.dataService.currentPhoto.subscribe(message => {
       this.image = message
@@ -103,7 +102,7 @@ export class CardComponent implements OnInit {
           this.pinEvent.emit(this.card)
         }
         else {
-          console.log("changes not needed");
+          // console.log("changes not needed");
         }
       }
     });

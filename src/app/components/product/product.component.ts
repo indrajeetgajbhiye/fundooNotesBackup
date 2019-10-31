@@ -28,7 +28,6 @@ export class ProductComponent implements OnInit {
         data["data"].data[i].select = false;
         this.cards.push(data["data"].data[i]);
       }
-      console.log(this.cards)
       var value = data["data"].data.name;
     })
   }

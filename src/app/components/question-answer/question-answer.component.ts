@@ -4,6 +4,7 @@ import { NoteService } from '../../service/note/note.service';
 import { Model } from '../../Models/model.model';
 import { environment } from '../../../../src/environments/environment';
 import { Location } from '@angular/common';
+import { SnackbarService } from 'src/app/service/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-question-answer',
@@ -31,7 +32,8 @@ export class QuestionAnswerComponent implements OnInit {
   lastName: String;
   modifiedDate: Date;
   like: boolean = false;
-  constructor(private _location: Location,private routes: ActivatedRoute, public router: Router, public noteService: NoteService) { }
+  constructor(private _location: Location,private routes: ActivatedRoute, public router: Router, public noteService: NoteService,
+    private snackbar : SnackbarService) { }
 
   ngOnInit() {
     this.sub = this.routes.params.subscribe(params => {
@@ -39,7 +41,6 @@ export class QuestionAnswerComponent implements OnInit {
     });
     this.noteService.getNoteDetails(this.cardId).subscribe(result => {
       this.card = result['data']['data'][0];
-      console.log('card===============', this.card.user.imageUrl)
       this.qA = result['data']['data'][0].questionAndAnswerNotes;
       this.image = environment.profileUrl+'/'+this.card.user.imageUrl;
       this.show = result['data']['data'][0].questionAndAnswerNotes.length;
@@ -49,7 +50,6 @@ export class QuestionAnswerComponent implements OnInit {
       if (this.show) {
         this.questions = result['data']['data'][0].questionAndAnswerNotes[0];
         this.rate = this.questions.rate['0'].rate;
-        console.log("questions", this.questions)
       }
     })
     
@@ -59,14 +59,12 @@ export class QuestionAnswerComponent implements OnInit {
   }
   addQuestion() {
     if (this.question != '') {
-      console.log(this.question)
       this.show = !this.show;
       let body = {
         "message": this.question,
         "notesId": this.cardId
       }
       this.noteService.addQuestionAndAnswer(body).subscribe(result => {
-        console.log(result);
       })
     }
   }
@@ -85,8 +83,7 @@ export class QuestionAnswerComponent implements OnInit {
       "rate": event
     }
     this.noteService.ratingQuestionAndAnswer(data.id, reqBody).subscribe(result => {
-      // this.getNote();
-      console.log("done", +result);
+      this.snackbar.open("rating given")
     })
   }
   averageRating(rateArray) {
@@ -101,12 +98,9 @@ export class QuestionAnswerComponent implements OnInit {
     }
   }
   addRemoveLike(){
-    console.log('ghauhgajh', this.like)
     if(this.questions.like){
       this.like= !this.like;
-          console.log('ghauhgajh', this.like)
       this.noteService.likeQuestionAndAnswer(this.questions.id, {"like":this.like}).subscribe(data=>{
-        console.log(data);
       })
     }
   }
@@ -128,7 +122,6 @@ export class QuestionAnswerComponent implements OnInit {
     }
     this.noteService.replyQuestionAndAnswer(this.qID, replyRequest).subscribe(response => {
       if(response){
-        console.log('done')
       }
     })
   }
@@ -142,9 +135,7 @@ export class QuestionAnswerComponent implements OnInit {
   }
   likeDislike(reply){
       this.like= !this.like;
-      console.log('ghauhgajh', reply)
       this.noteService.likeQuestionAndAnswer(reply.id, {"like":this.like}).subscribe(data=>{
-        console.log(data);
       })
  
   }

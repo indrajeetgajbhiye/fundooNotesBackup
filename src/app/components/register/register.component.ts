@@ -75,9 +75,7 @@ export class RegisterComponent implements OnInit {
             }
             console.log(user);
             this.service.postRequest('user/userSignUp', user).subscribe((data:any)=>{
-                console.log('data==========',data)
                 if(data.data.success==true){
-                    console.log("inside")
                     this.snackBar.open("User Registerd");
                     this.router.navigate(['login'])
                 }

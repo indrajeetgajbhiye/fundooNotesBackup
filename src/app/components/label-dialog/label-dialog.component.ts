@@ -33,7 +33,7 @@ export class LabelDialogComponent implements OnInit {
         this.ArrayOfLabel.forEach(element=>{
           if(element.label==this.labelName){
             flag=false;
-            console.log("label already present")
+            this.snackbar.open('Label already present')
             return
           }
         })
@@ -55,7 +55,7 @@ export class LabelDialogComponent implements OnInit {
       }
     }
     catch (error) {
-      console.log("Error in add Label" + error);
+      this.snackbar.open("error in adding label")
     };
   }
   deleteLabel(labelid) {

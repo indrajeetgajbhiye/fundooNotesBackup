@@ -15,7 +15,6 @@ export class NoteDialogComponent implements OnInit {
   fullIcon: boolean;
   ngOnInit() {
     this.fullIcon = true
-    console.log(this.data);
   }
   changeColor($event) {
     this.card.color = $event;

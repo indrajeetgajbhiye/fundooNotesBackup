@@ -34,7 +34,6 @@ export class ReminderIconComponent implements OnInit {
     this.remindershow = !this.remindershow;
   }
   reminder(dayCount, timeCount) {
-    console.log(this.model);
     this.changed = true;
     this.model = {
       "noteIdList": [this.card.id],
@@ -45,10 +44,8 @@ export class ReminderIconComponent implements OnInit {
       this.card.reminder[0] = this.model.reminder;
     } else {
       this.saveReminder();
-
     }
   }
-
   customReminder(timeCount) {
     this.changed = true;
     this.checker.setHours(timeCount, 0, 0);
@@ -59,15 +56,12 @@ export class ReminderIconComponent implements OnInit {
   }
   saveReminder() {
     if (this.changed) {
-      console.log(this.model, "model")
       if (this.card.id == undefined) {
         this.card.reminder[0] = this.model.reminder;
       }
       else {
         this.noteService.addUpdateReminderNote(this.model).subscribe(response => {
-          // this.remindEvent.emit();
           this.snackbar.open("Reminder Added")
-          console.log(response, "responce");
           this.card.reminder[0] = this.model.reminder;
         })
       }

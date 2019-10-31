@@ -18,7 +18,6 @@ export class TrashComponent implements OnInit {
     this.noteService.trashNotes().subscribe(data => {
       this.loading=false
       this.cardData = data["data"]["data"];
-      console.log(data);
       return
     })
   }

@@ -20,7 +20,6 @@ export class ArchiveComponent implements OnInit {
     this.service.archiveNotes().subscribe(data => {
       this.loading=false;
       this.cardData = data["data"]["data"];
-      console.log(data);
       return
     })
   }

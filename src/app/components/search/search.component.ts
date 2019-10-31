@@ -13,20 +13,21 @@ export class SearchComponent implements OnInit {
   @Input() keyword;
   cardData = [];
   destroy: Subject<boolean> = new Subject<boolean>();
+  loading: boolean;
   constructor(private noteService: NoteService, private dataService: DataService) { }
   ngOnInit() {
     this.getAllCard();
   }
   getAllCard() {
+    this.loading = true;
     this.noteService.getnotes().pipe(takeUntil(this.destroy))
       .subscribe(data => {
-        this.cardData = [];
         for (var i = data["data"]['data'].length - 1; i >= 0; i--) {
           if(data["data"]['data'][i].isDeleted==false){
             this.cardData.push(data["data"]['data'][i])
           }
         }
-        console.log("Search cards", this.cardData)
+        this.loading = false;
       }, error => {
         console.log(error);
       })
