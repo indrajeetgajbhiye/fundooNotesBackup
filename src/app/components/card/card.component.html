@@ -1,16 +1,17 @@
 <div fxLayout="column" class="fullnote" [style.background]=card.color>
-    <div *ngIf="card.imageUrl && !fullIcon" class='imagediv'>
+    <div *ngIf="card.imageUrl && !fullIcon && !view" class='imagediv' (click)="check()">
         <img [src]="img" class="image" width="272px" height="auto" style="border-radius:14px 14px 0 0;" />
+        <mat-icon class="cancelIcon" (click)="deleteImage()">cancel</mat-icon>
+    </div>
+    <div *ngIf="card.imageUrl && (fullIcon || view)" class='imagediv'>
+        <img [src]="img" width="100%" height="auto" style="border-radius:14px 14px 0 0;" />
         <mat-icon class="cancelIcon" (click)="deleteImage()">cancel</mat-icon>
     </div>
     <mat-card class="display-note" [style.background]=card.color fxLayout="column">
 
         <div (click)="check()" fxLayout="column">
 
-            <div *ngIf="card.imageUrl && fullIcon" class='imagediv'>
-                <img [src]="img" width="100%" height="auto" style="border-radius: 14px;" />
-                <mat-icon class="cancelIcon" (click)="deleteImage()">cancel</mat-icon>
-            </div>
+
             <div fxFlex=50 class="Border" fxLayout="row" fxLayoutAlign="space-between center" class="takenote">
                 <div fxFlex='100' class="description">
                     <textarea fxFlex='100' cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3" class="textArea" style="font-weight: bold;" [(ngModel)]="card.title">

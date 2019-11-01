@@ -54,6 +54,7 @@ export class CardComponent implements OnInit {
       this.image = message
       this.loading=false;
   })
+  console.log("view", this.view)
   }
   show() {
     this.description = this.card.description;
