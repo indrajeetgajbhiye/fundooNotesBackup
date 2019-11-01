@@ -1,1 +1,7 @@
-<app-display-notes [notes]="reminderNotes"></app-display-notes>
+<ngx-loading [show]="loading"></ngx-loading>
+<div fxLayout="column">
+    <div *ngIf="!view" fxFlex="20">
+
+    </div>
+    <app-display-notes [notes]="reminderNotes"></app-display-notes>
+</div>

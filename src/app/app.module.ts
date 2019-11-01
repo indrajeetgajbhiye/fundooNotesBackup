@@ -41,6 +41,8 @@ import { ConfirmProductComponent } from './components/confirm-product/confirm-pr
 import { ProductComponent } from './components/product/product.component';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { AddImageComponent } from './components/add-image/add-image.component';
+import { LikeComponent } from './components/like/like.component';
+import { StarRatingComponent } from './components/star-rating/star-rating.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,8 +72,9 @@ import { AddImageComponent } from './components/add-image/add-image.component';
     CartComponent,
     ConfirmProductComponent,
     ProductComponent,
-    AddImageComponent
-    
+    AddImageComponent,
+    LikeComponent,
+    StarRatingComponent
     ],
   imports: [
     BrowserModule,

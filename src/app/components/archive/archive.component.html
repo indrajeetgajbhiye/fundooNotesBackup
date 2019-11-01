@@ -1,3 +1,9 @@
-<ngx-loading [show]="loading" [template]="customLoadingTemplate"></ngx-loading>
-<app-display-notes class="container" [notes]="cardData">
-</app-display-notes>
+<ngx-loading [show]="loading"></ngx-loading>
+
+<div fxLayout="column">
+    <div *ngIf="!view" fxFlex="20">
+
+    </div>
+    <app-display-notes class="container" [notes]="cardData">
+    </app-display-notes>
+</div>

@@ -53,3 +53,19 @@ export interface userList {
     "email": string
     "userId": string
 }
+
+export class Question{
+    message : string;
+    like : any;
+    rate : any;
+    user : any;
+    createdDate : Date;
+}
+export class Reply{
+    message : string;
+    id : string;
+}
+export class rating{
+    rate : string;
+    id : string;
+}

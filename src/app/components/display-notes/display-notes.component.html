@@ -10,10 +10,8 @@
 </div> -->
 <div *ngIf="view" fxLayoutAlign="center center">
     <div fxFlex="15" fxFlex.sm="10" fxFlex.xs="5">
-
     </div>
     <div fxFlex='70' fxFlex.sm="80">
-        <!-- <div> -->
         <ngx-masonry [options]="masonryOptions" [updateLayout]="updateMasonryLayout">
             <div fxLayoutGap="1%">
                 <div ngxMasonryItem *ngFor="let card of notes|search:(search?null:searchValue)" class="display">
@@ -21,14 +19,11 @@
                 </div>
             </div>
         </ngx-masonry>
-        <!-- </div> -->
     </div>
     <div fxFlex="15" fxFlex.sm="10" fxFlex.xs="5">
-
     </div>
 </div>
 <div *ngIf="!view" fxLayoutAlign="space-around stretch">
-
     <div fxLayout='column' fxLayoutAlign="center stretch" fxFlex="60" fxFlex.sm="90" fxFlex.xs="90" fxLayoutGap="10px">
         <div *ngFor="let card of notes|search:(search?null:searchValue)">
             <app-card class="example-card" [view]='!view' [card]="card" (removeEvent)="removeEvent($event,card) "></app-card>

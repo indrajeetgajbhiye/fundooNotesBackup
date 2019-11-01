@@ -6,7 +6,7 @@
         <button mat-button (click)="photoInput.click()">Select a photo from your computer</button>
 
         <input #photoInput type="file" style="display:none" (change)="fileChangeEvent($event)">
-        <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1" [resizeToWidth]="168" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (loadImageFailed)="loadImageFailed()"></image-cropper>
+        <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1920/1080" [resizeToWidth]="168" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (loadImageFailed)="loadImageFailed()"></image-cropper>
 
 
         <img [src]="imageBefore" />

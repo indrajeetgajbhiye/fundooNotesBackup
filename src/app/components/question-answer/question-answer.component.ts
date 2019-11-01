@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { NoteService } from '../../service/note/note.service';
-import { Model } from '../../Models/model.model';
+import { Question, Reply } from '../../Models/model.model';
 import { environment } from '../../../../src/environments/environment';
-import { Location } from '@angular/common';
 import { SnackbarService } from 'src/app/service/snackbar/snackbar.service';
+import { DataService } from 'src/app/service/data/data.service'
 
 @Component({
   selector: 'app-question-answer',
@@ -12,131 +12,183 @@ import { SnackbarService } from 'src/app/service/snackbar/snackbar.service';
   styleUrls: ['./question-answer.component.scss']
 })
 export class QuestionAnswerComponent implements OnInit {
-  card = new Model();
-  private qID;
-  replyShow:boolean=false;
-  image;
-  private open = true;
-  show
-  rate = 2
-  cardId: any
-  question: string = '';
-  sub
-  questions
-  replyCount;
-  private down = true;
-  private rID;
-  public editorContent: string ;
-  qA;
-  firstName: String;
-  lastName: String;
-  modifiedDate: Date;
-  like: boolean = false;
-  constructor(private _location: Location,private routes: ActivatedRoute, public router: Router, public noteService: NoteService,
-    private snackbar : SnackbarService) { }
+  public QuestionModel: Question;
+  public replyModel: Reply;
+  constructor(public route: Router, public activeRoute: ActivatedRoute,
+    public noteService: NoteService,
+    private snackBar: SnackbarService, private dataservice: DataService) { }
 
+  cardToken
+  title = '';
+  description = '';
+  card: any;
+  editorContent: any;
+  secondId = '';
+  questions = ''
+  AnswerArray = [];
+  question: any;
+  display = false;
+  user: any;
+  rate = 5;
+  htmlField: any;
+  parentId = ''
+  sidnav = false;
+  likeCount = 3;
+  showId = '';
+  showFirstReply = false;
+  showSecondReply = false;
+  showSecondId = '';
+  showEditorId = false;
+  imgUrl = environment.profileUrl
+  mainClass = {
+    sideNavOpen: this.sidnav,
+    sideNavClose: !this.sidnav
+  }
   ngOnInit() {
-    this.sub = this.routes.params.subscribe(params => {
-      this.cardId = params['cardId'];
-    });
-    this.noteService.getNoteDetails(this.cardId).subscribe(result => {
-      this.card = result['data']['data'][0];
-      this.qA = result['data']['data'][0].questionAndAnswerNotes;
-      this.image = environment.profileUrl+'/'+this.card.user.imageUrl;
-      this.show = result['data']['data'][0].questionAndAnswerNotes.length;
-      this.firstName = this.card.user.firstName;
-      this.lastName = this.card.user.lastName;
-      this.modifiedDate = this.card.modifiedDate;
-      if (this.show) {
-        this.questions = result['data']['data'][0].questionAndAnswerNotes[0];
-        this.rate = this.questions.rate['0'].rate;
-      }
-    })
-    
-  }
-  close() {
-    this._location.back();
-  }
-  addQuestion() {
-    if (this.question != '') {
-      this.show = !this.show;
-      let body = {
-        "message": this.question,
-        "notesId": this.cardId
-      }
-      this.noteService.addQuestionAndAnswer(body).subscribe(result => {
-      })
-    }
-  }
-  viewReplies(questAns) {
-    this.replyCount = 0;
-    for (let i = 0; i < this.qA.length; i++) {
-      if (questAns.id == this.qA[i].parentId) {
-        this.replyCount++
-      }
-    }
-    return this.replyCount;
-  }
-  rating(data, event) {
 
-    let reqBody = {
-      "rate": event
-    }
-    this.noteService.ratingQuestionAndAnswer(data.id, reqBody).subscribe(result => {
-      this.snackbar.open("rating given")
-    })
-  }
-  averageRating(rateArray) {
-    let value = 0;
-    if (rateArray.length != 0) {
-      for (let i = 0; i < rateArray.length; i++) {
-        value += rateArray[i].rate
-      }
-      let avgRate = value / rateArray.length;
 
-      return avgRate.toFixed(1);
-    }
-  }
-  addRemoveLike(){
-    if(this.questions.like){
-      this.like= !this.like;
-      this.noteService.likeQuestionAndAnswer(this.questions.id, {"like":this.like}).subscribe(data=>{
-      })
-    }
-  }
-  checkRating(rateArray) {
-    this.rate = 0;
-    if (rateArray.length == 0) {
-      return true;
-    }
-    for (let i = 0; i < rateArray.length; i++) {
-      if (rateArray[i].userId == localStorage.getItem('userId')) {
-        this.rate = rateArray[i].rate;
-      }
-    }
-    return true;
-  }
-  replyTo() {
-    let replyRequest = {
-      "message": this.editorContent,
-    }
-    this.noteService.replyQuestionAndAnswer(this.qID, replyRequest).subscribe(response => {
-      if(response){
-      }
+    this.activeRoute.params.subscribe((params: Params) => {
+      this.cardToken = params['cardId'];
+      console.log("this.noteId in ask question================>", this.cardToken);
     })
+    console.log(this.cardToken);
+    this.getCardDetails();
   }
-  replyDown(replyId) {
-    this.down = !this.down;
-    this.rID = replyId;
-  }
-  answer(id) {
-    this.replyShow = !this.replyShow;
-    this.qID = id;
-  }
-  likeDislike(reply){
-      this.like= !this.like;
-      this.noteService.likeQuestionAndAnswer(reply.id, {"like":this.like}).subscribe(data=>{
+
+  getCardDetails() {
+    console.log("question",this.question);
+
+    try {
+      this.noteService.getNoteDetails(this.cardToken).subscribe(data => {
+        console.log('data ', data['data']['data']);
+        this.card = data['data']['data'];
+        this.title = this.card[0].title;
+        this.user = this.card[0].user;
+        this.description = this.card[0].description;
+        this.question = this.card[0].questionAndAnswerNotes[0];
+        console.log("question",this.question);
+        this.AnswerArray = this.card[0].questionAndAnswerNotes;
+        if (this.card[0].questionAndAnswerNotes[0] != undefined)
+          this.parentId = this.card[0].questionAndAnswerNotes[0].id;
+        this.AnswerArray.splice(0, 1);
+        console.log(this.question);
+        this.display = true;
+        console.log(this.AnswerArray);
+        if (this.AnswerArray != null)
+          for (let i = 0; i < this.AnswerArray.length; i++) {
+            console.log(this.AnswerArray[i].id, 'Id and parent id', this.AnswerArray[i].parentId);
+          }
+
+      }, err => {
+        console.log('error ', err);
+
       })
+    } catch (error) {
+      console.log('error in getCardDetails in askQuestion ', error);
+
+    }
+
+  }
+  Askquestion() {
+    if (this.editorContent == '') {
+      return;
+    }
+    else {
+      this.submit();
+    }
+  }
+
+  submit() {
+    try {
+      this.showEditorId = false;
+      console.log(this.editorContent, '   data');
+      this.QuestionModel = new Question();
+      this.QuestionModel.createdDate = new Date();
+      this.QuestionModel.like = [];
+      this.QuestionModel.rate = [];
+      this.QuestionModel.user = this.user;
+      this.QuestionModel.message = this.editorContent;
+      console.log(this.QuestionModel);
+      this.question = this.QuestionModel;
+      const obj = {
+        message: this.editorContent,
+        notesId: this.cardToken
+      }
+      this.noteService.addQuestionAndAnswer(obj).subscribe(data => {
+        console.log(data);
+        this.openSnackBar('Question Added successfully', '');
+        this.editorContent = '';
+      }, err => {
+        console.log(err);
+
+      })
+    } catch (error) {
+      console.log('error in submit method in ask component');
+
+    }
+  }
  
+  close() {
+    this.route.navigate(['../dashboard'])
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action,
+    );
+  }
+
+  replyIt(id) {
+    console.log(id);
+
+    this.replyModel = new Reply();
+    this.showEditorId = false;
+    this.replyModel.message = this.editorContent;
+    this.replyModel.id = id;
+    if (this.editorContent.length < 10 && this.question != undefined) {
+      this.openSnackBar('Not a proper Answer', '');
+      this.editorContent = '';
+      return;
+    }
+    console.log(this.replyModel);
+
+    this.replyService(this.replyModel);
+  }
+
+
+  replyService(body) {
+    this.noteService.replyQuestionAndAnswer(body.id,{
+      "message": body.message
+    }).subscribe(data => {
+      console.log('data after reply the question', data);
+      this.openSnackBar('Thankyou For Your Answer', '');
+
+    }, err => {
+      console.log('err after reply ', err);
+
+    })
+  }
+
+  setId(index) {
+    console.log('data is ', index);
+    console.log('id is ', index.id);
+
+    this.showId = index.id;
+  }
+  setSecondId(index) {
+    this.secondId = index.id;
+  }
+  showSecondReplyMethod(id) {
+    this.showSecondReply = true;
+    this.showSecondId = id;
+  }
+  hideSecondReplyMethod(id) {
+    if (this.showSecondId == id) {
+      this.showSecondId = '';
+    }
+  }
+  showEditor(question) {
+    console.log(question);
+
+    this.showEditorId = question.id
   }
 }

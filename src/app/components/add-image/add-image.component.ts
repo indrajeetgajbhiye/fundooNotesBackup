@@ -22,8 +22,7 @@ export class AddImageComponent implements OnInit {
   private snackbar: SnackbarService) { }
   ngOnInit() {
     console.log("data", this.data);
-    // this.image = this.data.imageUrl.trim('client')
-    this.imageBefore= environment.profileUrl+"/"+this.data.imageUrl
+    this.imageBefore= environment.profileUrl+"/"+this.data.imageUrl.replace('client', '')
     console.log("hajhajh",this.imageBefore)
   }
   fileChangeEvent(event: any): void {
@@ -50,22 +49,10 @@ export class AddImageComponent implements OnInit {
     uploadData.append('noteId', this.data.id)
     uploadData.append('title', this.data.title)
     uploadData.append('description', this.data.description)
-    // uploadData.append("title", this.data.title)
-    // uploadData.append("description", this.data.description)
-    // uploadData.append('labelIdList', this.data.labelIdList)
-    // uploadData.append('collaborators', this.data.collaborators);
-    // uploadData.append('isArchived', this.data.isArchived)
-    // uploadData.append('isDeleted', this.data.isDeleted)
-    // uploadData.append('isPined', this.data.isPined)
-    // console.log("uploadData", uploadData);
-    // this.data['file']=uploadData;
     this.noteService.updateImageNote(uploadData).subscribe(data => {
       this.snackbar.open("Profile image chnaged")
       this.dataService.changeImage(true)
       this.dialogRef.close("imageChange")
     })
-
-
   }
-
 }

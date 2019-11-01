@@ -49,18 +49,20 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.innerWidth = window.innerWidth;
     }
     ngOnInit() {
+        this.loading = true;
         this.getLabel();
         this.name = localStorage.getItem('firstName');
         this.email = localStorage.getItem('email');
         this.newImage = localStorage.getItem('imageUrl');
         this.img = environment.profileUrl + "/" + this.newImage
-        this.loading = true;
+
         this.dataService.currentPhoto.subscribe(message => {
             this.image = message
             this.newImage = localStorage.getItem('imageUrl');
             this.img = environment.profileUrl + "/" + this.newImage
-            this.loading=false;
+            
         })
+        this.loading=false;
     }
     navigateArchive() {
         this.router.navigate(['archive']);

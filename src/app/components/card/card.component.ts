@@ -48,11 +48,10 @@ export class CardComponent implements OnInit {
     if(this.card.questionAndAnswerNotes.length!>0){
       this.question=this.card.questionAndAnswerNotes[0].message
     }
-
-    this.img = environment.profileUrl+"/"+this.imageUrl
+    let str  = this.card.imageUrl.replace('client','')
+    this.img = environment.profileUrl+str;
     this.dataService.currentPhoto.subscribe(message => {
       this.image = message
-      this.img = environment.profileUrl + "/" + this.image
       this.loading=false;
   })
   }
@@ -62,7 +61,7 @@ export class CardComponent implements OnInit {
     this.isArchived = this.card.isArchived;
     this.isDeleted = this.card.isDeleted;
     this.isPined = this.card.isPined;
-    this.imageUrl = this.card.imageUrl;
+    this.imageUrl = this.card.imageUrl.replace('client','')
     this.img = environment.profileUrl+"/"+this.imageUrl
   }
   check() {
@@ -74,8 +73,10 @@ export class CardComponent implements OnInit {
   }
   openDialog(card): void {
     const dialogRef = this.dialog.open(NoteDialogComponent, {
-      position: { top: '15.5%' },
+      height : 'auto',
+      width : 'auto',
       data: card,
+      maxHeight: '90vh',
       panelClass: 'myClass1',
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -83,12 +84,12 @@ export class CardComponent implements OnInit {
         this.removeEvent.emit('true');
       }
       else {
-        console.log(card.description + " = " + this.description);
         if (card.title != this.title || card.description != this.description) {
           this.model = {
             noteId: card.id,
             title: card.title,
-            description: card.description
+            description: card.description,
+            imageUrl : environment.profileUrl + this.card.imageUrl.replace('client', '')
           }
           this.noteService.updatenote(this.model).subscribe(message => {
             this.snackbar.open('Note updated successfully')
@@ -113,7 +114,6 @@ export class CardComponent implements OnInit {
       this.updatePin(card);
     return
   }
-
   updatePin(card) {
     this.model = {
       noteIdList: [card.id],

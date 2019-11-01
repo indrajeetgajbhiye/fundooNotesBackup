@@ -1,25 +1,29 @@
+<!-- <div fxLayout="column" class="display-note" fxLayoutAlign="space-around center" [style.background]=card.color> -->
+
 <mat-card class="display-note" [style.background]=card.color fxLayout="column">
+
     <div (click)="check()" fxLayout="column">
-        <div *ngIf="card.imageUrl">
-            <img [src]="img" />
+        <div *ngIf="card.imageUrl" class='imagediv'>
+            <img [src]="img" width="100%" height="auto" style="border-radius: 14px;" />
+            <mat-icon class="cancelIcon" (click)="deleteImage()">cancel</mat-icon>
         </div>
         <div fxFlex=50 class="Border" fxLayout="row" fxLayoutAlign="space-between center" class="takenote">
             <div fxFlex='100' class="description">
                 <textarea fxFlex='100' cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3" class="textArea" style="font-weight: bold;" [(ngModel)]="card.title">
-            </textarea>
+                </textarea>
             </div>
             <button *ngIf=!card.isDeleted fxFlex=10 mat-icon-button color="basic" (click)="changePin(card)" (click)="$event.stopPropagation()">
-                <div class="barpin" *ngIf=card.isPined>
-                    <img src="../../../assets/images/pin_Off.svg" />
-                </div>
-                <div class="barpin" *ngIf=!card.isPined>
-                    <img src="../../../assets/images/pin_On.svg" />
-                </div>
-            </button>
+                    <div class="barpin" *ngIf=card.isPined>
+                        <img src="../../../assets/images/pin_Off.svg" />
+                    </div>
+                    <div class="barpin" *ngIf=!card.isPined>
+                        <img src="../../../assets/images/pin_On.svg" />
+                    </div>
+                </button>
         </div>
         <div fxFlex=100 class="description">
             <textarea fxFlex='100' cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="15" class="textArea" [(ngModel)]="card.description">
-            </textarea>
+                </textarea>
         </div>
         <div *ngIf='display'>
             <div *ngFor='let list of card.noteCheckLists'>
@@ -38,8 +42,8 @@
                 <div *ngIf="list.status=='close' && !list.isDeleted" fxLayout='center center'>
                     <img src="../../../assets/images/right_box.svg" (click)='addCheckList(list)'>
                     <del>
-                            {{list.itemName}}
-                        </del>
+                                {{list.itemName}}
+                            </del>
                 </div>
             </div>
         </div>
@@ -79,3 +83,4 @@
         <div [innerHTML]="question"></div>
     </div>
 </mat-card>
+<!-- </div> -->

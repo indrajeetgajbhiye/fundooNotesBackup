@@ -12,6 +12,7 @@ export class DataService {
     isDeleted: false,
     userId: ''
   }
+  imageUrl : string
   private messageSource = new BehaviorSubject('searching');
   public currentMessage = this.messageSource.asObservable();
 
@@ -26,6 +27,9 @@ export class DataService {
 
   private changephoto = new BehaviorSubject(true);
   currentPhoto = this.changephoto.asObservable();
+  
+  private addPhoto = new BehaviorSubject(this.imageUrl);
+  recievedPhoto  = this.addPhoto.asObservable();
 
   constructor() { }
   changeMessage(message: string) {
@@ -42,5 +46,8 @@ export class DataService {
   }
   changeImage(message: boolean) {
     this.changephoto.next(message);
+  }
+  addImage(message: string){
+    this.addPhoto.next(message)
   }
 }

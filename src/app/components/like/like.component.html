@@ -1,0 +1,9 @@
+<div *ngIf="liked==true" (click)="unlike()" fxLayout='row'>
+    <div class="countLike">{{count}}</div>
+    <mat-icon>thumb_up_alt</mat-icon>
+</div>
+<!-- otherwise -->
+<div *ngIf="liked==false" (click)="like(likeMessage)" fxLayout='row'>
+    <div class="countLike">{{count}}</div>
+    <mat-icon>thumb_up_off_alt</mat-icon>
+</div>
