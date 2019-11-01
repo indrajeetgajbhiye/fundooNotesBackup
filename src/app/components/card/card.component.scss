@@ -13,6 +13,8 @@
 .display-note {
     border-radius: 14px;
     padding: 16px;
+    border: none;
+    outline: none;
 }
 
 .mat-icon {
@@ -55,4 +57,20 @@
     color: white;
     cursor: pointer;
     ;
+}
+
+.fullnote {
+    border-radius: 14px;
+    outline: $color-grey;
+    border: solid $color-grey 1px
+}
+
+.mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: none;
+}
+
+.image:hover {
+    width: 280px;
+    transition: all 0.5s ease;
+    cursor: pointer;
 }

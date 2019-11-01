@@ -5,7 +5,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { DataService } from 'src/app/service/data/data.service';
 import { NoteService } from 'src/app/service/note/note.service';
-import { CompileShallowModuleMetadata } from '@angular/compiler';
 
 @Component({
   selector: 'app-add-image',
@@ -29,28 +28,18 @@ export class AddImageComponent implements OnInit {
     console.log(event, "FLE CHNAGE");
     this.imageChangedEvent = event;
   }
-  imageCropped(event:ImageCroppedEvent) {
-    console.log('Event', event.file)
-    this.croppedImage = event.file;
-  }
-  imageLoaded() {
-  
-  }
-  loadImageFailed() {
-    this.snackbar.open("Image loading failed")
-  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
   setimage() {
     const uploadData = new FormData();
-    console.log("croppeed image", this.croppedImage)
-    uploadData.append('file', this.croppedImage)
+    uploadData.append('file', this.imageChangedEvent.target.files[0])
     uploadData.append('noteId', this.data.id)
     uploadData.append('title', this.data.title)
     uploadData.append('description', this.data.description)
     this.noteService.updateImageNote(uploadData).subscribe(data => {
-      this.snackbar.open("Profile image chnaged")
+      this.snackbar.open("Image added successfully")
       this.dataService.changeImage(true)
       this.dialogRef.close("imageChange")
     })

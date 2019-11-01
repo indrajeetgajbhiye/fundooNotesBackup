@@ -6,14 +6,15 @@
         <button mat-button (click)="photoInput.click()">Select a photo from your computer</button>
 
         <input #photoInput type="file" style="display:none" (change)="fileChangeEvent($event)">
-        <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1920/1080" [resizeToWidth]="168" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (loadImageFailed)="loadImageFailed()"></image-cropper>
 
+        <div *ngIf="imageChangedEvent.target.files[0]" fxLayoutAlign="space-around center">
+            <img [src]="imageChangedEvent.target.value" />
+        </div>
 
-        <img [src]="imageBefore" />
     </div>
-    <div fxLayoutAlign="space-around center" fxLayout="row">
+    <div fxLayoutAlign="space-between center" fxLayout="row">
         <div style="padding:5px;">
-            <button mat-raised-button color="primary" [mat-dialog-close]="{'image':croppedImage}" (click)=setimage()>Save</button>
+            <button mat-raised-button color="primary" [mat-dialog-close]="{'image': imageChangedEvent}" (click)=setimage()>Save</button>
         </div>
         <div style="padding:5px;">
             <button mat-button [mat-dialog-close]="{'title':false}" cdkFocusInitial>Cancel</button>
