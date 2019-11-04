@@ -74,7 +74,7 @@
                     </div>
                 </div>
             </div>
-            <!-- answer display -->
+            <!-- answer display *ngIf="!showFirstReply"-->
             <div *ngIf="!showFirstReply" class="showFirstReply" fxLayout="row" fxLayoutAlign="end center" (click)="showFirstReply=true">
                 <mat-icon>expand_more</mat-icon> View reply
             </div>

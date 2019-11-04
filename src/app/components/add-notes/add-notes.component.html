@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <mat-divider></mat-divider>
-                <div fxLayout='row'><img src='../../../assets/images/add_mark.svg'><input matInput [(ngModel)]="list" placeholder="List Here" (keydown)='enter($event,list)'></div>
+                <div fxLayout='row'><img src='../../../assets/images/add_mark.svg'><input matInput [(ngModel)]="list" placeholder="List Here" (keydown.enter)='update($event,list)'></div>
                 <mat-divider></mat-divider>
                 <div *ngFor='let list of checklistOpen'>
                     <div *ngIf='list.status=="close"'>

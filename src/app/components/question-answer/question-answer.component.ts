@@ -110,11 +110,8 @@ export class QuestionAnswerComponent implements OnInit {
       this.QuestionModel.message = this.editorContent;
       console.log(this.QuestionModel);
       this.question = this.QuestionModel;
-      const obj = {
-        message: this.editorContent,
-        notesId: this.cardToken
-      }
-      this.noteService.addQuestionAndAnswer(obj).subscribe(data => {
+      this.question.notesId = this.cardToken
+      this.noteService.addQuestionAndAnswer(this.question).subscribe(data => {
         console.log(data);
         this.openSnackBar('Question Added successfully', '');
         this.editorContent = '';

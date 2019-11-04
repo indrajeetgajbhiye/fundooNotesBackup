@@ -41,6 +41,7 @@ export class CardComponent implements OnInit {
   img 
   loading: boolean= false
   image: any;
+  listToggle 
   constructor(public dialog: MatDialog, private router: Router, private noteService: NoteService, private snackbar : SnackbarService , private dataService: DataService) { 
   }
   ngOnInit() {
@@ -48,8 +49,10 @@ export class CardComponent implements OnInit {
     if(this.card.questionAndAnswerNotes.length!>0){
       this.question=this.card.questionAndAnswerNotes[0].message
     }
-    let str  = this.card.imageUrl.replace('client','')
-    this.img = environment.profileUrl+str;
+    this.img = environment.profileUrl+(this.card.imageUrl.replace('client',''))
+    console.log("card", this.card)
+    console.log('jhsjkh',this.img);
+    
     this.dataService.currentPhoto.subscribe(message => {
       this.image = message
       this.loading=false;
@@ -63,7 +66,8 @@ export class CardComponent implements OnInit {
     this.isDeleted = this.card.isDeleted;
     this.isPined = this.card.isPined;
     this.imageUrl = this.card.imageUrl.replace('client','')
-    this.img = environment.profileUrl+"/"+this.imageUrl
+    this.img = environment.profileUrl+this.imageUrl
+    console.log('imaghe', this.img)
   }
   check() {
     if (!this.fullIcon) {
@@ -192,5 +196,34 @@ export class CardComponent implements OnInit {
   openLabelNotes(labelName) {
     this.router.navigate(['label', labelName]);
     this.removeEvent1(false);
+  }
+  addCheckList(list){
+    console.log("lost", list)
+    list.status="open"
+    this.noteService.checklistUpdate(this.card.id, list.id, list).subscribe(success=>{
+      console.log("success",success)
+    })
+  }
+  removeCheckList(list){
+    console.log("list", list)
+    list.status="close"
+    this.noteService.checklistUpdate(this.card.id, list.id, list).subscribe(success=>{
+      console.log("success",success)
+    })
+  }
+  toggle($event){
+    console.log("event", $event)
+    this.listToggle = $event;
+  }
+  addlist(event, list){
+    console.log("event", event);
+    console.log("list", list)
+    status="open"
+    this.noteService.checklistAdd(this.card.id, {
+      "itemName":list,
+    "status":"open"}).subscribe(data=>{
+      console.log("data", data)
+      
+    })
   }
 }

@@ -17,7 +17,7 @@ export class NoteIconsComponent implements OnInit {
   @Output() removeEvent = new EventEmitter();
   @Output() addNoteEvent = new EventEmitter();
   @Input() show = true;
-  
+  @Output() toggleEvent = new EventEmitter<boolean>();
   labelList: Label
   addLabel: boolean = true;
   count: number = 0;
@@ -40,6 +40,7 @@ export class NoteIconsComponent implements OnInit {
       { 'color': '#e6c9a8', 'name': 'brown' },
       { 'color': '#e8eaed', 'name': 'grey' }
     ]]
+  listToggle: boolean = false
   constructor(private noteService: NoteService, private router: Router, public dialog: MatDialog, public dataService: DataService, private snackbar: SnackbarService) { 
   }
 
@@ -173,5 +174,9 @@ export class NoteIconsComponent implements OnInit {
   }
   onClickedOutside($event){
     this.addLabel = true
+  }
+  openCheckbox(){
+    this.listToggle = !this.listToggle
+    this.toggleEvent.emit(this.listToggle);
   }
 }

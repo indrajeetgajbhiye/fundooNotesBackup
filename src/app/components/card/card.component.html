@@ -1,17 +1,14 @@
 <div fxLayout="column" class="fullnote" [style.background]=card.color>
     <div *ngIf="card.imageUrl && !fullIcon && !view" class='imagediv' (click)="check()">
         <img [src]="img" class="image" width="272px" height="auto" style="border-radius:14px 14px 0 0;" />
-        <mat-icon class="cancelIcon" (click)="deleteImage()">cancel</mat-icon>
+        <!-- <mat-icon class="cancelIcon" (click)="deleteImage()">cancel</mat-icon> -->
     </div>
     <div *ngIf="card.imageUrl && (fullIcon || view)" class='imagediv'>
         <img [src]="img" width="100%" height="auto" style="border-radius:14px 14px 0 0;" />
-        <mat-icon class="cancelIcon" (click)="deleteImage()">cancel</mat-icon>
+        <!-- <mat-icon class="cancelIcon" (click)="deleteImage()">cancel</mat-icon> -->
     </div>
     <mat-card class="display-note" [style.background]=card.color fxLayout="column">
-
         <div (click)="check()" fxLayout="column">
-
-
             <div fxFlex=50 class="Border" fxLayout="row" fxLayoutAlign="space-between center" class="takenote">
                 <div fxFlex='100' class="description">
                     <textarea fxFlex='100' cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3" class="textArea" style="font-weight: bold;" [(ngModel)]="card.title">
@@ -32,13 +29,6 @@
             </div>
             <div *ngIf='display'>
                 <div *ngFor='let list of card.noteCheckLists'>
-                    <div *ngIf='!list.isDeleted'>
-                        <div fxLayout='column'>{{list.itemName}}</div>
-                    </div>
-                </div>
-            </div>
-            <div *ngIf='display'>
-                <div *ngFor='let list of card.noteCheckLists'>
                     <div *ngIf="list.status=='open' && list.status!='close' && !list.isDeleted" fxLayout='center center'>
                         <img src="../../../assets/images/empty_box.svg" (click)='removeCheckList(list)'>{{list.itemName}}
                     </div>
@@ -51,6 +41,11 @@
                             </del>
                     </div>
                 </div>
+            </div>
+            <div *ngIf='listToggle'>
+                <mat-divider></mat-divider>
+                <div fxLayout='row'><img src='../../../assets/images/add_mark.svg'><input matInput [(ngModel)]="list" placeholder="List Here" (keydown.enter)='addlist($event,list)'></div>
+                <mat-divider></mat-divider>
             </div>
         </div>
         <div *ngIf='card.reminder.length>0'>
@@ -78,7 +73,7 @@
             </div>
         </div>
         <div fxFlex='100' fxLayout="row">
-            <app-note-icons class="iconClass" fxFlex=100 *ngIf=!card.isDeleted (removeEvent)="removeEvent1($event)" [show]=fullIcon [card]=card>
+            <app-note-icons class="iconClass" fxFlex=100 *ngIf=!card.isDeleted (toggleEvent)="toggle($event)" (removeEvent)="removeEvent1($event)" [show]=fullIcon [card]=card>
             </app-note-icons>
             <app-delete-icons *ngIf=card.isDeleted (removeEvent)="removeEvent1(true)" [card]=card></app-delete-icons>
         </div>

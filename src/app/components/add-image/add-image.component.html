@@ -13,7 +13,7 @@
 
     </div>
     <div fxLayoutAlign="space-between center" fxLayout="row">
-        <div style="padding:5px;">
+        <div style="padding:5px;" *ngIf=data.id>
             <button mat-raised-button color="primary" [mat-dialog-close]="{'image': imageChangedEvent}" (click)=setimage()>Save</button>
         </div>
         <div style="padding:5px;">

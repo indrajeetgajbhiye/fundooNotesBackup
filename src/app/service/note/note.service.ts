@@ -106,4 +106,10 @@ export class NoteService {
   likeQuestionAndAnswer(id, data) {
     return this.service.postJSON('questionAndAnswerNotes/like/' + id, data)
   }
+  checklistUpdate(noteId, checklistId, data){
+    return this.service.postJSON("notes/"+noteId+"/checklist/"+checklistId+"/update", data)
+  }
+  checklistAdd(noteId, data){
+    return this.service.postJSON("notes/"+noteId+"/checklist/add", data)
+  }
 }

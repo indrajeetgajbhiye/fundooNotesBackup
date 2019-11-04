@@ -43,6 +43,8 @@ export class AddNotesComponent implements OnInit {
                 this.card.collaberators = this.card.collaborators;
                 this.card.noteLabels = JSON.stringify(this.card.noteLabels);
                 this.card.labelIdList = JSON.stringify(this.card.labelIdList);
+                this.card.checklist = this.checklistOpen
+                console.log("carlist", this.card.noteCheckLists)
                 try {
                     this.noteService.addnote(this.card).subscribe(data => {
                         this.snackbar.open('Notes added Succesfully')
@@ -75,5 +77,11 @@ export class AddNotesComponent implements OnInit {
     }
     addCheckList(){
 
+    }
+    update(event, list){   
+        
+        this.checklistOpen.push(list);
+        list=''
+        console.log('list----------------',this.checklistOpen)
     }
 }

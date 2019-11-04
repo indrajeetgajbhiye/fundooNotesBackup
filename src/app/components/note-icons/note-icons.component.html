@@ -21,10 +21,10 @@
             <div *ngFor='let color of row'>
                 <div *ngIf="color.color == card.color">
                     <button [ngStyle]="{'background-color': color.color }" (click)='changeColor(color.color)' matTooltip="{{color.name}}" mat-card-avatar class="visible">
-                    <mat-icon>
-                      done
-                    </mat-icon>
-                  </button>
+            <mat-icon>
+              done
+            </mat-icon>
+          </button>
                 </div>
                 <div *ngIf="color.color != card.color">
                     <button [ngStyle]="{'background-color': color.color }" (click)='changeColor(color.color)' matTooltip="{{color.name}}" mat-card-avatar class="visible"></button>
@@ -66,7 +66,7 @@
             <button mat-menu-item>
         <span>Make a copy</span>
       </button>
-            <button mat-menu-item>
+            <button mat-menu-item (click)="openCheckbox()">
         <span>
           Show checkboxes
         </span>
