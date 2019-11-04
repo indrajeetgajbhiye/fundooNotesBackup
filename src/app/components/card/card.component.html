@@ -8,7 +8,7 @@
         <!-- <mat-icon class="cancelIcon" (click)="deleteImage()">cancel</mat-icon> -->
     </div>
     <mat-card class="display-note" [style.background]=card.color fxLayout="column">
-        <div (click)="check()" fxLayout="column">
+        <div fxLayout="column" (click)="check()">
             <div fxFlex=50 class="Border" fxLayout="row" fxLayoutAlign="space-between center" class="takenote">
                 <div fxFlex='100' class="description">
                     <textarea fxFlex='100' cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3" class="textArea" style="font-weight: bold;" [(ngModel)]="card.title">
@@ -28,21 +28,21 @@
                 </textarea>
             </div>
             <div *ngIf='display'>
-                <div *ngFor='let list of card.noteCheckLists'>
+                <div *ngFor='let list of card.noteCheckLists' (click)='removeCheckList(list)' (click)="$event.stopPropagation()" class="above">
                     <div *ngIf="list.status=='open' && list.status!='close' && !list.isDeleted" fxLayout='center center'>
-                        <img src="../../../assets/images/empty_box.svg" (click)='removeCheckList(list)'>{{list.itemName}}
+                        &nbsp;&nbsp;&nbsp;<img src="../../../assets/images/empty_box.svg">{{list.itemName}}
                     </div>
                 </div>
-                <div *ngFor='let list of card.noteCheckLists'>
+                <div *ngFor='let list of card.noteCheckLists' (click)='addCheckList(list)' (click)="$event.stopPropagation()" class="above">
                     <div *ngIf="list.status=='close' && !list.isDeleted" fxLayout='center center'>
-                        <img src="../../../assets/images/right_box.svg" (click)='addCheckList(list)'>
+                        &nbsp;&nbsp;&nbsp;<img src="../../../assets/images/right_box.svg">
                         <del>
                                 {{list.itemName}}
                             </del>
                     </div>
                 </div>
             </div>
-            <div *ngIf='listToggle'>
+            <div *ngIf='listToggle' class="above">
                 <mat-divider></mat-divider>
                 <div fxLayout='row'><img src='../../../assets/images/add_mark.svg'><input matInput [(ngModel)]="list" placeholder="List Here" (keydown.enter)='addlist($event,list)'></div>
                 <mat-divider></mat-divider>
