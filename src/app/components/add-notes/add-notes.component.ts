@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { NoteService } from '../../service/note/note.service';
-import { Model, inputCheckList} from '../../Models/model.model';
+import { Model} from '../../Models/model.model';
 import { MatDialog } from '@angular/material';
 import { SnackbarService } from '../../service/snackbar/snackbar.service';
 import { CollaboratorDialogComponent } from '../collaborator-dialog/collaborator-dialog.component';
