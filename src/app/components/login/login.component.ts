@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
             'You must enter password' : this.password.hasError('minlength') ? 'Wrong password' : ''
     }
     register() {
-        this.router.navigate(['registration'])
+        this.router.navigate(['product'])
     }
     forgot() {
         this.router.navigate(['forgot'])

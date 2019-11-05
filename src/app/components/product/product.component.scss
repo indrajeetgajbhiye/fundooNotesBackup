@@ -5,7 +5,7 @@
 
 .fontSize {
     font-size: 24px;
-    color: gray;
+    color: $color-darkGrey;
 }
 
 .break {
@@ -29,19 +29,19 @@
 }
 
 .fontColor {
-    color: #0000ff
+    color: $color-navyBlue
 }
 
 .shadow {
     height: 350px;
     width: 270px;
-    background-color: #5f5f5f;
+    background-color: $color-darkGrey;
 }
 
 .cardClicked {
     height: 390px;
     width: 270px;
-    background: #fb0;
+    background: $color-lightYellow;
 }
 
 .secondcard {
@@ -66,15 +66,15 @@
     &:hover {
         height: 390px;
         width: 260px;
-        background-color: #fb0;
-        ;
+        background-color: $color-darkYellow;
+        transition: all 0.3s ease;
     }
 }
 
 .notSelect {
     height: 350px;
     width: 260px;
-    background-color: #5f5f5f;
+    background-color: $color-darkGrey;
 }
 
 .back {

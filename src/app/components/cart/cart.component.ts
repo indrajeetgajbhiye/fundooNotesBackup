@@ -17,7 +17,7 @@ export class CartComponent implements OnInit {
   cartid: any;
   public forCss;
   public firstCss = true;
-
+  paymentStatus:boolean = false;
   constructor(public cartService: CartService, public snackbar: SnackbarService) { }
 
   ngOnInit() {
@@ -27,6 +27,7 @@ export class CartComponent implements OnInit {
   getCart(){
     this.cartService.getMyCart().subscribe(data=>{
       if(data['data'].length>0){
+      this.paymentStatus = data['data'][0].isPaymentDone;
        this.selected= data['data'][0]['product'];
        this.cartid=data['data'][0].id
       }
@@ -35,8 +36,6 @@ export class CartComponent implements OnInit {
       }
     })
   }
-  
-  
   
   placeOrder(){
     if(this.address==''){
@@ -47,10 +46,7 @@ export class CartComponent implements OnInit {
         this.cond='complete';
         this.value = 100
         this.forCss = false
-
       }) 
     }
-  
-    
   }
 }

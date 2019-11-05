@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { HttpService } from 'src/app/service/http/http.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { SnackbarService } from 'src/app/service/snackbar/snackbar.service';
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html',
@@ -15,13 +16,14 @@ export class RegisterComponent implements OnInit {
     public email = new FormControl('', [Validators.required, Validators.email]);
     public password = new FormControl('', [Validators.required, Validators.minLength(8)])
     public confirmpassword = new FormControl('', [Validators.required, Validators.minLength(8)])
-    constructor(private router: Router,  private service : HttpService, public snackBar: MatSnackBar) { 
+    public serv
+    constructor(private router: Router,  private service : HttpService, public snackBar: SnackbarService) { 
         if(localStorage.getItem("userToken")!=null){
             this.router.navigate([''])
         }
+        this.serv=localStorage.getItem('service')
     }
     ngOnInit() {
-        console.log(this.router)
     }
     getFirstnameErrorMessage(): String {
         return this.firstname.hasError('required') ? "You must enter First Name":''
@@ -38,7 +40,6 @@ export class RegisterComponent implements OnInit {
             'You must enter password' : this.password.hasError('minlength') ? 'Wrong password' : ''
     }
     getConfirmPasswordErrorMessage(): String {
-        console.log(this.confirmpassword)
         if(this.confirmpassword.hasError('required')){
             return "You must enter the confirm password"
         }
@@ -46,11 +47,10 @@ export class RegisterComponent implements OnInit {
             return 'password at least 8 letters '
         }
         else if(this.confirmpassword != this.password){
-            
+            return "password don't match"
         }
     }
     login() {
-        console.log('fff',this.firstname.value)
         this.router.navigate(['login'])
     }
     forgot() {
@@ -64,16 +64,18 @@ export class RegisterComponent implements OnInit {
             return "password matched"
         }
     }
+    goToProduct(){
+        this.router.navigate(['product'])
+    }
     secureRegister(){
         if(this.confirmpassword.value == this.password.value && this.firstname!=null && this.lastname != null && this.email != null && this.password != null){
             var user = {
                 "firstName" : this.firstname.value,
                 "lastName" : this.lastname.value,
-                "service" : "advance", 
+                "service" : this.serv,
                 "email" : this.email.value,
                 "password" : this.password.value
             }
-            console.log(user);
             this.service.postRequest('user/userSignUp', user).subscribe((data:any)=>{
                 if(data.data.success==true){
                     this.snackBar.open("User Registerd");

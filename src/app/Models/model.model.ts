@@ -69,3 +69,8 @@ export class rating{
     rate : string;
     id : string;
 }
+
+export class inputCheckList{
+    itemName : string;
+    status : string;
+}

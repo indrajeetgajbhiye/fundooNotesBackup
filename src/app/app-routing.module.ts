@@ -23,6 +23,7 @@ import { ConfirmProductComponent } from './components/confirm-product/confirm-pr
 import { ProductComponent } from './components/product/product.component';
 import { AddImageComponent } from './components/add-image/add-image.component';
 const routes: Routes = [
+  {path:'product', component: ProductComponent},
   {path: 'login',component: LoginComponent},
   {path: 'registration',component: RegisterComponent},
   {path: 'forgot',component: ForgotPasswordComponent},
@@ -45,7 +46,7 @@ const routes: Routes = [
   {path:'upload-image',component:ImageDialogComponent},
   {path:'collabs', component: CollaboratorDialogComponent},
   {path:'confirm-product', component: ConfirmProductComponent},
-  {path:'product', component: ProductComponent},
+
   {path:'**', redirectTo: 'home'}
 ];
 @NgModule({

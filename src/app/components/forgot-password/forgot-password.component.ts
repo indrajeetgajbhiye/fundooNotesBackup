@@ -25,7 +25,6 @@ export class ForgotPasswordComponent implements OnInit {
                 '';
     }
     passwordReset(email) {
-        console.log(email);
         var user = {
             "email": email
         }

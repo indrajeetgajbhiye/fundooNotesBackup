@@ -68,6 +68,7 @@
             </div>
         </mat-menu>
     </mat-toolbar>
+    <mat-divider></mat-divider>
     <mat-sidenav-container class="example-sidenav-container">
         <mat-sidenav #snav [mode]="innerWidth>600 ? 'side' : 'over'">
             <mat-list role="List">
@@ -81,7 +82,7 @@
                 <p id="para">labels</p>
                 <div *ngFor='let label of ArrayOfLabel'>
                     <mat-list-item class="navField" (click)="openLabelNotes(label.label)" (click)="header= label.label" [ngClass]="{'highlight':header==label.label, 'normal':header!=label.label}">
-                        <mat-icon>label_outlined</mat-icon> {{label.label}}
+                        <mat-icon>label_outlined</mat-icon>&nbsp;&nbsp;&nbsp;&nbsp;{{label.label}}
                     </mat-list-item>
                 </div>
                 <mat-list-item role="listitem" id="lable" class="navField" (click)="openLabelDialog()" (click)="header='editLabel'" [ngClass]="{'highlight':header=='editLabel', 'normal':header!='editLabel'}">

@@ -10,21 +10,19 @@ import { Router } from '@angular/router';
 export class ConfirmProductComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<ConfirmProductComponent>,
-    @Inject(MAT_DIALOG_DATA) public data,private router:Router) { }
+    @Inject(MAT_DIALOG_DATA) public data, private router: Router) { }
 
   ngOnInit() {
+    localStorage.setItem("service", this.data.name)
   }
   onNoClick(): void {
     this.dialogRef.close();
   }
-
-  rejectCart(){
+  rejectCart() {
     this.dialogRef.close();
   }
-
-  proceedCheckout(){
+  proceedCheckout() {
     this.onNoClick()
     this.router.navigate(['/registration'])
-}
-
+  }
 }

@@ -19,7 +19,6 @@ export class ImageDialogComponent implements OnInit {
   ngOnInit() {
   }
   fileChangeEvent(event: any): void {
-    console.log(event, "FLE CHNAGE");
     this.imageChangedEvent = event;
   }
   imageCropped(event:ImageCroppedEvent) {
@@ -43,7 +42,5 @@ export class ImageDialogComponent implements OnInit {
       this.dataService.changeImage(true)
       this.dialogRef.close("imageChange")
     })
-
-
   }
 }

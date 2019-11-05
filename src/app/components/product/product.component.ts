@@ -33,8 +33,8 @@ export class ProductComponent implements OnInit {
   }
   openDialog(product): void {
     const dialogRef = this.dialog.open(ConfirmProductComponent, {
-      width: '600px',
-      height: '300px',
+      width: "auto",
+      height: "auto",
       data:product
     });
   }
@@ -57,10 +57,8 @@ export class ProductComponent implements OnInit {
       
     ).subscribe(
       (data) => {
-        console.log("successfully added to cart", data)
         localStorage.setItem("cartId",data['data']['details'].id)
       }, error => {
-        console.log("Error ", error)
       }
     )
 }

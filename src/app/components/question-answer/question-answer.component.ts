@@ -49,43 +49,30 @@ export class QuestionAnswerComponent implements OnInit {
 
     this.activeRoute.params.subscribe((params: Params) => {
       this.cardToken = params['cardId'];
-      console.log("this.noteId in ask question================>", this.cardToken);
     })
-    console.log(this.cardToken);
     this.getCardDetails();
   }
 
   getCardDetails() {
-    console.log("question",this.question);
-
     try {
       this.noteService.getNoteDetails(this.cardToken).subscribe(data => {
-        console.log('data ', data['data']['data']);
         this.card = data['data']['data'];
         this.title = this.card[0].title;
         this.user = this.card[0].user;
         this.description = this.card[0].description;
         this.question = this.card[0].questionAndAnswerNotes[0];
-        console.log("question",this.question);
         this.AnswerArray = this.card[0].questionAndAnswerNotes;
         if (this.card[0].questionAndAnswerNotes[0] != undefined)
           this.parentId = this.card[0].questionAndAnswerNotes[0].id;
         this.AnswerArray.splice(0, 1);
-        console.log(this.question);
         this.display = true;
-        console.log(this.AnswerArray);
         if (this.AnswerArray != null)
           for (let i = 0; i < this.AnswerArray.length; i++) {
-            console.log(this.AnswerArray[i].id, 'Id and parent id', this.AnswerArray[i].parentId);
           }
 
       }, err => {
-        console.log('error ', err);
-
       })
     } catch (error) {
-      console.log('error in getCardDetails in askQuestion ', error);
-
     }
 
   }
@@ -101,27 +88,20 @@ export class QuestionAnswerComponent implements OnInit {
   submit() {
     try {
       this.showEditorId = false;
-      console.log(this.editorContent, '   data');
       this.QuestionModel = new Question();
       this.QuestionModel.createdDate = new Date();
       this.QuestionModel.like = [];
       this.QuestionModel.rate = [];
       this.QuestionModel.user = this.user;
       this.QuestionModel.message = this.editorContent;
-      console.log(this.QuestionModel);
       this.question = this.QuestionModel;
       this.question.notesId = this.cardToken
       this.noteService.addQuestionAndAnswer(this.question).subscribe(data => {
-        console.log(data);
         this.openSnackBar('Question Added successfully', '');
         this.editorContent = '';
       }, err => {
-        console.log(err);
-
       })
     } catch (error) {
-      console.log('error in submit method in ask component');
-
     }
   }
  
@@ -135,8 +115,6 @@ export class QuestionAnswerComponent implements OnInit {
   }
 
   replyIt(id) {
-    console.log(id);
-
     this.replyModel = new Reply();
     this.showEditorId = false;
     this.replyModel.message = this.editorContent;
@@ -146,8 +124,6 @@ export class QuestionAnswerComponent implements OnInit {
       this.editorContent = '';
       return;
     }
-    console.log(this.replyModel);
-
     this.replyService(this.replyModel);
   }
 
@@ -156,19 +132,12 @@ export class QuestionAnswerComponent implements OnInit {
     this.noteService.replyQuestionAndAnswer(body.id,{
       "message": body.message
     }).subscribe(data => {
-      console.log('data after reply the question', data);
       this.openSnackBar('Thankyou For Your Answer', '');
-
     }, err => {
-      console.log('err after reply ', err);
-
     })
   }
 
   setId(index) {
-    console.log('data is ', index);
-    console.log('id is ', index.id);
-
     this.showId = index.id;
   }
   setSecondId(index) {
@@ -184,8 +153,6 @@ export class QuestionAnswerComponent implements OnInit {
     }
   }
   showEditor(question) {
-    console.log(question);
-
     this.showEditorId = question.id
   }
 }

@@ -42,7 +42,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
         this.mobileQuery.addListener(this._mobileQueryListener);
         this.innerWidth = window.innerWidth;
-        // this.router.navigate(['home'])
     }
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -145,7 +144,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         })
         dialogRef.afterClosed().subscribe(result => {
             if (result == "imageChange") {
-                console.log("inside");
             }
             this.dataService.currentPhoto.subscribe(response => this.profile = response)
             if (this.profile = true) {

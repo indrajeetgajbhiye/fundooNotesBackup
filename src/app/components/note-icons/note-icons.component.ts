@@ -101,8 +101,6 @@ export class NoteIconsComponent implements OnInit {
       return;
     }
     else {
-      console.log("Card need to be deleted");
-      console.log(this.card.id)
       let body={
         "isDeleted": true,
         "noteIdList": [this.card.id]
@@ -142,8 +140,6 @@ export class NoteIconsComponent implements OnInit {
   }
 
   labelToNote(label) {
-    console.log(label);
-    console.log(this.card.noteLabels.indexOf(label));
     let flag=true; 
     this.card.noteLabels.forEach(list => {
       if (list.id == label.id) {
@@ -161,7 +157,6 @@ export class NoteIconsComponent implements OnInit {
     if (this.card.id != undefined) {
       this.noteService.addLabelToNote(this.card.id, label.id, '').subscribe(message => {
         this.snackbar.open("Label Added Successfully")
-        console.log(message);
       })
     }
     else

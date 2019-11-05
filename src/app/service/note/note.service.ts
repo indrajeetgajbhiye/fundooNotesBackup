@@ -112,4 +112,7 @@ export class NoteService {
   checklistAdd(noteId, data){
     return this.service.postJSON("notes/"+noteId+"/checklist/add", data)
   }
+  checklistRemove(noteId, checklistId, data){
+    return this.service.postJSON('notes/'+noteId+"/checklist/"+checklistId+"/remove", data)
+  }
 }

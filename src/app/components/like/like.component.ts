@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NoteService } from '../../service/note/note.service'
+import { SnackbarService } from 'src/app/service/snackbar/snackbar.service';
 @Component({
   selector: 'app-like',
   templateUrl: './like.component.html',
@@ -7,20 +8,17 @@ import { NoteService } from '../../service/note/note.service'
 })
 export class LikeComponent implements OnInit {
 
-  constructor(public askService: NoteService) { }
+  constructor(public askService: NoteService, private snackbar: SnackbarService) { }
   liked = false;
   count = 0;
   likeObject;
   @Input()
   public set likeMessage(v: any) {
-    console.log(v);
     this.likeObject = v;
     this.likeCheck(v);
   }
 
   likeCheck(v) {
-    console.log(v);
-
     for (let i = 0; i < v.like.length; i++) {
       if (v.userId == v.like[i].userId && v.like[i].like) {
         this.liked = true;
@@ -57,16 +55,12 @@ export class LikeComponent implements OnInit {
       }
 
       this.askService.likeQuestionAndAnswer(userId, body).subscribe(data => {
-        console.log('data after like dislike', data);
-
+        this.snackbar.open("like updated")
       }, err => {
-        console.log('error after like dislike', err);
-
+        this.snackbar.open("error in updating like", 'okay')
       })
 
     } catch (error) {
-      console.log('error in like component in likeDislike method');
-
     }
 
   }

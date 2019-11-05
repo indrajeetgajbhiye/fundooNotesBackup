@@ -10,6 +10,17 @@
     user-select: none;
 }
 
+.checklist {
+    resize: none;
+    white-space: nowrap;
+    background: transparent;
+    border: none;
+    outline: none;
+    user-select: none;
+    overflow: hidden;
+    width: 100%;
+}
+
 .display-note {
     border-radius: 14px;
     padding: 16px;
@@ -75,9 +86,9 @@
     cursor: pointer;
 }
 
-.above {
-     :hover {
-        background-color: rgb(248, 237, 222);
-        border-radius: 14px;
-    }
-}
+// .above {
+//      :hover {
+//         background-color: rgb(248, 237, 222);
+//         border-radius: 14px;
+//     }
+// }

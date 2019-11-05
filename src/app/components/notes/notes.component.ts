@@ -52,9 +52,10 @@ export class NotesComponent implements OnInit {
                     this.unPinNotes.push(element);
                     this.unPinNotes.reverse();
                 }
-                else
+                else{
                     this.pinNotes.push(element);
                     this.pinNotes.reverse();
+                }
             }
         });
     }

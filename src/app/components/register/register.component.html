@@ -40,17 +40,16 @@
                         <!-- <mat-error>{{matchPassword(password.value, confirmpassword.value)}}</mat-error> -->
                     </mat-form-field>
                 </div>
+                <span fxLayoutAlign="space-around center">Service {{serv | titlecase}}</span>
             </mat-card-content>
-            <mat-button-toggle-group fxLayoutGap="5px" fxLayoutAlign="space-around center">
-                <mat-button-toggle fxFlex="49">Advance</mat-button-toggle>
-                <mat-button-toggle fxFlex="52">Basic</mat-button-toggle>
-            </mat-button-toggle-group>
             <mat-card-actions>
                 <div id="signupButton"><button mat-raised-button color="primary" (click)="secureRegister()">Sign Up</button></div>
             </mat-card-actions>
+            <div id="loginLink" fxLayoutAlign="center center"><a routerLink="." (click)="goToProduct()">Change Service</a></div>
             <mat-card-actions>
                 <div>Already a User</div>
                 <div id="loginLink" fxLayoutAlign="center center"><a routerLink="." (click)="login()">Log In</a></div>
+
             </mat-card-actions>
         </mat-card>
     </mat-card>

@@ -16,32 +16,13 @@
                 <div fxFlex="30" fxLayout="column" fxLayoutGap="5%">
                     <div></div>
                     <div fxLayout="row">
-                        <mat-icon [ngClass]="firstCss ? 'cart' : forCss ? 'secndPlace':'thirdPlace'">shopping_cart</mat-icon>
+                        <mat-icon [ngClass]="firstCss ? 'cart' : forCss ? 'secndPlace':'thirdPlace'">shopping_cart
+                        </mat-icon>
 
                         <mat-progress-bar class="example-margin" [color]="color" [mode]="mode" [value]="value" [bufferValue]="bufferValue"></mat-progress-bar>
                     </div>
                 </div>
             </div>
-            <!-- <div fxLayout="row" fxLayoutGap="2%">
-                  <mat-chip-list>
-                      <mat-chip style="background-color: #fb0">fundooNotes</mat-chip>
-                    </mat-chip-list>
-                <div fxFlex='60' style="margin-left:15px;margin-right: 15px" fxFlex.xs='100'>
-                  <div *ngIf='cond=="signin"' > <mat-icon class="material-icons">add_shopping_cart</mat-icon></div>
-                  <div *ngIf='cond=="review"'  style="margin-left:48%"> <mat-icon class="material-icons">add_shopping_cart</mat-icon></div>
-                  <div *ngIf='cond=="complete"'  style="margin-left:98%"> <mat-icon class="material-icons">add_shopping_cart</mat-icon></div>
-                  <div >
-                    <mat-progress-bar *ngIf='cond=="signin"' mode="determinate" value="0"></mat-progress-bar>
-                    <mat-progress-bar *ngIf='cond=="review"' mode="determinate" value="50"></mat-progress-bar>
-                    <mat-progress-bar *ngIf='cond=="complete"' mode="determinate" value="100"></mat-progress-bar>
-                  </div>
-                </div>
-              </div> -->
-            <!-- <div fxLayout='row'  fxLayoutAlign="space-between end"  >
-                  <div   >signin</div>
-                  <div  >review</div>
-                  <div  >complete</div>
-                </div> -->
         </div>
         <br>
 
@@ -52,7 +33,8 @@
         <mat-divider></mat-divider>
         <div fxLayout='row' fxLayout.sm='column' fxLayout.xs='column'>
             <div fxLayoutAlign.xs='center center'>
-                <div fxLayoutAlign='center start' style="margin-top:25px;margin-left: 23px" class="rate">${{selected.price}}/month</div>
+                <div fxLayoutAlign='center start' style="margin-top:25px;margin-left: 23px" class="rate">
+                    ${{selected.price}}/month</div>
             </div>
 
             <div fxLayout.xs='row' fxLayout='row'>
@@ -75,15 +57,15 @@
                     <div>per month</div>
                 </div>
             </div>
-            <div fxLayoutAlign.xs='center center' fxFlex='100'>
-                <div class="total" fxLayoutAlign='center center' fxLayout='column' *ngIf='cond !="complete"'>
+            <div fxLayoutAlign.xs='space-around center' fxFlex='100'>
+                <div class="total" fxLayoutAlign='center center' fxLayout='column' *ngIf='cond !="complete" && !paymentStatus'>
                     <div>Subtotal(1 item) : $ {{selected.price}} </div>
                     <button mat-stroked-button color='warn' *ngIf='cond=="signin"' (click)='cond="review"' (click)='value=50;forCss=true;firstCss=false'>Proceed to Checkout</button>
                     <button mat-stroked-button color='warn' *ngIf='cond=="review"' (click)='placeOrder()'>Place your
-                      order</button>
-
-
-                    <div></div>
+                        order</button>
+                </div>
+                <div *ngIf="paymentStatus">
+                    <h1>Payment Done</h1>
                 </div>
             </div>
         </div>
@@ -91,7 +73,7 @@
 
         <mat-divider></mat-divider>
         <div *ngIf='cond=="signin"' fxLayoutAlign='end end' style="margin-right:35px"><b>Subtotal(1 item) : $
-                  {{selected.price}}</b></div><br>
+                {{selected.price}}</b></div><br>
         <div *ngIf='cond=="review"'><textarea cols="30" rows="5" placeholder="Enter Your Address Here" [(ngModel)]='address'></textarea></div>
     </div>
 </div>

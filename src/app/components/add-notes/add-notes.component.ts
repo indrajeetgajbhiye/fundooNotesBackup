@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { NoteService } from '../../service/note/note.service';
-import { Model} from '../../Models/model.model';
+import { Model, inputCheckList} from '../../Models/model.model';
 import { MatDialog } from '@angular/material';
 import { SnackbarService } from '../../service/snackbar/snackbar.service';
 import { CollaboratorDialogComponent } from '../collaborator-dialog/collaborator-dialog.component';
@@ -15,8 +15,10 @@ export class AddNotesComponent implements OnInit {
     flag2 = false;
     card: any;
     listToggle : boolean = false;
-    checklistOpen = [];
+    checklistOpen = []
+  
     @Output() newNoteEvent = new EventEmitter();
+    listItem: any;
     constructor(public dialog: MatDialog, private noteService: NoteService, private snackbar: SnackbarService) {
     }
     color: string = '#FFFFFF';
@@ -28,7 +30,10 @@ export class AddNotesComponent implements OnInit {
     }
     noteTitle = new FormControl('', [Validators.required]);
     noteContent = new FormControl('');
-
+    toggle($event){
+        console.log("event", $event)
+        this.listToggle = $event;
+      }
     addNote() {
         this.flag = !this.flag;
         if (this.flag) {
@@ -43,8 +48,8 @@ export class AddNotesComponent implements OnInit {
                 this.card.collaberators = this.card.collaborators;
                 this.card.noteLabels = JSON.stringify(this.card.noteLabels);
                 this.card.labelIdList = JSON.stringify(this.card.labelIdList);
-                this.card.checklist = this.checklistOpen
-                console.log("carlist", this.card.noteCheckLists)
+                this.card.checklist = JSON.stringify(this.checklistOpen)
+                this.checklistOpen = [];
                 try {
                     this.noteService.addnote(this.card).subscribe(data => {
                         this.snackbar.open('Notes added Succesfully')
@@ -54,6 +59,8 @@ export class AddNotesComponent implements OnInit {
                         this.card.color = "#FFFFFF";
                         this.card = new Model();
                         this.card.reminder = []
+                        this.listItem = ''
+                        this.listToggle = false;
                         this.newNoteEvent.emit(note['status']['details']);
                     })
                 } catch (error) {
@@ -75,13 +82,21 @@ export class AddNotesComponent implements OnInit {
     removeReminder() {
         this.card.reminder = [];
     }
-    addCheckList(){
-
+    addlist(){
+     if(this.listItem){
+        let checklistObj = {
+            itemName:this.listItem,
+            status : "open"
+        }
+        this.checklistOpen.push(checklistObj)
+        this.listItem="";
+     }
     }
-    update(event, list){   
-        
-        this.checklistOpen.push(list);
-        list=''
-        console.log('list----------------',this.checklistOpen)
+    update(list, status){
+        list.status = status
+    }
+    deleteCheckList(list){
+        list.itemName = ''
+        list.status = ''
     }
 }

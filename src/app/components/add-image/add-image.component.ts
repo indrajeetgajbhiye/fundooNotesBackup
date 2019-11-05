@@ -43,5 +43,6 @@ export class AddImageComponent implements OnInit {
       this.dataService.changeImage(true)
       this.dialogRef.close("imageChange")
     })
+    uploadData.delete("file")
   }
 }

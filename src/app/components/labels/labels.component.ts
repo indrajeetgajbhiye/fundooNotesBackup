@@ -15,7 +15,6 @@ export class LabelsComponent implements OnInit {
   public loading = false;
   ngOnInit() {
     this.sub = this.routes.params.subscribe(params => {
-      console.log(params);
       this.labelName = params['labelName'];
       this.getLabel();
     });

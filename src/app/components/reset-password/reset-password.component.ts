@@ -38,14 +38,10 @@ export class ResetPasswordComponent implements OnInit {
             var user = {
                 "newPassword": this.password.value
             }
-            console.log(user);
-            
             this.service.postUrlEncoded('user/reset-password', user).subscribe((data: any) => {
-                console.log('resolve',data);
                 this.snackBar.open("password reset");
                 this.router.navigate(['login'])
             }, (error:any)=>{
-                console.log('error',error);
                 this.snackBar.open("Unknown error occurred","try again");
                 this.router.navigate(['forgot'])
             }

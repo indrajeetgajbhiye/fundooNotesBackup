@@ -30,26 +30,28 @@
                 <div *ngFor='let list of checklistOpen'>
                     <div *ngIf='list.status=="open"'>
                         <div fxLayoutAlign='space-between center'>
-                            <img src='../../../assets/images/empty_box.svg' (click)="update(list,'close')"><input matInput [(ngModel)]=list.itemName>
-                            <div (click)='delete(list)'>
-                                <img src='../../../assets/images/wrong_mark.svg'>
-                            </div>
+                            <span fxLayout="row">
+                                <img src='../../../assets/images/empty_box.svg' (click)="update(list,'close')" matTooltip="mark as done" class="visible"><input matInput [(ngModel)]="list.itemName">
+                            </span>
+                            <mat-icon (click)=deleteCheckList(list) matTooltip="remove" class="visible">cancel</mat-icon>
+
                         </div>
                     </div>
                 </div>
-                <mat-divider></mat-divider>
-                <div fxLayout='row'><img src='../../../assets/images/add_mark.svg'><input matInput [(ngModel)]="list" placeholder="List Here" (keydown.enter)='update($event,list)'></div>
-                <mat-divider></mat-divider>
+
                 <div *ngFor='let list of checklistOpen'>
                     <div *ngIf='list.status=="close"'>
                         <div fxLayoutAlign='space-between center'>
-                            <img src='../../../assets/images/right_box.svg' class='decorate' (click)="update(list,'open')"><input matInput style="text-decoration:line-through;" [(ngModel)]=list.itemName>
-                            <div (click)='delete(list)'>
-                                <img src='../../../assets/images/wrong_mark.svg'>
-                            </div>
+                            <span fxLayout="row">
+                                    <img src='../../../assets/images/right_box.svg' class='decorate' (click)="update(list,'open')" matTooltip="mark as not done" class="visible"><input matInput style="text-decoration:line-through;" [(ngModel)]=list.itemName>
+                            </span>
+                            <mat-icon (click)=deleteCheckList(list) matTooltip="remove" class="visible">cancel</mat-icon>
                         </div>
                     </div>
                 </div>
+                <mat-divider></mat-divider>
+                <div fxLayout='row'><img src='../../../assets/images/add_mark.svg'><input matInput [(ngModel)]="listItem" placeholder="List Here" (keydown.enter)='addlist()'></div>
+                <mat-divider></mat-divider>
             </div><br><br>
             <div *ngIf='card.reminder.length!=0'>
                 <mat-chip class="sample" (mouseenter)="cancelIcon=true" (mouseleave)="cancelIcon=false">
@@ -74,7 +76,7 @@
                 </div>
             </div>
             <div fxFlex='100'>
-                <app-note-icons (addNoteEvent)="addNote()" [card]=card></app-note-icons>
+                <app-note-icons (addNoteEvent)="addNote()" (toggleEvent)="toggle($event)" [card]=card></app-note-icons>
             </div>
         </mat-card>
     </div>

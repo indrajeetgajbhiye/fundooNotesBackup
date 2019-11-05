@@ -38,10 +38,11 @@ export class CardComponent implements OnInit {
   display=true;
   collaborators: any;
   imageUrl: any;
-  img 
+  img = ''
   loading: boolean= false
-  image: any;
+  image: boolean = false
   listToggle 
+  listItem: any;
   constructor(public dialog: MatDialog, private router: Router, private noteService: NoteService, private snackbar : SnackbarService , private dataService: DataService) { 
   }
   ngOnInit() {
@@ -49,15 +50,13 @@ export class CardComponent implements OnInit {
     if(this.card.questionAndAnswerNotes.length!>0){
       this.question=this.card.questionAndAnswerNotes[0].message
     }
-    this.img = environment.profileUrl+(this.card.imageUrl.replace('client',''))
-    console.log("card", this.card)
-    console.log('jhsjkh',this.img);
-    
-    this.dataService.currentPhoto.subscribe(message => {
-      this.image = message
-      this.loading=false;
-  })
-  console.log("view", this.view)
+    let strContent = this.card.imageUrl.indexOf("client")
+    if(strContent>-1){
+      this.img = environment.profileUrl+"/"+(this.card.imageUrl.replace('client/',''))
+      this.image = true
+    }
+  
+  this.loading=false;
   }
   show() {
     this.description = this.card.description;
@@ -65,9 +64,11 @@ export class CardComponent implements OnInit {
     this.isArchived = this.card.isArchived;
     this.isDeleted = this.card.isDeleted;
     this.isPined = this.card.isPined;
-    this.imageUrl = this.card.imageUrl.replace('client','')
-    this.img = environment.profileUrl+this.imageUrl
-    console.log('imaghe', this.img)
+    let strContent = this.card.imageUrl.indexOf("client")
+    if(strContent>-1){
+      this.img = environment.profileUrl+"/"+(this.card.imageUrl.replace('client/',''))
+      this.image = true
+    }
   }
   check() {
     if (!this.fullIcon) {
@@ -187,9 +188,6 @@ export class CardComponent implements OnInit {
       }
     })
   }
-  addList() {
-    console.log("add list")
-  }
   openQandA() {
     this.router.navigate(['questionAnswer', this.card.id])
   }
@@ -198,32 +196,48 @@ export class CardComponent implements OnInit {
     this.removeEvent1(false);
   }
   addCheckList(list){
-    console.log("lost", list)
     list.status="open"
     this.noteService.checklistUpdate(this.card.id, list.id, list).subscribe(success=>{
-      console.log("success",success)
+      this.snackbar.open("checklist updated")
+    },
+    error=>{
+      this.snackbar.open("error in updating checklist")
     })
   }
   removeCheckList(list){
-    console.log("list", list)
     list.status="close"
     this.noteService.checklistUpdate(this.card.id, list.id, list).subscribe(success=>{
-      console.log("success",success)
+      this.snackbar.open("checklist updated")
+    },
+    error=>{
+      this.snackbar.open("error in updating checklist")
     })
   }
   toggle($event){
-    console.log("event", $event)
     this.listToggle = $event;
   }
-  addlist(event, list){
-    console.log("event", event);
-    console.log("list", list)
-    status="open"
+  addlist(){
     this.noteService.checklistAdd(this.card.id, {
-      "itemName":list,
+      "itemName":this.listItem,
     "status":"open"}).subscribe(data=>{
-      console.log("data", data)
-      
+      this.snackbar.open("checklist added")
+      this.card.noteCheckLists.push(data.data.details);
+      this.listItem=null
     })
+  }
+  deleteCheckList(list){
+    this.noteService.checklistRemove(this.card.id, list.id, list).subscribe(success=>{
+      list.status="";
+    })
+  }
+  updateList(list){
+    this.noteService.checklistUpdate(this.card.id, list.id, list).subscribe(success=>{
+    },
+    error=>{
+    })
+  }
+  textareachange(event){
+    console.log("event", event)
+    event.preventDefault();
   }
 }
