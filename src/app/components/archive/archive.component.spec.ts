@@ -12,6 +12,7 @@ import { DeleteIconsComponent } from '../delete-icons/delete-icons.component';
 import { ReminderIconComponent } from '../reminder-icon/reminder-icon.component';
 import { AppMaterialModule } from 'src/app/app-material.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NgxLoadingModule } from 'ngx-loading';
 
 describe('ArchiveComponent', () => {
   let component: ArchiveComponent;
@@ -40,7 +41,8 @@ describe('ArchiveComponent', () => {
         MatCheckboxModule,
         MatDatepickerModule,
         AppMaterialModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        NgxLoadingModule
       ]
     })
     .compileComponents();

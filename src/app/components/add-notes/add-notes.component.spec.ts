@@ -8,6 +8,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NoteIconsComponent } from '../note-icons/note-icons.component';
 import { ReminderIconComponent } from '../reminder-icon/reminder-icon.component';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { AppMaterialModule } from 'src/app/app-material.module';
+import { NgxLoadingModule } from 'ngx-loading';
 describe('AddNotesComponent', () => {
   let component: AddNotesComponent;
   let fixture: ComponentFixture<AddNotesComponent>;
@@ -33,7 +35,9 @@ describe('AddNotesComponent', () => {
         MatDatepickerModule,
         MatFormFieldModule,
         MatSelectModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        AppMaterialModule,
+        NgxLoadingModule
       ]
     })
       .compileComponents();
