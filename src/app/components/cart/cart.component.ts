@@ -46,6 +46,7 @@ export class CartComponent implements OnInit {
         this.cond='complete';
         this.value = 100
         this.forCss = false
+        console.log("data")
       }) 
     }
   }

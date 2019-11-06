@@ -43,9 +43,7 @@
                     <div *ngIf="list.status=='close' && !list.isDeleted" fxLayout="row" fxLayoutAlign="space-between center">
                         <div fxLayout="row" fxFlex="100">
                             <img (click)='addCheckList(list)' src="../../../assets/images/right_box.svg" class="visible">
-                            <del fxFlex="100">
-                                    <input class="checklist" [(ngModel)]="list.itemName" (keyup)="updateList(list)"  (keydown.enter)="textareachange($event)">
-                            </del>
+                            <input class="checklist" style="text-decoration:line-through;" [(ngModel)]="list.itemName" (keyup)="updateList(list)" (keydown.enter)="textareachange($event)">
                             <mat-icon class="visible" (click)="deleteCheckList(list)">cancel</mat-icon>
                         </div>
                     </div>
