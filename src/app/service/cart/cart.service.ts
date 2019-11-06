@@ -7,13 +7,13 @@ import { HttpService } from '../http/http.service';
 export class CartService {
   constructor(public httpService: HttpService) { }
   getServiceOfUser() {
-    return this.httpService.getConfig('/user/service')
+    return this.httpService.getConfig('user/service')
   }
   addtoCart(data) {
-    return this.httpService.postJSON("/productcarts/addToCart", data)
+    return this.httpService.postJSONWithoutToken("productcarts/addToCart", data)
   }
   getCartDetails(cartId) {
-    return this.httpService.httpGetData("/productcarts/getCartDetails/" + cartId + "")
+    return this.httpService.httpGetDataWithoutToken("productcarts/getCartDetails/" + cartId + "")
   }
   placeOrder(data) {
     return this.httpService.postJSON('productcarts/placeOrder', data)

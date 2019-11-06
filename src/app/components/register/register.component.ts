@@ -4,6 +4,7 @@ import { Router } from '@angular/router'
 import { HttpService } from 'src/app/service/http/http.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { SnackbarService } from 'src/app/service/snackbar/snackbar.service';
+import { CartService } from 'src/app/service/cart/cart.service';
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html',
@@ -17,13 +18,16 @@ export class RegisterComponent implements OnInit {
     public password = new FormControl('', [Validators.required, Validators.minLength(8)])
     public confirmpassword = new FormControl('', [Validators.required, Validators.minLength(8)])
     public serv
-    constructor(private router: Router,  private service : HttpService, public snackBar: SnackbarService) { 
+    product: any;
+    prodId: any;
+    private cartId = localStorage.getItem('cartId')
+    constructor(private router: Router,  private service : HttpService, public snackBar: SnackbarService, public cartService : CartService ) { 
         if(localStorage.getItem("userToken")!=null){
             this.router.navigate([''])
         }
-        this.serv=localStorage.getItem('service')
     }
     ngOnInit() {
+        this.getCartInformation()
     }
     getFirstnameErrorMessage(): String {
         return this.firstname.hasError('required') ? "You must enter First Name":''
@@ -68,11 +72,12 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['product'])
     }
     secureRegister(){
+        
         if(this.confirmpassword.value == this.password.value && this.firstname!=null && this.lastname != null && this.email != null && this.password != null){
             var user = {
                 "firstName" : this.firstname.value,
                 "lastName" : this.lastname.value,
-                "service" : this.serv,
+                "service" : this.product.name,
                 "email" : this.email.value,
                 "password" : this.password.value
             }
@@ -89,4 +94,19 @@ export class RegisterComponent implements OnInit {
             this.router.navigate['register']
         }
     }
+    getCartInformation(){
+        this.cartService.getCartDetails(this.cartId).subscribe(
+          data => {
+            console.log(data)
+            this.prodId = data['data'].productId
+            console.log(this.prodId)
+            this.product =  data['data']['product'];
+            console.log("product", this.product)
+          },
+          error => {
+            console.log(error)
+          }
+      )
+      }
+
 }

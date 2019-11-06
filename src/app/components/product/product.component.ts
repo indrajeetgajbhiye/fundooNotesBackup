@@ -49,7 +49,7 @@ export class ProductComponent implements OnInit {
     }
   }
   cartAdd(cart) {
-    console.log(cart.id)
+    console.log("cart",cart)
     this.cartService.addtoCart(
       {
         "productId": cart.id
@@ -57,8 +57,10 @@ export class ProductComponent implements OnInit {
       
     ).subscribe(
       (data) => {
+        console.log(data)
         localStorage.setItem("cartId",data['data']['details'].id)
       }, error => {
+        console.log(error)
       }
     )
 }

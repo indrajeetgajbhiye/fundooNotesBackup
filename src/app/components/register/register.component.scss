@@ -8,13 +8,10 @@
     cursor: pointer;
 }
 
-.main {
-    background: $color-grey;
-    height: 100%;
+.break {
+    word-break: break-word;
 }
 
-.card {
-    height: 100vh;
-    min-height: 640px;
-    min-width: 360px;
+.fontColor {
+    color: $color-navyBlue
 }

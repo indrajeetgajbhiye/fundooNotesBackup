@@ -13,7 +13,10 @@ export class ConfirmProductComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data, private router: Router) { }
 
   ngOnInit() {
-    localStorage.setItem("service", this.data.name)
+    localStorage.setItem("product.name", this.data.name)
+    localStorage.setItem("product.price", this.data.price)
+    localStorage.setItem("product.decription", this.data.decription)
+    // localStorage.setItem("product", this.data)
   }
   onNoClick(): void {
     this.dialogRef.close();

@@ -16,7 +16,7 @@ export class AddNotesComponent implements OnInit {
     card: any;
     listToggle : boolean = false;
     checklistOpen = []
-  
+
     @Output() newNoteEvent = new EventEmitter();
     listItem: any;
     constructor(public dialog: MatDialog, private noteService: NoteService, private snackbar: SnackbarService) {

@@ -13,6 +13,7 @@ export class DataService {
     userId: ''
   }
   imageUrl : string
+  product: any;
   private messageSource = new BehaviorSubject('searching');
   public currentMessage = this.messageSource.asObservable();
 
@@ -29,8 +30,11 @@ export class DataService {
   currentPhoto = this.changephoto.asObservable();
   
   private addPhoto = new BehaviorSubject(this.imageUrl);
-  recievedPhoto  = this.addPhoto.asObservable();
+  public recievedPhoto  = this.addPhoto.asObservable();
 
+  private addtocart = new BehaviorSubject(this.product);
+  public cartContent = this.addtocart.asObservable();
+  
   constructor() { }
   changeMessage(message: string) {
     this.messageSource.next(message)
@@ -49,5 +53,8 @@ export class DataService {
   }
   addImage(message: string){
     this.addPhoto.next(message)
+  }
+  addcart(message:any){
+    this.addtocart.next(message)
   }
 }

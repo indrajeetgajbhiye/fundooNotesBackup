@@ -86,6 +86,19 @@ export class HttpService {
   getConfig(url) {
     return this.http.get(environment.baseUrl + url);
   }
-  
-
+  postJSONWithoutToken(url: string, body: any): any {
+    url = environment.baseUrl + url;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    }
+    return this.http.post(url, body, httpOptions)
+  }
+  httpGetDataWithoutToken(url) {
+    let headers = new HttpHeaders({
+      'Accept': 'application/json',
+    });
+    return this.http.get(this.API_URL + url, { headers });
+  }
 } 

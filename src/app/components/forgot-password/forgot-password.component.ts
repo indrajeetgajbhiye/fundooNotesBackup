@@ -24,6 +24,9 @@ export class ForgotPasswordComponent implements OnInit {
             this.email.hasError('email') ? 'Not a valid email' :
                 '';
     }
+    login(){
+        this.router.navigate(['login'])
+    }
     passwordReset(email) {
         var user = {
             "email": email
