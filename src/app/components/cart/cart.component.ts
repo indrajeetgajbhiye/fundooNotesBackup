@@ -21,7 +21,6 @@ export class CartComponent implements OnInit {
   constructor(public cartService: CartService, public snackbar: SnackbarService) { }
 
   ngOnInit() {
-    this.cartid=localStorage.getItem('cartid');
     this.getCart()
   }
   getCart(){
@@ -30,10 +29,14 @@ export class CartComponent implements OnInit {
       this.paymentStatus = data['data'][0].isPaymentDone;
        this.selected= data['data'][0]['product'];
        this.cartid=data['data'][0].id
+       console.log("data", data)
+       console.log("cartid", this.cartid)
       }
       else{
         this.noCart=data['data']
       }
+    }, error=>{
+      console.log("eroor",error)
     })
   }
   

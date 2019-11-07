@@ -22,8 +22,11 @@ export class RegisterComponent implements OnInit {
     prodId: any;
     private cartId = localStorage.getItem('cartId')
     constructor(private router: Router,  private service : HttpService, public snackBar: SnackbarService, public cartService : CartService ) { 
-        if(localStorage.getItem("userToken")!=null){
+        if(localStorage.getItem("userToken")){
             this.router.navigate([''])
+        }
+        if(!localStorage.getItem("cartId")){
+            this.router.navigate(['product'])
         }
     }
     ngOnInit() {

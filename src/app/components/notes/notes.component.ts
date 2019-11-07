@@ -21,15 +21,16 @@ export class NotesComponent implements OnInit {
         this.cardData.push($event);
         if ($event["isArchived"] == false) {
             if ($event["isPined"] == false) {
-                this.unPinNotes.reverse()
+                this.unPinNotes=this.unPinNotes.reverse()
                 this.unPinNotes.push($event);
-                this.unPinNotes.reverse();
+                this.unPinNotes=this.unPinNotes.reverse();
             }
             else{
-                this.pinNotes.reverse();
+                this.pinNotes=this.pinNotes.reverse();
                 this.pinNotes.push($event);
-                this.pinNotes.reverse();
+                this.pinNotes=this.pinNotes.reverse();
             }
+            
         }
     }
     printCards(){
@@ -50,13 +51,15 @@ export class NotesComponent implements OnInit {
             if (element["isDeleted"] == false && element["isArchived"] == false) {
                 if (element["isPined"] == false) {
                     this.unPinNotes.push(element);
-                    this.unPinNotes.reverse();
+                   
                 }
                 else{
                     this.pinNotes.push(element);
-                    this.pinNotes.reverse();
+                   
                 }
             }
+            this.pinNotes = this.pinNotes.reverse();
+            this.unPinNotes = this.unPinNotes.reverse();
         });
     }
 }

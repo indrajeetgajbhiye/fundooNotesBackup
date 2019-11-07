@@ -6,7 +6,7 @@
                     <b>{{title}}</b>
                 </div>
                 <div class="close">
-                    <button mat-button (click)="close()"> Close</button>
+                    <button mat-button color="warn" (click)="close()"> Close</button>
                 </div>
             </div>
             <div class="description">
@@ -64,13 +64,15 @@
                 </div>
             </div>
             <!-- reply the answer to question -->
-            <div *ngIf="showEditorId">
-                <div> <button mat-button (click)="showEditorId=false">close</button></div>
+            <div *ngIf="showEditorId" fxLayout="column">
+                <div fxLayoutAlign="end center"> <button mat-raised-button color="warn" (click)="showEditorId=false">close</button>
+                </div>
+                <br>
                 <div [froalaEditor] [(froalaModel)]="editorContent">
                 </div>
                 <div fxLayout='row' fxLayoutAlign='end'>
                     <div class="ask">
-                        <button mat-raised-button class="submit" (click)="replyIt(question.id)">SUBMIT-ANSWER</button>
+                        <button mat-raised-button class="submit" (click)="replyIt(question.id)">SUBMIT</button>
                     </div>
                 </div>
             </div>
@@ -112,12 +114,12 @@
                         </div>
                         <!-- reply the answer to answer -->
                         <div *ngIf="showId == index.id">
-                            <div> <button mat-button (click)="showId=''">close</button></div>
+                            <div> <button mat-raised-button color="warn" (click)="showId=''">close</button></div>
                             <div [froalaEditor] [(froalaModel)]="editorContent">
                             </div>
                             <div fxLayout='row' fxLayoutAlign='end'>
                                 <div class="ask">
-                                    <button mat-raised-button class="submit" (click)="replyIt(index.id)" (click)="showId=''">SUBMIT-ANSWER</button>
+                                    <button mat-raised-button class="submit" (click)="replyIt(index.id)" (click)="showId=''">SUBMIT</button>
                                 </div>
                             </div>
                         </div>
@@ -168,7 +170,7 @@
                                         </div>
                                         <div fxLayout='row' fxLayoutAlign='end'>
                                             <div class="ask">
-                                                <button mat-raised-button class="submit" (click)="replyIt(user1.id)" (click)="secondId=''">SUBMIT-ANSWER</button>
+                                                <button mat-raised-button class="submit" (click)="replyIt(user1.id)" (click)="secondId=''">SUBMIT</button>
                                             </div>
                                         </div>
                                     </div>
