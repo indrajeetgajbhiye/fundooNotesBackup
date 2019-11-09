@@ -3,7 +3,10 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 // @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import '~ngx-bar-rating/themes/br-default-theme';
-// @import '~ngx-bar-rating/themes/br-fontawesome-o-theme';
+@import '~ngx-bar-rating/themes/br-movie-theme';
+@import '~ngx-bar-rating/themes/br-fontawesome-theme';
+@import '~ngx-bar-rating/themes/br-stars-theme';
+@import '~ngx-bar-rating/themes/br-square-theme';
 @import './scss/colors.scss';
 .visible {
     cursor: pointer;

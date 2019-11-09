@@ -198,7 +198,7 @@ export class CardComponent implements OnInit {
   addCheckList(list){
     list.status="open"
     this.noteService.checklistUpdate(this.card.id, list.id, list).subscribe(success=>{
-      this.snackbar.open("checklist updated")
+      // this.snackbar.open("checklist updated")
     },
     error=>{
       this.snackbar.open("error in updating checklist")
@@ -207,7 +207,7 @@ export class CardComponent implements OnInit {
   removeCheckList(list){
     list.status="close"
     this.noteService.checklistUpdate(this.card.id, list.id, list).subscribe(success=>{
-      this.snackbar.open("checklist updated")
+      // this.snackbar.open("checklist updated")
     },
     error=>{
       this.snackbar.open("error in updating checklist")

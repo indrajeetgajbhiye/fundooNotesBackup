@@ -92,3 +92,21 @@
 //         border-radius: 14px;
 //     }
 // }
+// @media only screen and (max-width: 600) {
+//     .display-note {
+//         .iconClass {
+//             opacity: 0;
+//         }
+//         .barpin {
+//             opacity: 0;
+//         }
+//         &:hover {
+//             .iconClass {
+//                 opacity: 1;
+//             }
+//             .barpin {
+//                 opacity: 1;
+//             }
+//         }
+//     }
+// }

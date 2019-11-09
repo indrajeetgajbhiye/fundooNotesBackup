@@ -3,7 +3,7 @@
     <mat-icon>thumb_up_alt</mat-icon>
 </div>
 <!-- otherwise -->
-<div *ngIf="liked==false" (click)="like(likeMessage)" fxLayout='row'>
+<div *ngIf="liked==false" (click)="like()" fxLayout='row'>
     <div class="countLike">{{count}}</div>
     <mat-icon>thumb_up_off_alt</mat-icon>
 </div>

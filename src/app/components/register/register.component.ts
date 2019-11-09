@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { HttpService } from 'src/app/service/http/http.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import { SnackbarService } from 'src/app/service/snackbar/snackbar.service';
 import { CartService } from 'src/app/service/cart/cart.service';
 @Component({
@@ -82,7 +81,8 @@ export class RegisterComponent implements OnInit {
                 "lastName" : this.lastname.value,
                 "service" : this.product.name,
                 "email" : this.email.value,
-                "password" : this.password.value
+                "password" : this.password.value,
+                "cartId": this.cartId
             }
             this.service.postRequest('user/userSignUp', user).subscribe((data:any)=>{
                 if(data.data.success==true){

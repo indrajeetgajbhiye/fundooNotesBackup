@@ -37,18 +37,18 @@ export class AddNotesComponent implements OnInit {
     addNote() {
         this.flag = !this.flag;
         if (this.flag) {
-            if (this.noteTitle.value == '') {
+            if (!this.noteTitle.value) {
                 this.card.reminder = [];
                 return
             }
             else {
                 this.card.title = this.noteTitle.value;
                 this.card.description = this.noteContent.value;
-                this.card.collaborators = JSON.stringify(this.card.collaborators);
-                this.card.collaberators = this.card.collaborators;
+                this.card.collaberators = JSON.stringify(this.card.collaborators)
                 this.card.noteLabels = JSON.stringify(this.card.noteLabels);
                 this.card.labelIdList = JSON.stringify(this.card.labelIdList);
                 this.card.checklist = JSON.stringify(this.checklistOpen)
+                console.log("card content",this.card);
                 this.checklistOpen = [];
                 try {
                     this.noteService.addnote(this.card).subscribe(data => {
