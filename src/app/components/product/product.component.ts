@@ -18,6 +18,9 @@ export class ProductComponent implements OnInit {
   private service;
 
   ngOnInit() {
+    if(localStorage.getItem("userToken")){
+      this.router.navigate([''])
+    }
     this.getServices()
 
   }
