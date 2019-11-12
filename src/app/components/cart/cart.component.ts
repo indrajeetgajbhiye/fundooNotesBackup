@@ -15,7 +15,8 @@ export class CartComponent implements OnInit {
   address: string = '';
   public value = 25;
   cartid: any;
-  public forCss;
+  public forCss=false;
+  public done = false;
   public firstCss = true;
   paymentStatus:boolean = false;
   constructor(public cartService: CartService, public snackbar: SnackbarService) { }
@@ -25,11 +26,17 @@ export class CartComponent implements OnInit {
   }
   getCart(){
     this.cartService.getMyCart().subscribe(data=>{
+      console.log(data);
       if(data['data'].length>0){
       this.paymentStatus = data['data'][0].isPaymentDone;
        this.selected= data['data'][0]['product'];
        this.cartid=data['data'][0].id
-       console.log("data", data)
+       this.done = data['data'][0].isOrderPlaced
+       if(this.done){
+         this.value=100
+       }
+       this.firstCss = !data['data'][0].isOrderPlaced
+       console.log("data", this.done)
        console.log("cartid", this.cartid)
       }
       else{

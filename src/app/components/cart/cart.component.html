@@ -16,7 +16,7 @@
                 <div fxFlex="30" fxLayout="column" fxLayoutGap="5%">
                     <div></div>
                     <div fxLayout="row">
-                        <mat-icon [ngClass]="firstCss ? 'cart' : forCss ? 'secndPlace':'thirdPlace'">shopping_cart
+                        <mat-icon [ngClass]="firstCss ? 'cart' : forCss ? 'secndPlace': done? 'thirdPlace': 'noclass'">shopping_cart
                         </mat-icon>
 
                         <mat-progress-bar class="example-margin" [color]="color" [mode]="mode" [value]="value" [bufferValue]="bufferValue"></mat-progress-bar>
@@ -60,13 +60,17 @@
             <div fxLayoutAlign.xs='space-around center' fxFlex='100'>
                 <div class="total" fxLayoutAlign='center center' fxLayout='column' *ngIf='cond !="complete" && !paymentStatus'>
                     <div>Subtotal(1 item) : $ {{selected.price}} </div>
-                    <button mat-stroked-button color='warn' *ngIf='cond=="signin"' (click)='cond="review"' (click)='value=50;forCss=true;firstCss=false'>Proceed to Checkout</button>
+                    <button mat-stroked-button color='warn' *ngIf='cond=="signin" && !done' (click)='cond="review"' (click)='value=50;forCss=true;firstCss=false'>Proceed to Checkout</button>
                     <button mat-stroked-button color='warn' *ngIf='cond=="review"' (click)='placeOrder()'>Place your
                         order</button>
+                    <div *ngIf="paymentStatus">
+                        <h1>Payment Done</h1>
+                    </div>
+                    <div *ngIf="!paymentStatus && cond=='signin'">
+                        <h1>Pending</h1>
+                    </div>
                 </div>
-                <div *ngIf="paymentStatus">
-                    <h1>Payment Done</h1>
-                </div>
+
             </div>
         </div>
         <div></div><br>
