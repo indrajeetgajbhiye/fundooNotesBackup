@@ -19,19 +19,18 @@ export class NotesComponent implements OnInit {
     }
     getNewNote($event) {
         this.cardData.push($event);
+        this.unPinNotes=this.unPinNotes.reverse()
+        this.pinNotes=this.pinNotes.reverse();
         if ($event["isArchived"] == false) {
             if ($event["isPined"] == false) {
-                this.unPinNotes=this.unPinNotes.reverse()
                 this.unPinNotes.push($event);
-                this.unPinNotes=this.unPinNotes.reverse();
             }
             else{
-                this.pinNotes=this.pinNotes.reverse();
                 this.pinNotes.push($event);
-                this.pinNotes=this.pinNotes.reverse();
             }
-            
         }
+        this.pinNotes=this.pinNotes.reverse();
+        this.unPinNotes=this.unPinNotes.reverse();
     }
     printCards(){
         this.pinNotes;
@@ -51,15 +50,19 @@ export class NotesComponent implements OnInit {
             if (element["isDeleted"] == false && element["isArchived"] == false) {
                 if (element["isPined"] == false) {
                     this.unPinNotes.push(element);
-                   
                 }
                 else{
                     this.pinNotes.push(element);
-                   
                 }
             }
             this.pinNotes = this.pinNotes.reverse();
             this.unPinNotes = this.unPinNotes.reverse();
         });
+    }
+    onScrollUp(){
+        console.log("onscrollup")
+    }
+    onScrollDown(){
+        console.log("onscrolldown")
     }
 }

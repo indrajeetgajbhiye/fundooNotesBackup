@@ -40,12 +40,12 @@ export class LoginComponent implements OnInit {
     forgot() {
         this.router.navigate(['forgot'])
     }
-    secureLogin(email, password){
+    secureLogin(){
         this.loading = true;
-        if(email != null && password != null){
+        if(this.email.value != '' && this.password.value != ''){
             var user = {
-                "email" : email,
-                "password" : password
+                "email" : this.email.value,
+                "password" : this.password.value
             }
             this.service.postRequest('user/login', user).subscribe((data:any)=>{
                 this.loading = false;
@@ -64,6 +64,8 @@ export class LoginComponent implements OnInit {
                 this.loading = false;
                 this.snackBar.open('login unsuccessfull try again', "okay")
             })
+        }else{
+            this.snackBar.open("Please fill the fileds to log in")
         }
     }
 }

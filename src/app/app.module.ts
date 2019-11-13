@@ -43,6 +43,10 @@ import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { AddImageComponent } from './components/add-image/add-image.component';
 import { LikeComponent } from './components/like/like.component';
 import { StarRatingComponent } from './components/star-rating/star-rating.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 @NgModule({
   declarations: [
     AppComponent,
@@ -96,7 +100,9 @@ import { StarRatingComponent } from './components/star-rating/star-rating.compon
       primaryColour: ' #f28b82', 
       secondaryColour: ' #fbbc04', 
       tertiaryColour: '#d7aefb'
-  })
+  }),
+  InfiniteScrollModule,
+  ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -19,6 +19,8 @@ export class RegisterComponent implements OnInit {
     public serv
     product: any;
     prodId: any;
+    records = {};
+    cards = []
     private cartId = localStorage.getItem('cartId')
     constructor(private router: Router,  private service : HttpService, public snackBar: SnackbarService, public cartService : CartService ) { 
         if(localStorage.getItem("userToken")){
@@ -29,6 +31,13 @@ export class RegisterComponent implements OnInit {
         }
     }
     ngOnInit() {
+        this.records = this.cartService.getServiceOfUser().subscribe(data => {
+            for (var i = 0; i < data["data"].data.length; i++) {
+              data["data"].data[i].select = false;
+              this.cards.push(data["data"].data[i]);
+            }
+            var value = data["data"].data.name;
+      })
         this.getCartInformation()
     }
     getFirstnameErrorMessage(): String {
@@ -66,8 +75,11 @@ export class RegisterComponent implements OnInit {
         if(password!=confirmpassword){
             return "password not matched"
         }
-        if(password==confirmpassword){
+        if(password==confirmpassword && confirmpassword!=''){
             return "password matched"
+        }
+        if(confirmpassword==''){
+            return "Enter the confirm password"
         }
     }
     goToProduct(){
@@ -75,7 +87,7 @@ export class RegisterComponent implements OnInit {
     }
     secureRegister(){
         
-        if(this.confirmpassword.value == this.password.value && this.firstname!=null && this.lastname != null && this.email != null && this.password != null){
+        if(this.confirmpassword.value == this.password.value && this.firstname.value!= '' && this.lastname.value != '' && this.email.value != '' && this.password.value != ''){
             var user = {
                 "firstName" : this.firstname.value,
                 "lastName" : this.lastname.value,
@@ -94,22 +106,37 @@ export class RegisterComponent implements OnInit {
             })
         }
         else{
-            this.router.navigate['register']
+            this.snackBar.open('Please fill all the fields')
         }
     }
     getCartInformation(){
         this.cartService.getCartDetails(this.cartId).subscribe(
           data => {
-            console.log(data)
             this.prodId = data['data'].productId
-            console.log(this.prodId)
             this.product =  data['data']['product'];
-            console.log("product", this.product)
           },
           error => {
-            console.log(error)
           }
       )
       }
+      selectCards(card){
+            this.cartAdd(card);
+      }
+      cartAdd(cart) {
+        this.cartService.addtoCart(
+          {
+            "productId": cart.id
+          }
+          
+        ).subscribe(
+          (data) => {
+            localStorage.clear();
+            this.cartId = data['data']['details'].id
+            localStorage.setItem("cartId",data['data']['details'].id)
+            this.getCartInformation()
+          }, error => {
+          }
+        )
+    }
 
 }
