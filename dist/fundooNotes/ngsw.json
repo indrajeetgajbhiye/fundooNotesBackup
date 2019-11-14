@@ -12,8 +12,7 @@
         "/main.99843a1c7f0df7ee0e4a.js",
         "/polyfills.8d3433af7c34a3d75cea.js",
         "/runtime.06daa30a2963fa413676.js",
-        "/scripts.411a71012f36806a829d.js",
-        "/styles.19b5b81570824204e734.css"
+        "/scripts.411a71012f36806a829d.js"
       ],
       "patterns": [
         "https:\\/\\/fonts\\.googleapis\\.com\\/css\\?family=Roboto&display=swap\\/.*",
@@ -91,8 +90,7 @@
     "/main.99843a1c7f0df7ee0e4a.js": "fdabbe214969cb4fc94262b6352f86d7cba147b6",
     "/polyfills.8d3433af7c34a3d75cea.js": "ddf35f345b37339fe434522df96f2461f4cefa80",
     "/runtime.06daa30a2963fa413676.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
-    "/scripts.411a71012f36806a829d.js": "1884a609c1890e494f598dd433d2bdafd0190169",
-    "/styles.19b5b81570824204e734.css": "5e04d897b94faef834a1d1fcff66bae8594f3164"
+    "/scripts.411a71012f36806a829d.js": "1884a609c1890e494f598dd433d2bdafd0190169"
   },
   "navigationUrls": [
     {
