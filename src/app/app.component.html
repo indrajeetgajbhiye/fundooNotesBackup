@@ -1,5 +1,5 @@
 <router-outlet></router-outlet>
-<div class="update" *ngIf="update=='install'">
-    <button mat-button (click)="installApp()">Install</button>
-    <button mat-button (click)="notInstall()">Not Now</button>
+<div class="update" *ngIf="update=='install'" style="background-color: darkgray;">
+    <button mat-button (click)="installApp()" color="primary">Install</button>
+    <button mat-button (click)="notInstall()" color="warn">Not Now</button>
 </div>

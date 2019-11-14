@@ -19,6 +19,7 @@ export class AppComponent {
       this.installToggle = event
       this.update = "install"
       console.log("event", this.installToggle)
+      console.log("update", this.update)
     }))
   }
   installApp(){
