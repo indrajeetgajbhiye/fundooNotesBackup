@@ -36,14 +36,27 @@
     color: $color-black;
 }
 
-.display-note {
-    .iconClass {
-        opacity: 1;
+@media only screen and (min-width: 600px) {
+    .display-note {
+        .iconClass {
+            opacity: 0;
+        }
+        .barpin {
+            opacity: 0;
+        }
+        &:hover {
+            .iconClass {
+                opacity: 1;
+            }
+            .barpin {
+                opacity: 1;
+            }
+        }
     }
-    .barpin {
-        opacity: 1;
-    }
-    &:hover {
+}
+
+@media only screen and (orientation: portrait) {
+    .display-note {
         .iconClass {
             opacity: 1;
         }
