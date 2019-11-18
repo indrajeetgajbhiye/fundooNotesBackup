@@ -44,11 +44,17 @@
         .barpin {
             opacity: 0;
         }
+        .iconCross {
+            opacity: 0;
+        }
         &:hover {
             .iconClass {
                 opacity: 1;
             }
             .barpin {
+                opacity: 1;
+            }
+            .iconCross {
                 opacity: 1;
             }
         }
@@ -61,6 +67,9 @@
             opacity: 1;
         }
         .barpin {
+            opacity: 1;
+        }
+        .iconCross {
             opacity: 1;
         }
     }
