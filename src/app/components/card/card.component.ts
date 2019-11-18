@@ -134,7 +134,6 @@ export class CardComponent implements OnInit {
     })
   }
   removeReminder(id) {
-    console.log(id);
     this.noteService.deleteReminder(
       {
         "noteIdList": [id]
@@ -237,7 +236,6 @@ export class CardComponent implements OnInit {
     })
   }
   textareachange(event){
-    console.log("event", event)
     event.preventDefault();
   }
 }

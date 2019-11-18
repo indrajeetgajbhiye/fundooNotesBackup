@@ -60,9 +60,7 @@ export class NotesComponent implements OnInit {
         });
     }
     onScrollUp(){
-        console.log("onscrollup")
     }
     onScrollDown(){
-        console.log("onscrolldown")
     }
 }

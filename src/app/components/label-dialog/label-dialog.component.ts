@@ -44,7 +44,6 @@ export class LabelDialogComponent implements OnInit {
         }
         if(flag){
           this.noteService.noteLabel(label).subscribe(message => {
-            console.log(message);
             this.labelName = '';
             this.ArrayOfLabel.push(message);
           })

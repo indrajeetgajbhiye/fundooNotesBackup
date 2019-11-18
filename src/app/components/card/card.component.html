@@ -31,7 +31,7 @@
                         <div fxLayout="row" fxFlex="100">
                             <img (click)='removeCheckList(list)' src="../../../assets/images/empty_box.svg" class="visible">
                             <input class="checklist" width="90%" [(ngModel)]="list.itemName" (keyup)="updateList(list)" (keyup.enter)="textareachange($event)">
-                            <mat-icon class="visible" (click)="deleteCheckList(list)">cancel</mat-icon>
+                            <mat-icon class="visible" class='iconCross' (click)="deleteCheckList(list)">cancel</mat-icon>
                         </div>
                     </div>
                 </div>

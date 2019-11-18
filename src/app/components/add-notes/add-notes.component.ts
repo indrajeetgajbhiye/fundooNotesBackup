@@ -48,7 +48,6 @@ export class AddNotesComponent implements OnInit {
                 this.card.noteLabels = JSON.stringify(this.card.noteLabels);
                 this.card.labelIdList = JSON.stringify(this.card.labelIdList);
                 this.card.checklist = JSON.stringify(this.checklistOpen)
-                console.log("card content",this.card);
                 this.checklistOpen = [];
                 try {
                     this.noteService.addnote(this.card).subscribe(data => {

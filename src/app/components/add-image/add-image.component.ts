@@ -20,12 +20,9 @@ export class AddImageComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<AddImageComponent>, @Inject(MAT_DIALOG_DATA) public data, public dataService: DataService, public noteService: NoteService,
   private snackbar: SnackbarService) { }
   ngOnInit() {
-    console.log("data", this.data);
     this.imageBefore= environment.profileUrl+"/"+this.data.imageUrl.replace('client', '')
-    console.log("hajhajh",this.imageBefore)
   }
   fileChangeEvent(event: any): void {
-    console.log(event, "FLE CHNAGE");
     this.imageChangedEvent = event;
   }
 

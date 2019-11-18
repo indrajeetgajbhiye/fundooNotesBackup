@@ -26,7 +26,6 @@ export class CartComponent implements OnInit {
   }
   getCart(){
     this.cartService.getMyCart().subscribe(data=>{
-      console.log(data);
       if(data['data'].length>0){
       this.paymentStatus = data['data'][0].isPaymentDone;
        this.selected= data['data'][0]['product'];
@@ -36,14 +35,11 @@ export class CartComponent implements OnInit {
          this.value=100
        }
        this.firstCss = !data['data'][0].isOrderPlaced
-       console.log("data", this.done)
-       console.log("cartid", this.cartid)
       }
       else{
         this.noCart=data['data']
       }
     }, error=>{
-      console.log("eroor",error)
     })
   }
   
@@ -56,7 +52,6 @@ export class CartComponent implements OnInit {
         this.cond='complete';
         this.value = 100
         this.forCss = false
-        console.log("data")
       }) 
     }
   }

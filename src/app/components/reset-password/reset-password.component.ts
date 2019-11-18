@@ -21,8 +21,6 @@ export class ResetPasswordComponent implements OnInit {
     }
     accessToken = this.activeRoute.snapshot.paramMap.get('token')
     ngOnInit() {
-        console.log(this.router)
-        console.log(this.service)   
         localStorage.setItem('token', this.accessToken)
     }
     getPasswordErrorMessage(): String {
