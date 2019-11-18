@@ -12,7 +12,7 @@ export interface matdialog {
     styleUrls: ['./display-notes.component.scss']
 })
 export class DisplayNotesComponent implements OnInit {
-    view = true;
+    view 
     allNotes:any
     @Input() notes: any=[];
     @Output() pinEvent = new EventEmitter();
@@ -22,6 +22,13 @@ export class DisplayNotesComponent implements OnInit {
     model: any;
     card: any = {};
     constructor(private noteService: NoteService, private dataService: DataService) { 
+        this.innerWidth = window.innerWidth
+        if(this.innerWidth<=600){
+            this.view = false
+        }
+        if(this.innerWidth>600){
+            this.view=true;
+        }
     }
     ngOnInit() {
         this.dataService.currentMessage.subscribe(message => { 
