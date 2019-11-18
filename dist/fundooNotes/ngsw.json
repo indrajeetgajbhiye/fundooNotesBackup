@@ -9,7 +9,7 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main.9f4c027f2da735a80879.js",
+        "/main.bd8cfc8540dc615bbae7.js",
         "/polyfills.8d3433af7c34a3d75cea.js",
         "/runtime.06daa30a2963fa413676.js",
         "/scripts.411a71012f36806a829d.js"
@@ -86,8 +86,8 @@
     "/assets/images/trash.svg": "b7af614c1405fb2366eb10e6519dbb1cb432c98c",
     "/assets/images/wrong_mark.svg": "d7b647e66ac39e7e44c4aa6baf4a8e9eb1e65b2b",
     "/favicon.ico": "8c6a5d7c7dda466417f53bd5a7e6c2826e1b2a4b",
-    "/index.html": "8364c8b79902bec121242fbcafd7743536e23749",
-    "/main.9f4c027f2da735a80879.js": "2c42994e65e8035ea8e9e0442d8358f8a75f9608",
+    "/index.html": "2fcfa2101d7d3e0d09126d079ddba4df22418692",
+    "/main.bd8cfc8540dc615bbae7.js": "4c3f36137599f1635f939c8d341d53f350df40ec",
     "/polyfills.8d3433af7c34a3d75cea.js": "ddf35f345b37339fe434522df96f2461f4cefa80",
     "/runtime.06daa30a2963fa413676.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
     "/scripts.411a71012f36806a829d.js": "1884a609c1890e494f598dd433d2bdafd0190169"
